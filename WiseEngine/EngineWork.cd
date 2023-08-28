@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="WiseEngine.MonogamePart.GameProcessor">
+    <Position X="4" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQAAAAAAwAAgAAAAAAAAAAAAAACAAAAAIAAAAQ=</HashCode>
+      <FileName>MonogamePart\GameProcessor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_currentScene" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WiseEngine.MonogamePart.Graphics2D">
+    <Position X="0.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAIAAAABCAIAABABQEAIAACAAgA=</HashCode>
+      <FileName>MonogamePart\Graphics2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WiseEngine.MonogamePart.LoadableObjects">
+    <Position X="0.5" Y="4.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAACAAAAAABAAAAAQAAAAAgAAAAAAAQAABAAAAA=</HashCode>
+      <FileName>MonogamePart\LoadableObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WiseEngine.Scene">
+    <Position X="4.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scene.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="View" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WiseEngine.View">
+    <Position X="4" Y="6.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAULAAAAQAAAAwAAgABAABAABAggAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_currentModelData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WiseEngine.ModelViewData">
+    <Position X="9.25" Y="6" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ModelViewData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
