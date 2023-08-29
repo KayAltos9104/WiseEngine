@@ -5,10 +5,19 @@ using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
 using WiseTestBench;
 using WiseEngine;
+using System.Reflection;
 
-string currentDirectory = Directory.GetCurrentDirectory();
-string projectRoot = Path.GetFullPath(Path.Combine(new string []{currentDirectory}));
-Globals.ResourcesPath = Path.Combine(new string []{projectRoot,"Resources"}); 
+string projectRoot = Directory.GetCurrentDirectory();
+string projectName = Assembly.GetEntryAssembly().GetName().Name;
+int pos = 0;
+for (int i = 0; i < projectRoot.Length; i++)
+{
+    pos = projectRoot.IndexOf(projectName);
+}
+pos += projectName.Length;
+projectRoot = projectRoot.Substring(0, pos);
+//string projectRoot = Path.GetFullPath(Path.Combine(new string []{currentDirectory}));
+Globals.ResourcesPath = Path.Combine(new string []{projectRoot, "Resources"}); 
 var game = new GameProcessor(
     new List<(string, string)>(),
     //{

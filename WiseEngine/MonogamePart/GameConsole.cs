@@ -13,12 +13,14 @@ public static class GameConsole
     /// <value>
     /// Property <c>IsShown</c> is flag for console visibility
     /// </value>
-    public static bool IsShown { get; private set; } = false;
+    public static bool IsShown { get; private set; } = true;
 
     static GameConsole()
     {
         _log = new List<string>
         {
+            "WiseEngine 0.1.0",
+            "Press Ctrl+Q to show/hide console and Ctrl+R to clear",
             "Console log:"
         };
         try
@@ -50,8 +52,11 @@ public static class GameConsole
     /// Clears console
     /// </summary>
     public static void Clear()
-    {        
-        _log.RemoveRange(1, _log.Count-1);
+    {
+        if (_log.Count > 3)
+        {
+            _log.RemoveRange(3, _log.Count - 3);
+        }       
     }
     /// <summary>
     /// Renders console window with text

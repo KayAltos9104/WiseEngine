@@ -25,17 +25,15 @@ public sealed class GameProcessor : Game
     /// <summary>
     /// This constructor initializes GameProcessor object with neccessary technical parameters 
     /// </summary>
-    /// <param name="resourcesPath">Absolute path to the folder with game resources</param>
     /// <param name="textures">Pairs of texture name in code and relative path to its file</param>
     /// <param name="fonts">Pairs of font name in code and relative path to its file</param>
     public GameProcessor(
         List<(string key, string path)> textures, 
         List<(string key, string path)> fonts)
     {
-        Scenes = new Dictionary<string, Scene>();
-        //_graphics = new GraphicsDeviceManager(this);
-        Graphics2D.Graphics = new GraphicsDeviceManager(this);        
-        Content.RootDirectory = Globals.ResourcesPath;
+        Scenes = new Dictionary<string, Scene>();   
+        Graphics2D.Graphics = new GraphicsDeviceManager(this);
+        Content.RootDirectory = Globals.ResourcesPath;        
         IsMouseVisible = true; 
         _textures = textures;
         _fonts = fonts;
