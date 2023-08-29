@@ -7,8 +7,8 @@ using WiseTestBench;
 using WiseEngine;
 
 string currentDirectory = Directory.GetCurrentDirectory();
-string projectRoot = Path.GetFullPath(Path.Combine(currentDirectory, "..\\..\\..\\"));
-Globals.ResourcesPath = projectRoot+"\\Resources";
+string projectRoot = Path.GetFullPath(Path.Combine(new string []{currentDirectory}));
+Globals.ResourcesPath = Path.Combine(new string []{projectRoot,"Resources"}); 
 var game = new GameProcessor(
     new List<(string, string)>(),
     //{

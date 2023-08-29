@@ -51,7 +51,7 @@ public static class GameConsole
     /// </summary>
     public static void Clear()
     {        
-        _log.RemoveRange(1, _log.Count);
+        _log.RemoveRange(1, _log.Count-1);
     }
     /// <summary>
     /// Renders console window with text

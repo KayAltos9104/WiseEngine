@@ -89,7 +89,7 @@ public sealed class GameProcessor : Game
     protected override void LoadContent()
     {
         Graphics2D.SpriteBatch = new SpriteBatch(GraphicsDevice);
-        LoadableObjects.AddFont("SystemFont", Content.Load<SpriteFont>(Globals.ResourcesPath + "\\SystemFont"));
+        LoadableObjects.AddFont("SystemFont", Content.Load<SpriteFont>(Path.Combine(new string[]{Globals.ResourcesPath ,"SystemFont"})));
 
         foreach (var t in _textures)
         {
@@ -137,6 +137,8 @@ public sealed class GameProcessor : Game
         Globals.Time = gameTime;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.Q))
             GameConsole.SwitchVisibility();
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.R))
+            GameConsole.Clear();
 
         InputsManager.SaveInputs();
 
