@@ -22,14 +22,14 @@ public sealed class Presenter
 
         if (_model != null) 
         {
-            _model.CycleFinished += LoadModelDataToView;
+            _model.OnCycleFinished += LoadModelDataToView;
         }
         
     }
     /// <summary>
     /// Updates <see cref="_model"/> game logic after <see cref="View"/> finished its cycle
     /// </summary>
-    /// <param name="sender">Sender of the <c>_view.CycleFinished</c> event</param>
+    /// <param name="sender">Sender of the <c>_view.OnCycleFinished</c> event</param>
     /// <param name="e">Data from <see cref="_view"/></param>
     private void UpdateModel(object? sender, ViewCycleFinishedEventArgs e)
     {
@@ -39,7 +39,7 @@ public sealed class Presenter
     /// <summary>
     /// Loads data from <see cref="_model"/> to <see cref="_view"/> after model finishes its cycle
     /// </summary>
-    /// <param name="sender">Sender of the <c>_model.CycleFinished</c> event</param>
+    /// <param name="sender">Sender of the <c>_model.OnCycleFinished</c> event</param>
     /// <param name="e">Data from <see cref="_model"/></param>
     private void LoadModelDataToView (object? sender, ModelCycleFinishedEventArgs e)
     {

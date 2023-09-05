@@ -10,17 +10,17 @@ public abstract class Model
     /// <value>
     /// Property <c>GameObjects</c> contains all game objects in <see cref="Scene">scene</see>
     /// </value>
-    public Dictionary<string, IObject> GameObjects { get; set; }
+    public List<IObject> GameObjects { get; set; }
     /// <value>
-    /// Event <c>CycleFinished</c> that activates when Model ended cycle processing
+    /// Event <c>OnCycleFinished</c> that activates when Model ended cycle processing
     /// </value>
     /// <remarks>
     /// This event sends <see cref="ModelCycleFinishedEventArgs"/> which contains game logic data for view
     /// </remarks>
-    public EventHandler<ModelCycleFinishedEventArgs>? CycleFinished;
+    public EventHandler<ModelCycleFinishedEventArgs>? OnCycleFinished;
     public Model()
     {
-        GameObjects = new Dictionary<string, IObject>();
+        GameObjects = new List<IObject>();
     }
     /// <summary>
     /// Initializes model - objects, parameters, etc.
@@ -38,11 +38,11 @@ public abstract class Model
     /// </remarks>
     public virtual void Update(ViewCycleFinishedEventArgs e)
     {
-        foreach (var obj in GameObjects.Values)
+        foreach (var obj in GameObjects)
         {
             obj.Update();
         }
-        CycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs(GameObjects.Values.ToList()));
+        OnCycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs(new List<IObject>(GameObjects)));
     }
 
     /// <summary>

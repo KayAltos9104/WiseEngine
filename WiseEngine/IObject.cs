@@ -19,6 +19,10 @@ public interface IObject
     /// </value>
     List<(string ImageName, Vector2 ImagePos)> Sprites { get; set; }
     /// <value>
+    /// The <c>Scale</c> property represents scale of sprite for drawing
+    /// </value>
+    Vector2 Scale { get; set; }
+    /// <value>
     /// The <c>Pos</c> property represents position where object is placed
     /// </value>
     Vector2 Pos { get; set; }

@@ -15,7 +15,7 @@ public abstract class View
     protected InterfaceManager _interfaceManager;
 
     /// <value>
-    /// Event <c>CycleFinished</c> invokes when View ended cycle processing
+    /// Event <c>OnCycleFinished</c> invokes when View ended cycle processing
     /// </value>
     public EventHandler<ViewCycleFinishedEventArgs>? CycleFinished;
     /// <value>
@@ -54,7 +54,10 @@ public abstract class View
     /// <param name="currentModelData">
     /// Model data which should be loaded in view.
     /// </param>
-    public abstract void LoadModelData(ModelViewData currentModelData);
+    public void LoadModelData(ModelViewData currentModelData)
+    {
+        _currentModelData = currentModelData;
+    }
 
     /// <summary>
     /// Draws all game objects and interface elements.

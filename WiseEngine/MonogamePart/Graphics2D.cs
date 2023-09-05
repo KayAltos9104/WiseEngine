@@ -43,7 +43,7 @@ public static class Graphics2D
                 Color.White,
                 rotation: 0,
                 origin: Vector2.Zero,
-                scale: 1,
+                scale: obj.Scale,
                 SpriteEffects.None,
                 layerDepth: obj.Layer);
             }

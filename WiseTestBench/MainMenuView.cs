@@ -55,12 +55,7 @@ namespace WiseTestBench
                 (((IKeyboardCursor)_interfaceManager).GetCurrentElement() as Button).PerformClick();
 
             base.Update();
-        }
-
-        public override void LoadModelData(ModelViewData currentModelData)
-        {
-            throw new NotImplementedException();
-        }
+        }       
         private void BtnTest1_Click(object sender, ClickEventArgs e)
         {
             MessageBox MbxTest1 = new MessageBox(new Vector2(

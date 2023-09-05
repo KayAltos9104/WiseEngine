@@ -149,7 +149,7 @@ public sealed class GameProcessor : Game
     /// </remarks>
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.DarkSeaGreen);
+        GraphicsDevice.Clear(Color.CornflowerBlue);
         Graphics2D.SpriteBatch.Begin();
         if (_currentScene != null)
         {
