@@ -7,7 +7,7 @@ namespace WiseEngine;
 
 public class Button : MessageBox
 {
-    public event EventHandler<ClickEventArgs>? Click;
+    public event EventHandler<ClickEventArgs>? OnClick;
     public Button(Vector2 pos, SpriteFont font, string text) : base(pos, font, text)
     {
         IsChosen = false;
@@ -16,7 +16,7 @@ public class Button : MessageBox
 
     public void PerformClick()
     {
-        Click?.Invoke(this, new ClickEventArgs());
+        OnClick?.Invoke(this, new ClickEventArgs());
     }
     
     public override void Render(SpriteBatch spriteBatch)

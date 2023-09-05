@@ -1,12 +1,14 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using System;
 
 namespace WiseEngine.MonogamePart;
+/// <summary>
+/// Single class which manages all work with 2D graphics
+/// </summary>
 public static class Graphics2D
 {
-    public static SpriteBatch SpriteBatch;
-    public static GraphicsDeviceManager Graphics;
+    public static SpriteBatch SpriteBatch { get; set; }
+    public static GraphicsDeviceManager Graphics { get; set; }
     public static Vector2 VisualShift = new Vector2(0, 0);
     private static Rectangle VisionArea;
 

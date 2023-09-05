@@ -6,8 +6,8 @@ namespace WiseEngine.MonogamePart;
 /// </summary>
 public static class LoadableObjects
 {    
-    private static Dictionary<string, Texture2D> Textures = new Dictionary<string, Texture2D>();
-    private static Dictionary<string, SpriteFont> Fonts = new Dictionary<string, SpriteFont>();
+    private static readonly Dictionary<string, Texture2D> Textures = new();
+    private static readonly Dictionary<string, SpriteFont> Fonts = new();
     /// <summary>
     /// Adds new texture in storage
     /// </summary>

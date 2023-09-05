@@ -32,9 +32,9 @@ namespace WiseTestBench
                     Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 + 250),
                     LoadableObjects.GetFont("MainFont"), "Выход");
 
-            BtnTest.Click += BtnTest1_Click;
-            BtnTest2.Click += BtnTest2_Click;
-            BtnTest3.Click += BtnTest3_Click;
+            BtnTest.OnClick += BtnTest1_Click;
+            BtnTest2.OnClick += BtnTest2_Click;
+            BtnTest3.OnClick += BtnTest3_Click;
 
             _interfaceManager.AddElement(MbxTest);
             _interfaceManager.AddElement(BtnTest);
