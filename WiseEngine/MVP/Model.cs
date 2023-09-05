@@ -29,7 +29,25 @@ public abstract class Model
     public EventHandler<ModelCycleFinishedEventArgs>? OnCycleFinished;
     public Model()
     {
-        GameObjects = new List<IObject>();
+        GameObjects = new List<IObject>();        
+    }
+    /// <summary>
+    /// Gets <c>_inputData</c> 
+    /// </summary>
+    /// <typeparam name="T">Correct successor of <see cref="ViewModelData"/></typeparam>
+    /// <returns><c>_inputData</c> which should be transferred to model</returns>
+    public T? GetInputData<T>() where T : ViewModelData
+    {
+        return (T)_inputData;
+    }
+    /// <summary>
+    /// Gets <c>_outputData</c> 
+    /// </summary>
+    /// <typeparam name="T">Correct successor of <see cref="ModelViewData"/></typeparam>
+    /// <returns><c>__outputData</c> which should be transferred to model</returns>
+    public T? GetOutputData<T>() where T : ModelViewData
+    {
+        return (T)_outputData;
     }
     /// <summary>
     /// Initializes model - objects, parameters, etc.
@@ -47,6 +65,7 @@ public abstract class Model
     /// </remarks>
     public virtual void Update(ViewCycleFinishedEventArgs e)
     {
+        _inputData = e.CurrentViewData;
         foreach (var obj in GameObjects)
         {
             obj.Update();

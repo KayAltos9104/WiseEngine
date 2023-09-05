@@ -16,15 +16,17 @@ public class BaseMovementModel : Model
             );
         GameObjects.Add(_player);
         _outputData = new BaseMovementModelViewData();
+        _inputData = new BaseMovementViewModelData();
     }
     
     public override void Update(ViewCycleFinishedEventArgs e)
     {
+        
         GameConsole.Clear();
-        var outData = (BaseMovementModelViewData)_outputData;
+        var outData = GetOutputData<BaseMovementModelViewData>();
         outData.PlayerPos = _player.Pos;
-        var data = (BaseMovementViewModelData)e.CurrentViewData;
-        _player.Speed += data.DeltaSpeedPlayer;
+        var inputData = GetInputData<BaseMovementViewModelData>();
+        _player.Speed += inputData.DeltaSpeedPlayer;
         GameConsole.WriteLine($"Позиция игрока: {_player.Pos}");
         GameConsole.WriteLine($"Скорость игрока: {_player.Speed}");
         base.Update(e);

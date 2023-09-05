@@ -33,8 +33,25 @@ public abstract class View
     
     public View()
     {        
-        _interfaceManager = new InterfaceManager();
-        _outputData = new ViewModelData();
+        _interfaceManager = new InterfaceManager();        
+    }
+    /// <summary>
+    /// Gets <c>_inputData</c> 
+    /// </summary>
+    /// <typeparam name="T">Correct successor of <see cref="ModelViewData"/></typeparam>
+    /// <returns><c>_inputData</c> which should be transferred to model</returns>
+    public T? GetInputData<T>() where T : ModelViewData
+    {
+        return (T)_inputData;
+    }
+    /// <summary>
+    /// Gets <c>_outputData</c> 
+    /// </summary>
+    /// <typeparam name="T">Correct successor of <see cref="ViewModelData"/></typeparam>
+    /// <returns><c>__outputData</c> which should be transferred to model</returns>
+    public T? GetOutputData<T>() where T : ViewModelData
+    {
+        return (T)_outputData;
     }
     /// <summary>
     /// Invokes <see cref="SceneFinished"/> event

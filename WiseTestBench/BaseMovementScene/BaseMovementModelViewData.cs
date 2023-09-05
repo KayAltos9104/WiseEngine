@@ -6,5 +6,5 @@ namespace WiseTestBench.BaseMovementScene;
 
 public class BaseMovementModelViewData : ModelViewData
 {
-    public Vector2 PlayerPos { get; set; }
+    public Vector2 PlayerPos { get; set; } = Vector2.Zero;
 }

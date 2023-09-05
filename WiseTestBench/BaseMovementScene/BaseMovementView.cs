@@ -15,11 +15,14 @@ public class BaseMovementView : View
         mb = new MessageBox(new Vector2(150, 50), LoadableObjects.GetFont("MainFont"),
             "0");
         _interfaceManager.AddElement(mb);
+        _outputData = new BaseMovementViewModelData(); 
+        _inputData = new BaseMovementModelViewData();
     } 
     public override void Update()
     {
-        var m = (BaseMovementModelViewData)_inputData;
-        mb.Text = _inputData != null ? m.PlayerPos.ToString(): "0";
+        //var m = GetInputData<BaseMovementModelViewData>();
+        //mb.Text = _inputData != null ? GetInputData<BaseMovementModelViewData>().PlayerPos.ToString(): "0";
+        mb.Text = GetInputData<BaseMovementModelViewData>().PlayerPos.ToString();
 
         Vector2 sV = Vector2.Zero;
         var data = (BaseMovementViewModelData)_outputData;
