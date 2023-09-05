@@ -17,19 +17,26 @@ public static class Globals
     /// <value>
     /// The <c>Time</c> property represents a <see cref="GameTime"/> object in game
     /// </value>
-    public static GameTime Time { get; set;}
+    public static GameTime? Time { get; set;}
     /// <value>
     /// Full path to resources folder
     /// </value>
-    public static string ResourcesPath { get; set; }
-
-    public static bool SpriteBordersAreVisible { get; set; } = false;
-    public static bool CollidersAreVisible { get; set; } = false;
+    public static string? ResourcesPath { get; set; }
+    /// <value>
+    /// Flag to show/hide sprite borders
+    /// </value>
+    public static bool SpriteBordersAreVisible { get; set; }
+    /// <value>
+    /// Flag to show/hide collider borders
+    /// </value>
+    public static bool CollidersAreVisible { get; set; }
     static Globals()
     {
         //TODO: Потом сделать, чтобы из файла с настройками тягал
         Resolution = (1600, 900);
-        IsFullScreen = false;        
+        IsFullScreen = false;
+        SpriteBordersAreVisible = false;
+        CollidersAreVisible = false;
     }
 
 }

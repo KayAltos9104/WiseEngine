@@ -12,7 +12,7 @@ public sealed class GameProcessor : Game
 {
     //private GraphicsDeviceManager _graphics;
     private Scene? _currentScene;
-    private string? _pathToResources;
+    //private string? _pathToResources;
     private List<(string key, string path)> _textures;
     private List<(string key, string path)> _fonts;
     
@@ -34,6 +34,10 @@ public sealed class GameProcessor : Game
     {
         Scenes = new Dictionary<string, Scene>();   
         Graphics2D.Graphics = new GraphicsDeviceManager(this);
+        if (Globals.ResourcesPath == null)
+        {
+            throw new Exception("Resources path is missing");
+        }
         Content.RootDirectory = Globals.ResourcesPath;        
         IsMouseVisible = true; 
         _textures = textures;
@@ -142,6 +146,12 @@ public sealed class GameProcessor : Game
             Globals.SpriteBordersAreVisible = !Globals.SpriteBordersAreVisible;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.C))
             Globals.CollidersAreVisible = !Globals.CollidersAreVisible;
+
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftAlt) && InputsManager.IsSinglePressed(Keys.F4))
+        {
+            Exit();
+        }
+            
 
         InputsManager.SaveInputs();
 

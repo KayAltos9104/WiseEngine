@@ -34,7 +34,9 @@ public abstract class View
     
     public View()
     {        
-        _interfaceManager = new InterfaceManager();        
+        _interfaceManager = new InterfaceManager(); 
+        _outputData = new ViewModelData();
+        _inputData = new ModelViewData();
     }
     /// <summary>
     /// Gets <c>_inputData</c> 
@@ -119,13 +121,13 @@ public abstract class View
 /// </summary>
 public class ViewCycleFinishedEventArgs : EventArgs
 {
-    public ViewModelData CurrentViewData { get; set; }
+    public ViewModelData CurrentViewData { get; set; } = new ViewModelData();
 }
 /// <summary>
 /// Class that contains name of scene for GameProcessor to switch for
 /// </summary>
 public class SceneFinishedEventArgs : EventArgs
 {
-    public string NewSceneName {  get; set;}
+    public string NewSceneName { get; set; } = "";
 }
 
