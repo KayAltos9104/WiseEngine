@@ -30,9 +30,10 @@ public class BaseMovementModel : Model
         GameConsole.WriteLine($"Позиция игрока: {_player.Pos}");
         GameConsole.WriteLine($"Скорость игрока: {_player.Speed}");
         base.Update(e);
+        var t = LoadableObjects.GetTexture(_player.Sprites[0].ImageName);
         _player.Pos = new Vector2(
-            MathHelper.Clamp(_player.Pos.X, 0,Globals.Resolution.Width),
-            MathHelper.Clamp(_player.Pos.Y, 0, Globals.Resolution.Height)
+            MathHelper.Clamp(_player.Pos.X, 0, Globals.Resolution.Width - t.Width * _player.Scale.X),
+            MathHelper.Clamp(_player.Pos.Y, 0, Globals.Resolution.Height - t.Height * _player.Scale.Y)
             );
     }
 }
