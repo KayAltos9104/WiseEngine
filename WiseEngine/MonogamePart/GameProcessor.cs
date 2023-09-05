@@ -15,7 +15,9 @@ public sealed class GameProcessor : Game
     //private string? _pathToResources;
     private List<(string key, string path)> _textures;
     private List<(string key, string path)> _fonts;
-    
+
+    private TimeSpan _elapsedTime = new TimeSpan();
+    private int _elapsedFrames = 0;
     /// <value>
     /// The <c>Scenes</c> property represents a dictionary with all scenes used in game
     /// </value>
@@ -83,8 +85,7 @@ public sealed class GameProcessor : Game
     {
         Globals.IsFullScreen = isFullScreen;
         Graphics2D.Graphics.IsFullScreen = Globals.IsFullScreen;
-        Graphics2D.Graphics.ApplyChanges();
-        
+        Graphics2D.Graphics.ApplyChanges();        
     }
     /// <summary>
     /// Loads graphics and game files
@@ -154,7 +155,35 @@ public sealed class GameProcessor : Game
             
 
         InputsManager.SaveInputs();
-
+        _elapsedTime += gameTime.ElapsedGameTime;
+        _elapsedFrames++;
+        if (_elapsedTime.TotalMilliseconds > 60000)
+        {   
+            _elapsedTime = new TimeSpan();
+            _elapsedFrames = 0;
+        }
+        //if (_elapsedTime.TotalSeconds > 0)
+        //{
+        //    string FPS = $"FPS: {_elapsedFrames / _elapsedTime.TotalSeconds}";
+        //    var font = LoadableObjects.GetFont("SystemFont");
+        //    var textSize =  font.MeasureString(FPS);
+        //    Vector2 textShift = new Vector2(
+        //        (textSize.X - textSize.X) / 2,
+        //        (textSize.Y - textSize.Y) / 2
+        //        );
+        //    Graphics2D.SpriteBatch.DrawString(
+        //                spriteFont: font,
+        //                FPS,
+        //                position: textShift,
+        //                color: Color.Yellow,
+        //                rotation: 0,
+        //                origin: Vector2.Zero,
+        //                scale: 1,
+        //                SpriteEffects.None,
+        //                layerDepth: 0
+        //                );
+        //}
+            
         base.Update(gameTime);
     }
     /// <summary>

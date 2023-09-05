@@ -10,6 +10,7 @@ public static class GameConsole
 {
     private static readonly List<string> _log;
     private static readonly SpriteFont? _font;
+    
     /// <value>
     /// Property <c>IsShown</c> is flag for console visibility
     /// </value>

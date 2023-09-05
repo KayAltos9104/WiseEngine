@@ -23,6 +23,15 @@ public class Witch : IObject
         };
     }
 
+    public override string ToString()
+    {
+        string selfInfo = "";
+        selfInfo += $"Спрайт: {Sprites[0].ImageName}\n";
+        selfInfo += $"Позиция: {Pos}\n";
+        selfInfo += $"Скорость: {Speed}\n";
+
+        return selfInfo;
+    }
     public void Update()
     {
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;

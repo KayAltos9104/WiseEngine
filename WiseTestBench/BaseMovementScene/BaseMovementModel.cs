@@ -21,14 +21,12 @@ public class BaseMovementModel : Model
     
     public override void Update(ViewCycleFinishedEventArgs e)
     {
-        
         GameConsole.Clear();
         var outData = GetOutputData<BaseMovementModelViewData>();
         outData.PlayerPos = _player.Pos;
         var inputData = GetInputData<BaseMovementViewModelData>();
         _player.Speed += inputData.DeltaSpeedPlayer;
-        GameConsole.WriteLine($"Позиция игрока: {_player.Pos}");
-        GameConsole.WriteLine($"Скорость игрока: {_player.Speed}");
+        GameConsole.WriteLine(_player.ToString());
         base.Update(e);
         var t = LoadableObjects.GetTexture(_player.Sprites[0].ImageName);
         _player.Pos = new Vector2(
