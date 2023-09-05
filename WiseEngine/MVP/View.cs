@@ -12,6 +12,7 @@ namespace WiseEngine.MVP;
 public abstract class View
 {
     protected ModelViewData? _currentModelData;
+    protected ViewModelData? _toModelData;
     protected InterfaceManager _interfaceManager;
 
     /// <value>
@@ -23,9 +24,11 @@ public abstract class View
     /// </value>
     public EventHandler<SceneFinishedEventArgs>? SceneFinished;
 
+    
     public View()
     {        
         _interfaceManager = new InterfaceManager();
+        _toModelData = new ViewModelData();
     }
     /// <summary>
     /// Invokes <see cref="SceneFinished"/> event
@@ -46,7 +49,7 @@ public abstract class View
     /// </summary>
     public virtual void Update()
     {
-        CycleFinished?.Invoke(this, new ViewCycleFinishedEventArgs());
+        CycleFinished?.Invoke(this, new ViewCycleFinishedEventArgs() { CurrentViewData = _toModelData});
     }
     /// <summary>
     /// Loads game model data (list of objects for example).
@@ -91,7 +94,7 @@ public abstract class View
 /// </summary>
 public class ViewCycleFinishedEventArgs : EventArgs
 {
-    public GameData CurrentViewData { get; set; }
+    public ViewModelData CurrentViewData { get; set; }
 }
 /// <summary>
 /// Class that contains name of scene for GameProcessor to switch for
