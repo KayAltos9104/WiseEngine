@@ -20,6 +20,9 @@ public sealed class GameProcessor : Game
     /// The <c>Scenes</c> property represents a dictionary with all scenes used in game
     /// </value>
     public Dictionary<string, Scene> Scenes { get; }
+
+    
+
     /// <summary>
     /// This constructor initializes GameProcessor object with neccessary technical parameters 
     /// </summary>
@@ -135,6 +138,10 @@ public sealed class GameProcessor : Game
             GameConsole.SwitchVisibility();
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.R))
             GameConsole.Clear();
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.S))
+            Globals.SpriteBordersAreVisible = !Globals.SpriteBordersAreVisible;
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.C))
+            Globals.CollidersAreVisible = !Globals.CollidersAreVisible;
 
         InputsManager.SaveInputs();
 

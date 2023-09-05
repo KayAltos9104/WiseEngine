@@ -46,6 +46,14 @@ public static class Graphics2D
                 scale: obj.Scale,
                 SpriteEffects.None,
                 layerDepth: obj.Layer);
+
+                if (Globals.SpriteBordersAreVisible)
+                {
+                    DrawRectangle((int)v.X, (int)v.Y,
+                        (int)(LoadableObjects.GetTexture(sprite.ImageName).Width * obj.Scale.X),
+                        (int)(LoadableObjects.GetTexture(sprite.ImageName).Height * obj.Scale.Y),
+                        Color.Red, 3);
+                }
             }
         }
     }

@@ -14,11 +14,11 @@ public abstract class View
     /// <value>
     /// Property <c>_outputData</c> contains game data for transfering to view
     /// </value>
-    protected ViewModelData _outputData { get; set; }
+    protected ViewModelData _outputData;
     /// <value>
     /// Property <c>_inputData</c> contains game data for transfering to view
     /// </value>
-    protected ModelViewData _inputData { get; set; }
+    protected ModelViewData _inputData;
     protected InterfaceManager _interfaceManager;
 
     /// <value>
@@ -30,6 +30,7 @@ public abstract class View
     /// </value>
     public EventHandler<SceneFinishedEventArgs>? SceneFinished;
 
+  
     
     public View()
     {        
@@ -95,6 +96,7 @@ public abstract class View
             foreach (var o in _inputData.CurrentFrameObjects)
             {
                 Graphics2D.RenderObject(o);
+                
                 //if (o is IAnimated)
                 //    Graphics2D.RenderAnimation(o as IAnimated);
             }

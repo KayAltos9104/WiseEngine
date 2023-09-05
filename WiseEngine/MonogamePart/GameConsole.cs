@@ -20,7 +20,7 @@ public static class GameConsole
         _log = new List<string>
         {
             "WiseEngine 0.1.0",
-            "Press Ctrl+Q to show/hide console and Ctrl+R to clear",
+            "Ctrl+ =>  Q: show/hide console; R: clear console; S: show/hide sprite borders; C: show/hide colliders",
             "Console log:"
         };
         try

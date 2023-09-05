@@ -22,6 +22,9 @@ public static class Globals
     /// Full path to resources folder
     /// </value>
     public static string ResourcesPath { get; set; }
+
+    public static bool SpriteBordersAreVisible { get; set; } = false;
+    public static bool CollidersAreVisible { get; set; } = false;
     static Globals()
     {
         //TODO: Потом сделать, чтобы из файла с настройками тягал
