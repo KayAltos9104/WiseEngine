@@ -11,18 +11,18 @@ public class BaseMovementView : View
     MessageBox mb;
     public override void Initialize()
     {
-        _toModelData = new BaseMovementViewModelData();
+        _outputData = new BaseMovementViewModelData();
         mb = new MessageBox(new Vector2(150, 50), LoadableObjects.GetFont("MainFont"),
             "0");
         _interfaceManager.AddElement(mb);
     } 
     public override void Update()
     {
-        var m = (BaseMovementModelViewData)_currentModelData;
-        mb.Text = _currentModelData != null ? m.PlayerPos.ToString(): "0";
+        var m = (BaseMovementModelViewData)_inputData;
+        mb.Text = _inputData != null ? m.PlayerPos.ToString(): "0";
 
         Vector2 sV = Vector2.Zero;
-        var data = (BaseMovementViewModelData)_toModelData;
+        var data = (BaseMovementViewModelData)_outputData;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.W))
             sV -= Vector2.UnitY;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.A))

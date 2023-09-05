@@ -8,13 +8,18 @@
 public abstract class Model
 {
     /// <value>
+    /// Property <c>_outputData</c> contains game data for transfering to view
+    /// </value>
+    protected ModelViewData _outputData { get; set; }
+    /// <value>
+    /// Property <c>_inputData</c> contains game data for transfering to view
+    /// </value>
+    protected ViewModelData _inputData { get; set; }
+    /// <value>
     /// Property <c>GameObjects</c> contains all game objects in <see cref="Scene">scene</see>
     /// </value>
     public List<IObject> GameObjects { get; set; }
-    /// <value>
-    /// Property <c>ToViewData</c> contains game data for transfering to view
-    /// </value>
-    public ModelViewData ToViewData { get; set; }
+    
     /// <value>
     /// Event <c>OnCycleFinished</c> that activates when Model ended cycle processing
     /// </value>
@@ -46,8 +51,8 @@ public abstract class Model
         {
             obj.Update();
         }
-        ToViewData.CurrentFrameObjects = new List<IObject>(GameObjects);
-        OnCycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs() { ModelViewData = ToViewData});
+        _outputData.CurrentFrameObjects = new List<IObject>(GameObjects);
+        OnCycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs() { ModelViewData = _outputData});
     }
 
     /// <summary>

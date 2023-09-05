@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using WiseEngine;
+using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
 
 namespace WiseTestBench.BaseMovementScene;
@@ -14,16 +15,18 @@ public class BaseMovementModel : Model
             Globals.Resolution.Height / 2)
             );
         GameObjects.Add(_player);
-        ToViewData = new BaseMovementModelViewData();
+        _outputData = new BaseMovementModelViewData();
     }
     
     public override void Update(ViewCycleFinishedEventArgs e)
     {
-        var outData = (BaseMovementModelViewData)ToViewData;
+        GameConsole.Clear();
+        var outData = (BaseMovementModelViewData)_outputData;
         outData.PlayerPos = _player.Pos;
         var data = (BaseMovementViewModelData)e.CurrentViewData;
         _player.Speed += data.DeltaSpeedPlayer;
-
+        GameConsole.WriteLine($"Позиция игрока: {_player.Pos}");
+        GameConsole.WriteLine($"Скорость игрока: {_player.Speed}");
         base.Update(e);
     }
 }

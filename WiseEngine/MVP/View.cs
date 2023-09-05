@@ -11,8 +11,14 @@ namespace WiseEngine.MVP;
 /// </summary>
 public abstract class View
 {
-    protected ModelViewData? _currentModelData;
-    protected ViewModelData? _toModelData;
+    /// <value>
+    /// Property <c>_outputData</c> contains game data for transfering to view
+    /// </value>
+    protected ViewModelData _outputData { get; set; }
+    /// <value>
+    /// Property <c>_inputData</c> contains game data for transfering to view
+    /// </value>
+    protected ModelViewData _inputData { get; set; }
     protected InterfaceManager _interfaceManager;
 
     /// <value>
@@ -28,7 +34,7 @@ public abstract class View
     public View()
     {        
         _interfaceManager = new InterfaceManager();
-        _toModelData = new ViewModelData();
+        _outputData = new ViewModelData();
     }
     /// <summary>
     /// Invokes <see cref="SceneFinished"/> event
@@ -49,7 +55,7 @@ public abstract class View
     /// </summary>
     public virtual void Update()
     {
-        CycleFinished?.Invoke(this, new ViewCycleFinishedEventArgs() { CurrentViewData = _toModelData});
+        CycleFinished?.Invoke(this, new ViewCycleFinishedEventArgs() { CurrentViewData = _outputData });
     }
     /// <summary>
     /// Loads game model data (list of objects for example).
@@ -59,7 +65,7 @@ public abstract class View
     /// </param>
     public void LoadModelData(ModelViewData currentModelData)
     {
-        _currentModelData = currentModelData;
+        _inputData = currentModelData;
     }
 
     /// <summary>
@@ -67,9 +73,9 @@ public abstract class View
     /// </summary>
     public virtual void Draw()
     {        
-        if (_currentModelData != null)
+        if (_inputData != null)
         {
-            foreach (var o in _currentModelData.CurrentFrameObjects)
+            foreach (var o in _inputData.CurrentFrameObjects)
             {
                 Graphics2D.RenderObject(o);
                 //if (o is IAnimated)
