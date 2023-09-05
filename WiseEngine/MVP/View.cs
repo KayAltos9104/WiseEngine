@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System.Security.Cryptography.X509Certificates;
-using WiseEngine.MonogamePart;
+﻿using WiseEngine.MonogamePart;
 using WiseEngine.UI;
 
 namespace WiseEngine.MVP;

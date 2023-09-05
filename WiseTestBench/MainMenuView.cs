@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using System;
 using WiseEngine.MonogamePart;
 using WiseEngine;
 using WiseEngine.MVP;
@@ -17,29 +16,20 @@ namespace WiseTestBench
             MessageBox MbxTest = new MessageBox(new Vector2(
                     Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 - 100),
                     LoadableObjects.GetFont("MainFont"),
-                    "Тестовое окно\nДля вызова консоли нажмите Ctrl+Q"
+                    "Тестовое меню"
                     );
             MbxTest.IsCentered = true;
 
 
             Button BtnTest = new Button(new Vector2(
                     Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 + 100),
-                    LoadableObjects.GetFont("MainFont"), "Перейти к сцене 2");
-            Button BtnTest2 = new Button(new Vector2(
-                    Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 + 150),
-                    LoadableObjects.GetFont("MainFont"), "Нет, меня!");
-            Button BtnTest3 = new Button(new Vector2(
-                    Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 + 250),
-                    LoadableObjects.GetFont("MainFont"), "Выход");
+                    LoadableObjects.GetFont("MainFont"), "Перейти к сцене базового движения");           
 
             BtnTest.OnClick += BtnTest1_Click;
-            BtnTest2.OnClick += BtnTest2_Click;
-            BtnTest3.OnClick += BtnTest3_Click;
+            
 
             _interfaceManager.AddElement(MbxTest);
-            _interfaceManager.AddElement(BtnTest);
-            _interfaceManager.AddElement(BtnTest2);
-            _interfaceManager.AddElement(BtnTest3);
+            _interfaceManager.AddElement(BtnTest);            
         }
 
         public override void Update()
@@ -50,7 +40,7 @@ namespace WiseTestBench
             if (InputsManager.IsSinglePressed(Keys.S))
                 ((IKeyboardCursor)_interfaceManager).MoveCursor(DiscreteDirection.Down);
             if (InputsManager.IsSinglePressed(Keys.F))
-                GameConsole.WriteLine("Консоль работает. Для очистки консоли нажмите Ctrl+R");
+                GameConsole.WriteLine("Консоль работает");
             if (InputsManager.IsSinglePressed(Keys.Space))
                 (((IKeyboardCursor)_interfaceManager).GetCurrentElement() as Button).PerformClick();
 
@@ -67,27 +57,6 @@ namespace WiseTestBench
 
             _interfaceManager.AddElement(MbxTest1);
             OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "Test2" });
-        }
-        private void BtnTest2_Click(object sender, ClickEventArgs e)
-        {
-            MessageBox MbxTest2 = new MessageBox(new Vector2(
-                    250, 60),
-                    LoadableObjects.GetFont("MainFont"),
-                    "Нажата кнопка 2"
-                    );
-            MbxTest2.IsCentered = true;
-
-            _interfaceManager.AddElement(MbxTest2);
-        }
-        private void BtnTest3_Click(object sender, ClickEventArgs e)
-        {
-            MessageBox MbxTest3 = new MessageBox(new Vector2(
-                    250, 90),
-                    LoadableObjects.GetFont("MainFont"),
-                    "Заглушка на выход из программы"
-                    );
-            MbxTest3.IsCentered = true;
-            _interfaceManager.AddElement(MbxTest3);
-        }
+        }             
     }
 }
