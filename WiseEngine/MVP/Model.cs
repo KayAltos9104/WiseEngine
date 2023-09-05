@@ -12,6 +12,10 @@ public abstract class Model
     /// </value>
     public List<IObject> GameObjects { get; set; }
     /// <value>
+    /// Property <c>ToViewData</c> contains game data for transfering to view
+    /// </value>
+    public ModelViewData ToViewData { get; set; }
+    /// <value>
     /// Event <c>OnCycleFinished</c> that activates when Model ended cycle processing
     /// </value>
     /// <remarks>
@@ -42,7 +46,8 @@ public abstract class Model
         {
             obj.Update();
         }
-        OnCycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs(new List<IObject>(GameObjects)));
+        ToViewData.CurrentFrameObjects = new List<IObject>(GameObjects);
+        OnCycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs() { ModelViewData = ToViewData});
     }
 
     /// <summary>
@@ -55,9 +60,9 @@ public abstract class Model
         /// </value>
         public ModelViewData ModelViewData { get; set; }
 
-        public ModelCycleFinishedEventArgs(List<IObject> currentFrameObjects)
-        {
-            ModelViewData = new ModelViewData(currentFrameObjects);
-        }
+        //public ModelCycleFinishedEventArgs(List<IObject> currentFrameObjects)
+        //{
+        //    ModelViewData = new ModelViewData(currentFrameObjects);
+        //}
     }
 }

@@ -14,12 +14,16 @@ public class BaseMovementModel : Model
             Globals.Resolution.Height / 2)
             );
         GameObjects.Add(_player);
+        ToViewData = new BaseMovementModelViewData();
     }
-
+    
     public override void Update(ViewCycleFinishedEventArgs e)
     {
+        var outData = (BaseMovementModelViewData)ToViewData;
+        outData.PlayerPos = _player.Pos;
         var data = (BaseMovementViewModelData)e.CurrentViewData;
         _player.Speed += data.DeltaSpeedPlayer;
+
         base.Update(e);
     }
 }
