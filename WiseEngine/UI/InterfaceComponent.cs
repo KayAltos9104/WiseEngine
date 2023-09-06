@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using WiseEngine.MonogamePart;
+using Color = Microsoft.Xna.Framework.Color;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace WiseEngine;
 
@@ -10,9 +11,10 @@ public abstract class InterfaceComponent : IComponent
     public string Name { get; set; }
 
     protected Vector2 _textSize;
+    public Rectangle Bounds { get; set; }
     public Vector2 MarginText { get; set; }
     public List<(string ImageName, Vector2 ImagePos)> Sprites { get; set; }    
-    public Vector2 Pos { get; set; }
+    public Vector2 Pos { get; protected set; }
     public Vector2 TextPos { get; set; }
     public string Text { get; set; }
     public bool IsCentered { get; set; }
@@ -36,6 +38,7 @@ public abstract class InterfaceComponent : IComponent
         Font = font;  
         IsInteractive = false;
         IsChosen = false;
+        Bounds = new Rectangle((int)pos.X, (int)pos.Y, 100, 50);
     }
     public void LoadSprite(string spriteName, Vector2 pos)
     {
@@ -58,7 +61,25 @@ public abstract class InterfaceComponent : IComponent
                    layerDepth: Layer);
         }
     }
-    protected void RenderText (SpriteBatch spriteBatch) 
+
+    public void Transform (Vector2 newPos)
+    {
+        Pos = newPos;
+        var bounds = Bounds.Size;
+        Bounds = new Rectangle((int)newPos.X, (int)newPos.Y, bounds.X, bounds.Y);
+    }
+
+    public void Center()
+    {
+        var newPos = Pos - new Vector2(Bounds.Width / 2, Bounds.Height / 2);
+        Transform(newPos);
+    }
+
+    public void ChangeSize(int width, int height)
+    {
+        Bounds = new Rectangle((int)Pos.X, (int)Pos.Y, width, height);
+    }
+    protected virtual void RenderText (SpriteBatch spriteBatch) 
     {
         if (Text == null)
             return;

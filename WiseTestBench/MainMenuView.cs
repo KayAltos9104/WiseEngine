@@ -13,25 +13,37 @@ namespace WiseTestBench
 
         public override void Initialize()
         {
-            MessageBox MbxTest = new MessageBox(new Vector2(
-                    Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 - 100),
-                    LoadableObjects.GetFont("MainFont"),
-                    "Тестовое меню"
+            var center = new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2);
+            MessageBox MbxTest = new MessageBox(
+                center, 
+                LoadableObjects.GetFont("MainFont"),                     
+                "Тестовое меню"
                     );
             MbxTest.IsCentered = true;
             
 
-            Button BtnLaunchBaseMovementScene = new Button(new Vector2(
-                    Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 + 50),
-                    LoadableObjects.GetFont("MainFont"), "Перейти к сцене базового движения");           
-
+            Button BtnLaunchBaseMovementScene = new Button(
+                center + Vector2.UnitY * 100,
+                LoadableObjects.GetFont("MainFont"), 
+                "Перейти к сцене базового движения"
+                ); 
             BtnLaunchBaseMovementScene.OnClick += BtnTest1_Click;
             BtnLaunchBaseMovementScene.Name = "BtnLaunchBaseMovementScene";
-            Button BtnExit = new Button(new Vector2(
-                    Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 + 100),
-                    LoadableObjects.GetFont("MainFont"), "Выход");
+            BtnLaunchBaseMovementScene.ChangeSize(600, 50);
+            BtnLaunchBaseMovementScene.Center();
+
+            Button BtnExit = new Button(
+                center + Vector2.UnitY * 200, 
+                LoadableObjects.GetFont("MainFont"), 
+                "Выход"
+                );
+           
+
             BtnExit.OnClick += BtnExit_Click;
             BtnExit.Name = "BtnExit";
+            BtnExit.ChangeSize(200, 50);
+            BtnExit.Center();
+
             _interfaceManager.AddElement(MbxTest);
             _interfaceManager.AddElement(BtnLaunchBaseMovementScene);      
             _interfaceManager.AddElement(BtnExit);
