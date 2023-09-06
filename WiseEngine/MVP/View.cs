@@ -23,12 +23,18 @@ public abstract class View
     /// </value>
     public EventHandler<ViewCycleFinishedEventArgs>? CycleFinished;
     /// <value>
-    /// Event <c>SceneFinished</c> invokes when we should finish of pause current scene and switch to another
+    /// Event <c>SceneFinished</c> invokes when we should finish current scene and switch to another
     /// </value>
     public EventHandler<SceneFinishedEventArgs>? SceneFinished;
+    /// <value>
+    /// Event <c>GameFinished</c> invokes when we should finish the game
+    /// </value>
+    /// <remarks>
+    /// Processed in presenter because Exit method is in <see cref="GameProcessor"/>
+    /// </remarks>
+    public EventHandler? GameFinished;
 
-  
-    
+
     public View()
     {        
         _interfaceManager = new InterfaceManager(); 
@@ -60,6 +66,13 @@ public abstract class View
     protected void OnSceneFinished(SceneFinishedEventArgs e)
     {
         SceneFinished?.Invoke(this, e);
+    }
+    /// <summary>
+    /// Invokes <see cref="GameFinished"/> event
+    /// </summary>
+    protected void OnGameFinished()
+    {
+        GameFinished?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>

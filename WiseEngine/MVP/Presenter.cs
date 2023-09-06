@@ -19,6 +19,7 @@ public sealed class Presenter
         
         _view.CycleFinished += UpdateModel;
         _view.SceneFinished += SwitchScene;
+        _view.GameFinished += CallExit;
 
         if (_model != null) 
         {
@@ -26,6 +27,16 @@ public sealed class Presenter
         }
         
     }
+    /// <summary>
+    /// Calls <c>Exit</c> method from GameProcessor
+    /// </summary>
+    /// <param name="sender"><see cref="View"/> object which calls the <c>GameFinished</c> event</param>
+    /// <param name="e">Empty argument</param>
+    private void CallExit(object? sender, EventArgs e)
+    {
+        _processor.Exit();  
+    }
+
     /// <summary>
     /// Updates <see cref="_model"/> game logic after <see cref="View"/> finished its cycle
     /// </summary>
