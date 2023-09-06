@@ -1,9 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WiseEngine;
 
@@ -30,6 +25,10 @@ public static class Globals
     /// Flag to show/hide collider borders
     /// </value>
     public static bool CollidersAreVisible { get; set; }
+    /// <value>
+    /// Flag to show/hide FPS counter
+    /// </value>
+    public static bool FPSIsVisible { get; set; }
     static Globals()
     {
         //TODO: Потом сделать, чтобы из файла с настройками тягал
@@ -37,6 +36,7 @@ public static class Globals
         IsFullScreen = false;
         SpriteBordersAreVisible = false;
         CollidersAreVisible = false;
+        FPSIsVisible = false;
     }
 
 }

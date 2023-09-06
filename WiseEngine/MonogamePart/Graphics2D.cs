@@ -14,7 +14,7 @@ public static class Graphics2D
 
     public static void UpdateVisionArea()
     {
-        VisionArea = new Rectangle(-100, -100, 
+        VisionArea = new Rectangle(-100, -100,
             Globals.Resolution.Width + 100, Globals.Resolution.Height + 100);
     }
     public static void UpdateVisionArea(int x, int y, int width, int height)
@@ -56,6 +56,31 @@ public static class Graphics2D
                 }
             }
         }
+    }
+
+    public static void OutputText(Vector2 pos, string text, SpriteFont font, Color textColor)
+    {
+        var textSize = font.MeasureString(text);
+        Vector2 textShift = new Vector2(
+            (textSize.X - textSize.X) / 2,
+            (textSize.Y - textSize.Y) / 2
+            );
+        SpriteBatch.DrawString(
+                    spriteFont: font,
+                    text: text,
+                    position: pos,
+                    color: textColor,
+                    rotation: 0,
+                    origin: Vector2.Zero,
+                    scale: 1,
+                    SpriteEffects.None,
+                    layerDepth: 0
+                    );
+    }
+
+    public static void OutputText (Vector2 pos, string text)
+    {
+        OutputText(pos, text, LoadableObjects.GetFont("SystemFont"), Color.Yellow);
     }
 
     //public static void RenderAnimation(IAnimated a)

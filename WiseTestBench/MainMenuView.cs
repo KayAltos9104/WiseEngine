@@ -38,9 +38,7 @@ namespace WiseTestBench
             if (InputsManager.IsSinglePressed(Keys.W))
                 ((IKeyboardCursor)_interfaceManager).MoveCursor(DiscreteDirection.Up);
             if (InputsManager.IsSinglePressed(Keys.S))
-                ((IKeyboardCursor)_interfaceManager).MoveCursor(DiscreteDirection.Down);
-            if (InputsManager.IsSinglePressed(Keys.F))
-                GameConsole.WriteLine("Консоль работает");
+                ((IKeyboardCursor)_interfaceManager).MoveCursor(DiscreteDirection.Down);           
             if (InputsManager.IsSinglePressed(Keys.Space))
                 (((IKeyboardCursor)_interfaceManager).GetCurrentElement() as Button).PerformClick();
 

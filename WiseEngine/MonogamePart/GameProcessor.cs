@@ -147,6 +147,8 @@ public sealed class GameProcessor : Game
             Globals.SpriteBordersAreVisible = !Globals.SpriteBordersAreVisible;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.C))
             Globals.CollidersAreVisible = !Globals.CollidersAreVisible;
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.F))
+            Globals.FPSIsVisible = !Globals.FPSIsVisible;
 
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftAlt) && InputsManager.IsSinglePressed(Keys.F4))
         {
@@ -162,6 +164,7 @@ public sealed class GameProcessor : Game
             _elapsedTime = new TimeSpan();
             _elapsedFrames = 0;
         }
+        
         //if (_elapsedTime.TotalSeconds > 0)
         //{
         //    string FPS = $"FPS: {_elapsedFrames / _elapsedTime.TotalSeconds}";
@@ -204,7 +207,8 @@ public sealed class GameProcessor : Game
 
         if (GameConsole.IsShown)    
             GameConsole.Render(Graphics2D.SpriteBatch);
-
+        if (Globals.FPSIsVisible)
+            Graphics2D.OutputText(Vector2.Zero, $"FPS: {(int)(_elapsedFrames / _elapsedTime.TotalSeconds)}");
         Graphics2D.SpriteBatch.End();
         base.Draw(gameTime);
     }
