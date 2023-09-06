@@ -31,13 +31,13 @@ var game = new GameProcessor(
 
 var v1 = new MainMenuView();
 var scene1 = new Scene(v1, null, new Presenter(game, v1, null));
-game.Scenes.Add("Test1", scene1);
+game.Scenes.Add("MainMenu", scene1);
 
 var v2 = new BaseMovementView();
 var m2 = new BaseMovementModel();
 var scene2 = new Scene (v2, m2, new Presenter(game, v2, m2));
 
-game.Scenes.Add("Test2", scene2);
+game.Scenes.Add("BaseMovement", scene2);
 
-game.SetCurrentScene("Test1");
+game.SetCurrentScene("MainMenu");
 game.Run();

@@ -30,7 +30,7 @@ public sealed class Presenter
     /// <summary>
     /// Calls <c>Exit</c> method from GameProcessor
     /// </summary>
-    /// <param name="sender"><see cref="View"/> object which calls the <c>GameFinished</c> event</param>
+    /// <param name="sender"><see cref="_view"/> object which calls the <c>GameFinished</c> event</param>
     /// <param name="e">Empty argument</param>
     private void CallExit(object? sender, EventArgs e)
     {

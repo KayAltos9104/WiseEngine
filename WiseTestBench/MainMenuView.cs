@@ -19,17 +19,22 @@ namespace WiseTestBench
                     "Тестовое меню"
                     );
             MbxTest.IsCentered = true;
-
-
-            Button BtnTest = new Button(new Vector2(
-                    Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 + 100),
-                    LoadableObjects.GetFont("MainFont"), "Перейти к сцене базового движения");           
-
-            BtnTest.OnClick += BtnTest1_Click;
             
 
+            Button BtnLaunchBaseMovementScene = new Button(new Vector2(
+                    Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 + 50),
+                    LoadableObjects.GetFont("MainFont"), "Перейти к сцене базового движения");           
+
+            BtnLaunchBaseMovementScene.OnClick += BtnTest1_Click;
+            BtnLaunchBaseMovementScene.Name = "BtnLaunchBaseMovementScene";
+            Button BtnExit = new Button(new Vector2(
+                    Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 + 100),
+                    LoadableObjects.GetFont("MainFont"), "Выход");
+            BtnExit.OnClick += BtnExit_Click;
+            BtnExit.Name = "BtnExit";
             _interfaceManager.AddElement(MbxTest);
-            _interfaceManager.AddElement(BtnTest);            
+            _interfaceManager.AddElement(BtnLaunchBaseMovementScene);      
+            _interfaceManager.AddElement(BtnExit);
         }
 
         public override void Update()
@@ -41,7 +46,9 @@ namespace WiseTestBench
                 ((IKeyboardCursor)_interfaceManager).MoveCursor(DiscreteDirection.Down);           
             if (InputsManager.IsSinglePressed(Keys.Space))
                 (((IKeyboardCursor)_interfaceManager).GetCurrentElement() as Button).PerformClick();
-
+            GameConsole.Clear();
+            GameConsole.WriteLine($"Позиция курсора клавиатуры: {(_interfaceManager as IKeyboardCursor).CursorPos}");
+            GameConsole.WriteLine($"Имя выбранного элемента: {(_interfaceManager as IKeyboardCursor).GetCurrentElement().Name}");
             base.Update();
         }       
         private void BtnTest1_Click(object sender, ClickEventArgs e)
@@ -54,7 +61,12 @@ namespace WiseTestBench
             MbxTest1.IsCentered = true;
 
             _interfaceManager.AddElement(MbxTest1);
-            OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "Test2" });
-        }             
+            OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "BaseMovement" });
+        }
+
+        private void BtnExit_Click(object sender, ClickEventArgs e)
+        {
+            OnGameFinished();
+        }
     }
 }
