@@ -150,6 +150,11 @@ public sealed class GameProcessor : Game
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.F))
             Globals.FPSIsVisible = !Globals.FPSIsVisible;
 
+        if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
+        {
+            GameConsole.WriteLine($"Мышка: ({InputsManager.MouseStateCurrentFrame.X};{InputsManager.MouseStateCurrentFrame.Y})");
+        }
+
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftAlt) && InputsManager.IsSinglePressed(Keys.F4))
         {
             Exit();

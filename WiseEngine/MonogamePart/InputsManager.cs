@@ -15,13 +15,17 @@ public static class InputsManager
     /// Property <c>PressedPrevFrame</c> stores all keys which was pressed in previous frame
     /// </value>
     public static KeyboardState PressedPrevFrame { get; private set; }
-
+    /// <value>
+    /// Property <c>MouseStateCurrentFrame</c> stores mouse state in current frame
+    /// </value>
+    public static MouseState MouseStateCurrentFrame { get; private set; }
     /// <summary>
     /// Loads all inputs from user and saves in <see cref="PressedCurrentFrame"/>
     /// </summary>
     public static void ReadInputs()
     {
         PressedCurrentFrame = Keyboard.GetState();
+        MouseStateCurrentFrame = Mouse.GetState();
         //TODO: Потом добавить мышу
     }
 
