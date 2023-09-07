@@ -4,6 +4,7 @@ namespace WiseEngine;
 public interface IComponent
 {
     string Name { get; }
+    Rectangle Bounds { get; set; }
     Vector2 Pos { get; }
     Vector2 TextPos { get; set; }
     string Text { get; set; }

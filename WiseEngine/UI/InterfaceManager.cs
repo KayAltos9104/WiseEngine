@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +26,11 @@ public class InterfaceManager: IKeyboardCursor
        
     }
 
+    public IComponent? GetComponent (Point mousePos)
+    {
+        return InterfaceElements.FirstOrDefault(c => c.IsInteractive && c.Bounds.Contains(mousePos));
+    }
+
     public void AddElement(IComponent component)
     {
         InterfaceElements.Add(component);
@@ -34,8 +41,5 @@ public class InterfaceManager: IKeyboardCursor
             CursorPos = firstActiveElementIndex;
             ((IKeyboardCursor)this).UpdateActivationOnElement();
         }
-
-
     }
-
 }

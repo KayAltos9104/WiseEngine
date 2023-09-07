@@ -62,6 +62,16 @@ namespace WiseTestBench
             GameConsole.Clear();
             GameConsole.WriteLine($"Позиция курсора клавиатуры: {(_interfaceManager as IKeyboardCursor).CursorPos}");
             GameConsole.WriteLine($"Имя выбранного элемента: {(_interfaceManager as IKeyboardCursor).GetCurrentElement().Name}");
+
+            if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
+            {
+                var chosenElement = _interfaceManager.GetComponent(InputsManager.MouseStateCurrentFrame.Position);
+                if (chosenElement != null) 
+                {
+                    (chosenElement as Button).PerformClick();
+                }
+            }
+
             base.Update();
         }       
         private void BtnTest1_Click(object sender, ClickEventArgs e)
