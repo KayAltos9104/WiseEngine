@@ -26,12 +26,7 @@ public class Button : MessageBox
         if (IsChosen)
         {
             TextColor = Color.DarkSeaGreen;
-            //int x = (int)(Pos - (IsCentered ? _textSize / 2 : Vector2.Zero)).X;
-            //int y = (int)(Pos - (IsCentered ? _textSize / 2 : Vector2.Zero)).Y;
-            //Graphics2D.FillRectangle(x, y, (int)(_textSize.X + MarginText.X * 2), (int)(_textSize.Y + MarginText.Y * 2), Color.Black);
-            //Graphics2D.DrawRectangle(x, y, (int)(_textSize.X + MarginText.X * 2), (int)(_textSize.Y + MarginText.Y * 2), Color.Black, 3);
-            int x = (int)(Pos.X - (IsCentered ? Bounds.Width / 2 : 0));
-            int y = (int)(Pos.Y - (IsCentered ? Bounds.Height / 2 : 0));
+            
             Graphics2D.FillRectangle(
                 (int)Pos.X, (int)Pos.Y, 
                 Bounds.Width, Bounds.Height, 
@@ -43,42 +38,33 @@ public class Button : MessageBox
         }
         else
         {
-            TextColor = Color.Black;
-            //base.Render(spriteBatch);
-            Graphics2D.FillRectangle(
-                (int)Pos.X, (int)Pos.Y,
-                Bounds.Width, Bounds.Height,
-                Color.DarkSeaGreen);
-            Graphics2D.DrawRectangle((int)Pos.X, (int)Pos.Y,
-                Bounds.Width, Bounds.Height,
-                Color.Black, 3);
-            RenderText(spriteBatch);
+            base.Render(spriteBatch);
         }
     }
 
-    protected override void RenderText(SpriteBatch spriteBatch)
-    {
-        if (Text == null)
-            return;
-        _textSize = Font.MeasureString(Text) != Vector2.Zero ?
-                Font.MeasureString(Text) :
-                Vector2.One;
-        Vector2 textShift = new Vector2(
-             (IsCentered ? Bounds.Width / 2 : 0) - _textSize.X/2,
-             (IsCentered ? Bounds.Height / 2 : 0) - _textSize.Y/2
-            );
-        spriteBatch.DrawString(
-                    spriteFont: Font,
-                    Text,
-                    position: Pos + textShift,
-                    color: TextColor,
-                    rotation: 0,
-                    origin: Vector2.Zero,
-                    scale: 1,
-                    SpriteEffects.None,
-                    layerDepth: 0
-                    );
-    }
+    //protected override void RenderText(SpriteBatch spriteBatch)
+    //{
+    //    if (Text == null)
+    //        return;
+    //    _textSize = Font.MeasureString(Text) != Vector2.Zero ?
+    //            Font.MeasureString(Text) :
+    //            Vector2.One;
+    //    Vector2 textShift = new Vector2(
+    //         (IsCentered ? Bounds.Width / 2 : 0) - _textSize.X/2,
+    //         (IsCentered ? Bounds.Height / 2 : 0) - _textSize.Y/2
+    //        );
+    //    spriteBatch.DrawString(
+    //                spriteFont: Font,
+    //                Text,
+    //                position: Pos + textShift,
+    //                color: TextColor,
+    //                rotation: 0,
+    //                origin: Vector2.Zero,
+    //                scale: 1,
+    //                SpriteEffects.None,
+    //                layerDepth: 0
+    //                );
+    //}
 }
 
 public class ClickEventArgs:EventArgs

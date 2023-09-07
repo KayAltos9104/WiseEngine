@@ -13,17 +13,18 @@ namespace WiseTestBench
 
         public override void Initialize()
         {
-            var center = new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2);
+            var basePos = new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 - 200);
             MessageBox MbxTest = new MessageBox(
-                center, 
+                basePos, 
                 LoadableObjects.GetFont("MainFont"),                     
                 "Тестовое меню"
                     );
             MbxTest.IsCentered = true;
-            
+            MbxTest.ChangeSize(300, 50);
+            MbxTest.Center();
 
             Button BtnLaunchBaseMovementScene = new Button(
-                center + Vector2.UnitY * 100,
+                basePos + Vector2.UnitY * 100,
                 LoadableObjects.GetFont("MainFont"), 
                 "Перейти к сцене базового движения"
                 ); 
@@ -33,7 +34,7 @@ namespace WiseTestBench
             BtnLaunchBaseMovementScene.Center();
 
             Button BtnExit = new Button(
-                center + Vector2.UnitY * 200, 
+                basePos + Vector2.UnitY * 200, 
                 LoadableObjects.GetFont("MainFont"), 
                 "Выход"
                 );

@@ -67,6 +67,7 @@ public abstract class InterfaceComponent : IComponent
         Pos = newPos;
         var bounds = Bounds.Size;
         Bounds = new Rectangle((int)newPos.X, (int)newPos.Y, bounds.X, bounds.Y);
+       
     }
 
     public void Center()
@@ -84,16 +85,16 @@ public abstract class InterfaceComponent : IComponent
         if (Text == null)
             return;
         _textSize = Font.MeasureString(Text) != Vector2.Zero ?
-                Font.MeasureString(Text):
+                Font.MeasureString(Text) :
                 Vector2.One;
         Vector2 textShift = new Vector2(
-            Pos.X + (_textSize.X - Font.MeasureString(Text).X) / 2 - (IsCentered ? _textSize.X / 2 : 0),
-            Pos.Y + (_textSize.Y - Font.MeasureString(Text).Y) / 2 - (IsCentered ? _textSize.Y / 2 : 0)
+             IsCentered ? Bounds.Width / 2 - _textSize.X / 2 : 0 ,
+             IsCentered ? Bounds.Height / 2 - _textSize.Y / 2 : 0
             );
         spriteBatch.DrawString(
                     spriteFont: Font,
                     Text,
-                    position: TextPos + MarginText + textShift,
+                    position: Pos + MarginText + textShift,
                     color: TextColor,
                     rotation: 0,
                     origin: Vector2.Zero,

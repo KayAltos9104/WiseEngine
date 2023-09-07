@@ -11,7 +11,7 @@ public class MessageBox : InterfaceComponent
         Text = text;
         TextPos = Vector2.Zero;  
         Layer = 1.0f; 
-        MarginText = new Vector2 (20, 0);
+        //MarginText = new Vector2 (20, 0);
         IsCentered = true;
     }
     public void Move(Vector2 pos)
@@ -20,14 +20,15 @@ public class MessageBox : InterfaceComponent
     }
 
     public override void Render(SpriteBatch spriteBatch)
-    {
-        _textSize = Font.MeasureString(Text) != Vector2.Zero ?
-                Font.MeasureString(Text) :
-                Vector2.One;
-        int x = (int)(Pos - (IsCentered ? _textSize / 2 : Vector2.Zero)).X;
-        int y = (int)(Pos - (IsCentered ? _textSize / 2 : Vector2.Zero)).Y;        
-        Graphics2D.FillRectangle(x, y, (int)(_textSize.X + MarginText.X*2), (int)(_textSize.Y + MarginText.Y*2), Color.DarkSeaGreen);
-        Graphics2D.DrawRectangle(x, y, (int)(_textSize.X + MarginText.X*2), (int)(_textSize.Y + MarginText.Y * 2), Color.Black, 3);
-        RenderText(spriteBatch);
+    {        
+        TextColor = Color.Black;
+        Graphics2D.FillRectangle(
+            (int)Pos.X, (int)Pos.Y,
+            Bounds.Width, Bounds.Height,
+            Color.DarkSeaGreen);
+        Graphics2D.DrawRectangle((int)Pos.X, (int)Pos.Y,
+            Bounds.Width, Bounds.Height,
+            Color.Black, 3);
+        RenderText(spriteBatch);       
     }
 }
