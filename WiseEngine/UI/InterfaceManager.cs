@@ -37,9 +37,9 @@ public class InterfaceManager
     public void AddElement(IComponent component)
     {
         InterfaceElements.Add(component);
-        if (InterfaceElements.Count == 1)
+        if (InterfaceElements.FindAll(e => e.IsInteractive).Count() == 1)
         {
-            MoveCursor(0);
+            MoveCursor(CursorStep.Down);
         }
     }
     public IComponent? GetCurrentElement()
