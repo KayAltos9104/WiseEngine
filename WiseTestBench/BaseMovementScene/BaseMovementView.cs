@@ -3,6 +3,7 @@ using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
 using WiseEngine;
 using Microsoft.Xna.Framework;
+using WiseEngine.UI;
 
 namespace WiseTestBench.BaseMovementScene;
 
@@ -11,6 +12,7 @@ public class BaseMovementView : View
     MessageBox mb;
     public override void Initialize()
     {
+        _interfaceManager = new MouseInterfaceManager();
         _outputData = new BaseMovementViewModelData();
         mb = new MessageBox(new Vector2(150, 50), LoadableObjects.GetFont("MainFont"),
             "0");
@@ -43,6 +45,8 @@ public class BaseMovementView : View
             sV += Vector2.UnitY;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.D))
             sV += Vector2.UnitX;
+
+        _interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
 
         if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
         {

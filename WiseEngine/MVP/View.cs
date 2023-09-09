@@ -16,7 +16,7 @@ public abstract class View
     /// Property <c>_inputData</c> contains game data for transfering to view
     /// </value>
     protected ModelViewData _inputData;
-    protected KeyBoardInterfaceManager _interfaceManager;
+    protected ICursor _interfaceManager;
 
     /// <value>
     /// Event <c>OnCycleFinished</c> invokes when View ended cycle processing
@@ -37,7 +37,7 @@ public abstract class View
 
     public View()
     {        
-        _interfaceManager = new KeyBoardInterfaceManager(); 
+        //_interfaceManager = new KeyBoardInterfaceManager(); 
         _outputData = new ViewModelData();
         _inputData = new ModelViewData();
     }

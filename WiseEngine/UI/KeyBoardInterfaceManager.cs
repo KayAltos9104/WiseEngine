@@ -78,11 +78,30 @@ public class KeyBoardInterfaceManager: ICursor
 
     public void TransformCursor(Point newPos)
     {
-        var delta = newPos.X - CursorPosX;
+        //var delta = newPos.X - CursorPosX;
 
-        if (CursorPosX == -1 || delta == 0)
+        //if (CursorPosX == -1 || delta == 0)
+        //    return;
+        //var shift = delta > 0 ? 1 : -1;
+        //do
+        //{
+        //    CursorPosX += shift;
+        //    if (CursorPosX < firstActiveElementIndex)
+        //    {
+        //        CursorPosX = lastActiveElementIndex;
+        //    }
+        //    else if (CursorPosX > lastActiveElementIndex)
+        //    {
+        //        CursorPosX = firstActiveElementIndex;
+        //    }
+        //} while (GetCurrentElement().IsInteractive == false);
+        //Update();
+
+
+
+        if (CursorPosX == -1 || newPos.X == 0)
             return;
-        var shift = delta > 0 ? 1 : -1;
+        var shift = newPos.X > 0 ? 1 : -1;
         do
         {
             CursorPosX += shift;
@@ -96,24 +115,5 @@ public class KeyBoardInterfaceManager: ICursor
             }
         } while (GetCurrentElement().IsInteractive == false);
         Update();
-
-
-
-        //if (CursorPosX == -1 || newPos.X == 0)
-        //    return;
-        //var shift = newPos.X > 0 ? 1 : -1;
-        //do
-        //{
-        //    CursorPosX += shift;
-        //    if (CursorPosX < firstActiveElementIndex)
-        //    {
-        //        CursorPosX = lastActiveElementIndex;
-        //    }
-        //    else if (CursorPosX > lastActiveElementIndex)
-        //    {
-        //        CursorPosX = firstActiveElementIndex;
-        //    }                           
-        //} while (GetCurrentElement().IsInteractive == false);
-        //Update();
     }
 }

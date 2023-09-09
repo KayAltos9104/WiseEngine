@@ -11,5 +11,6 @@ public interface ICursor
     void Update();
 
     IComponent? GetCurrentElement();
-    
+
+    void AddElement(IComponent component);
 }
