@@ -12,7 +12,7 @@ namespace WiseTestBench
         public override void Initialize()
         {
             
-            _interfaceManager = new InterfaceManager(new WiseMouseCursor());
+            _interfaceManager = new InterfaceManager();
             var basePos = new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 - 200);
             MessageBox MbxTest = new MessageBox(
                 basePos, 
@@ -53,29 +53,28 @@ namespace WiseTestBench
         public override void Update()
         {
 
-            //if (InputsManager.IsSinglePressed(Keys.W))
-            //    _interfaceManager.Cursor.TransformCursor(new Point(-1, 0));
-            //if (InputsManager.IsSinglePressed(Keys.S))
-            //    _interfaceManager.Cursor.TransformCursor(new Point(1, 0));
-            _interfaceManager.Cursor.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
+            if (InputsManager.IsSinglePressed(Keys.W))
+                _interfaceManager.MoveCursor(-1);
+            if (InputsManager.IsSinglePressed(Keys.S))
+                _interfaceManager.MoveCursor(1);
             if (InputsManager.IsSinglePressed(Keys.Space))
                 (_interfaceManager.GetCurrentElement() as Button).PerformClick();
 
             GameConsole.Clear();
-            GameConsole.WriteLine($"Позиция курсора клавиатуры: {_interfaceManager.Cursor.CursorPos}");
+            GameConsole.WriteLine($"Позиция курсора клавиатуры: {_interfaceManager.CursorPos}");
             var cursorChoosed = _interfaceManager.GetCurrentElement() != null ? _interfaceManager.GetCurrentElement().Name : "None";
             GameConsole.WriteLine($"Имя выбранного элемента: {cursorChoosed}");
 
 
-
-            if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
-            {
-                var chosenElement = _interfaceManager.GetCurrentElement();
-                if (chosenElement != null)
-                {
-                    (chosenElement as Button).PerformClick();
-                }
-            }
+            //_interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
+            //if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
+            //{
+            //    var chosenElement = _interfaceManager.GetCurrentElement();
+            //    if (chosenElement != null)
+            //    {
+            //        (chosenElement as Button).PerformClick();
+            //    }
+            //}
 
             base.Update();
         }       
