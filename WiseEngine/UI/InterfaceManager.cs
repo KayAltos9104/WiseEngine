@@ -19,11 +19,11 @@ public class InterfaceManager
         Update();       
     }
 
-    public void MoveCursor(int step)
+    public void MoveCursor(CursorStep step)
     {
         if (InterfaceElements.Count > 0 && InterfaceElements.All(e => e.IsInteractive == false))
             return;
-        int shift = step >= 0 ? 1 : -1;
+        int shift = step == CursorStep.Up ? 1 : -1;
         int currentIndex = InterfaceElements.FindIndex(i => i.Bounds.Center == CursorPos);
         do
         {
@@ -37,15 +37,10 @@ public class InterfaceManager
     public void AddElement(IComponent component)
     {
         InterfaceElements.Add(component);
-        MoveCursor(0);
-        //if (InterfaceElements.Count == 1) 
-        //{
-        //    OnInputsChanged?.Invoke(this, new InterfaceInputsEventArgs() 
-        //    { 
-        //        CursorPoint = Point.Zero, 
-        //        InterfaceElements = InterfaceElements
-        //    });
-        //}
+        if (InterfaceElements.Count == 1)
+        {
+            MoveCursor(0);
+        }
     }
     public IComponent? GetCurrentElement()
     {
@@ -64,12 +59,13 @@ public class InterfaceManager
 
     public void TransformCursor(Point cursorPos)
     {
-        CursorPos = cursorPos;
-        //OnInputsChanged?.Invoke(this, new InterfaceInputsEventArgs()
-        //{
-        //    CursorPoint = cursorPos,
-        //    InterfaceElements = InterfaceElements
-        //});
+        CursorPos = cursorPos;        
+    }
+
+    public enum CursorStep: byte
+    {
+        Up,
+        Down,
     }
 }
 

@@ -50,6 +50,4 @@ public static class InputsManager
     {
         return PressedCurrentFrame.IsKeyUp(key) && PressedPrevFrame.IsKeyDown(key);
     }
-
-
 }

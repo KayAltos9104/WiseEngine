@@ -52,29 +52,37 @@ namespace WiseTestBench
 
         public override void Update()
         {
-
-            if (InputsManager.IsSinglePressed(Keys.W))
-                _interfaceManager.MoveCursor(-1);
-            if (InputsManager.IsSinglePressed(Keys.S))
-                _interfaceManager.MoveCursor(1);
-            if (InputsManager.IsSinglePressed(Keys.Space))
-                (_interfaceManager.GetCurrentElement() as Button).PerformClick();
-
+            bool isMouse = false;
+            if (isMouse)
+            {
+                // Mouse example
+                _interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
+                if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
+                {
+                    var chosenElement = _interfaceManager.GetCurrentElement();
+                    if (chosenElement != null)
+                    {
+                        (chosenElement as Button).PerformClick();
+                    }
+                }
+            }
+            else
+            {
+                // Keyboard example
+                if (InputsManager.IsSinglePressed(Keys.W))
+                    _interfaceManager.MoveCursor(InterfaceManager.CursorStep.Up);
+                if (InputsManager.IsSinglePressed(Keys.S))
+                    _interfaceManager.MoveCursor(InterfaceManager.CursorStep.Down);
+                if (InputsManager.IsSinglePressed(Keys.Space))
+                    (_interfaceManager.GetCurrentElement() as Button).PerformClick();
+            }
             GameConsole.Clear();
             GameConsole.WriteLine($"Позиция курсора клавиатуры: {_interfaceManager.CursorPos}");
             var cursorChoosed = _interfaceManager.GetCurrentElement() != null ? _interfaceManager.GetCurrentElement().Name : "None";
             GameConsole.WriteLine($"Имя выбранного элемента: {cursorChoosed}");
 
 
-            //_interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
-            //if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
-            //{
-            //    var chosenElement = _interfaceManager.GetCurrentElement();
-            //    if (chosenElement != null)
-            //    {
-            //        (chosenElement as Button).PerformClick();
-            //    }
-            //}
+            
 
             base.Update();
         }       
