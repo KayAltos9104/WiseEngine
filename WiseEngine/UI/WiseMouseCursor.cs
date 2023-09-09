@@ -16,8 +16,13 @@ public class WiseMouseCursor : ICursor
 
  
 
-    public void TransformCursor(Point newPos)
+    public void TransformCursor(Point newPos, List<IComponent> interfaceElements)
     {
         CursorPos = newPos;       
+    }
+
+    public void Update(object sender, InterfaceInputsEventArgs e)
+    {
+        TransformCursor(e.CursorPoint, e.InterfaceElements);
     }
 }
