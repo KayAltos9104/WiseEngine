@@ -57,7 +57,7 @@ namespace WiseTestBench
             {
                 // Mouse example
                 _interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
-                if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
+                if (InputsManager.IsSingleClicked(InputsManager.MouseButton.Left))
                 {
                     var chosenElement = _interfaceManager.GetCurrentElement();
                     if (chosenElement != null)
