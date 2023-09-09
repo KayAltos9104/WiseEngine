@@ -9,10 +9,10 @@ public class InterfaceManager
     
     public ICursor Cursor { get; private set; }
 
-    public InterfaceManager()
+    public InterfaceManager(ICursor cursor)
     { 
         InterfaceElements = new List<IComponent>();
-        Cursor = new KeyboardCursor();
+        Cursor = cursor;
         Cursor.InterfaceElements = InterfaceElements;
         Update();       
     }
@@ -29,7 +29,6 @@ public class InterfaceManager
     {
         return InterfaceElements.FirstOrDefault(c => c.IsInteractive && c.Bounds.Contains(Cursor.CursorPos));
     }
-
 
     public void Update()
     {

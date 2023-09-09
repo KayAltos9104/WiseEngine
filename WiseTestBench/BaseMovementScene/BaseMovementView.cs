@@ -12,7 +12,7 @@ public class BaseMovementView : View
     MessageBox mb;
     public override void Initialize()
     {
-        _interfaceManager = new InterfaceManager();
+        _interfaceManager = new InterfaceManager(new KeyboardCursor());
         _outputData = new BaseMovementViewModelData();
         mb = new MessageBox(new Vector2(150, 50), LoadableObjects.GetFont("MainFont"),
             "0");
