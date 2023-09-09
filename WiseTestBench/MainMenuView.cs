@@ -9,7 +9,7 @@ namespace WiseTestBench
 {
     public class MainMenuView : View
     {
-        public int CursorPos { get; set; } = 0;
+        
 
         public override void Initialize()
         {
@@ -54,36 +54,28 @@ namespace WiseTestBench
         {
 
             if (InputsManager.IsSinglePressed(Keys.W))
-                ((IKeyboardCursor)_interfaceManager).MoveCursor(DiscreteDirection.Up);
+                _interfaceManager.TransformCursor(new Point(_interfaceManager.CursorPosX-1, 0));                
             if (InputsManager.IsSinglePressed(Keys.S))
-                ((IKeyboardCursor)_interfaceManager).MoveCursor(DiscreteDirection.Down);           
+                _interfaceManager.TransformCursor(new Point(_interfaceManager.CursorPosX+1, 0));
             if (InputsManager.IsSinglePressed(Keys.Space))
-                (((IKeyboardCursor)_interfaceManager).GetCurrentElement() as Button).PerformClick();
+                (_interfaceManager.GetCurrentElement() as Button).PerformClick();
             GameConsole.Clear();
-            GameConsole.WriteLine($"Позиция курсора клавиатуры: {(_interfaceManager as IKeyboardCursor).CursorPos}");
-            GameConsole.WriteLine($"Имя выбранного элемента: {(_interfaceManager as IKeyboardCursor).GetCurrentElement().Name}");
+            GameConsole.WriteLine($"Позиция курсора клавиатуры: {(_interfaceManager as ICursor).CursorPos}");
+            GameConsole.WriteLine($"Имя выбранного элемента: {_interfaceManager.GetCurrentElement().Name}");
 
-            if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
-            {
-                var chosenElement = _interfaceManager.GetComponent(InputsManager.MouseStateCurrentFrame.Position);
-                if (chosenElement != null) 
-                {
-                    (chosenElement as Button).PerformClick();
-                }
-            }
+            //if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
+            //{
+            //    var chosenElement = _interfaceManager.GetCurrentElement();
+            //    if (chosenElement != null) 
+            //    {
+            //        (chosenElement as Button).PerformClick();
+            //    }
+            //}
 
             base.Update();
         }       
         private void BtnTest1_Click(object sender, ClickEventArgs e)
         {
-            MessageBox MbxTest1 = new MessageBox(new Vector2(
-                    250, 30),
-                    LoadableObjects.GetFont("MainFont"),
-                    "Нажата кнопка 1"
-                    );
-            MbxTest1.IsCentered = true;
-
-            _interfaceManager.AddElement(MbxTest1);
             OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "BaseMovement" });
         }
 

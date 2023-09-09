@@ -46,7 +46,7 @@ public class BaseMovementView : View
 
         if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
         {
-            var chosenElement = _interfaceManager.GetComponent(InputsManager.MouseStateCurrentFrame.Position);
+            var chosenElement = _interfaceManager.GetCurrentElement();
             if (chosenElement != null)
             {
                 (chosenElement as Button).PerformClick();
