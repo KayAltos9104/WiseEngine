@@ -52,7 +52,7 @@ namespace WiseTestBench
 
         public override void Update()
         {
-            bool isMouse = false;
+            bool isMouse = true;
             if (isMouse)
             {
                 // Mouse example

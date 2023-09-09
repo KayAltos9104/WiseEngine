@@ -46,16 +46,16 @@ public class BaseMovementView : View
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.D))
             sV += Vector2.UnitX;
 
-        //_interfaceManager.Cursor.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
+        _interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
 
-        //if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
-        //{
-        //    var chosenElement = _interfaceManager.GetCurrentElement();
-        //    if (chosenElement != null)
-        //    {
-        //        (chosenElement as Button).PerformClick();
-        //    }
-        //}
+        if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
+        {
+            var chosenElement = _interfaceManager.GetCurrentElement();
+            if (chosenElement != null)
+            {
+                (chosenElement as Button).PerformClick();
+            }
+        }
 
         data.DeltaSpeedPlayer = sV;
         base.Update();
