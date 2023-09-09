@@ -3,42 +3,41 @@
 
 namespace WiseEngine.UI;
 
-public class MouseInterfaceManager : ICursor
+public class MouseInterfaceManager
 {
-    public List<IComponent> InterfaceElements { get; private set; }
+    //public ICursor Cursor { get; private set; }
+    //public List<IComponent> InterfaceElements { get; private set; }
+    
+    //public MouseInterfaceManager() 
+    //{
+    //    InterfaceElements = new List<IComponent>();
+       
+    //}
 
-    public Point CursorPos { get; set; }
+    //public void AddElement(IComponent component)
+    //{
+    //    InterfaceElements.Add(component);
+    //    Update();
+    //}
 
-    public MouseInterfaceManager() 
-    {
-        InterfaceElements = new List<IComponent>();
-        CursorPos = new Point();
-    }
+    //public IComponent? GetCurrentElement()
+    //{
+    //    return InterfaceElements.FirstOrDefault(c => c.IsInteractive && c.Bounds.Contains(CursorPos));
+    //}
 
-    public void AddElement(IComponent component)
-    {
-        InterfaceElements.Add(component);
-        Update();
-    }
+    //public void TransformCursor(Point newPos)
+    //{
+    //    CursorPos = newPos;
+    //    Update();
+    //}
 
-    public IComponent? GetCurrentElement()
-    {
-        return InterfaceElements.FirstOrDefault(c => c.IsInteractive && c.Bounds.Contains(CursorPos));
-    }
-
-    public void TransformCursor(Point newPos)
-    {
-        CursorPos = newPos;
-        Update();
-    }
-
-    public void Update()
-    {
-        InterfaceElements.ForEach(element => element.IsChosen = false);
-        var chosenElement = GetCurrentElement();
-        if (chosenElement != null) 
-        {
-            chosenElement.IsChosen = true;
-        }
-    }
+    //public void Update()
+    //{
+    //    InterfaceElements.ForEach(element => element.IsChosen = false);
+    //    var chosenElement = GetCurrentElement();
+    //    if (chosenElement != null) 
+    //    {
+    //        chosenElement.IsChosen = true;
+    //    }
+    //}
 }

@@ -16,7 +16,7 @@ public abstract class View
     /// Property <c>_inputData</c> contains game data for transfering to view
     /// </value>
     protected ModelViewData _inputData;
-    protected ICursor _interfaceManager;
+    protected InterfaceManager _interfaceManager;
 
     /// <value>
     /// Event <c>OnCycleFinished</c> invokes when View ended cycle processing
@@ -37,7 +37,7 @@ public abstract class View
 
     public View()
     {        
-        //_interfaceManager = new KeyBoardInterfaceManager(); 
+        //_interfaceManager = new InterfaceManager(); 
         _outputData = new ViewModelData();
         _inputData = new ModelViewData();
     }
@@ -85,6 +85,7 @@ public abstract class View
     /// </summary>
     public virtual void Update()
     {
+        _interfaceManager.Update();
         CycleFinished?.Invoke(this, new ViewCycleFinishedEventArgs() { CurrentViewData = _outputData });
     }
     /// <summary>

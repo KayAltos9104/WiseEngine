@@ -5,12 +5,12 @@ using Microsoft.Xna.Framework;
 namespace WiseEngine.UI;
 public interface ICursor
 {
-    List<IComponent> InterfaceElements { get; }
+    List<IComponent> InterfaceElements { get; set; }
     Point CursorPos { get; }
     void TransformCursor(Point newPos);
-    void Update();
+    //void Update();
 
-    IComponent? GetCurrentElement();
+    //IComponent? GetCurrentElement();
 
-    void AddElement(IComponent component);
+    //void AddElement(IComponent component);
 }
