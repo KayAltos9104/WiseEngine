@@ -26,7 +26,7 @@ namespace WiseTestBench
                 LoadableObjects.GetFont("MainFont"), 
                 "Перейти к сцене базового движения"
                 ); 
-            BtnLaunchBaseMovementScene.OnClick += BtnTest1_Click;
+            BtnLaunchBaseMovementScene.Clicked += BtnTest1_Click;
             BtnLaunchBaseMovementScene.Name = "BtnLaunchBaseMovementScene";
             BtnLaunchBaseMovementScene.ChangeSize(600, 50);
             BtnLaunchBaseMovementScene.Center();
@@ -38,7 +38,7 @@ namespace WiseTestBench
                 );
            
 
-            BtnExit.OnClick += BtnExit_Click;
+            BtnExit.Clicked += BtnExit_Click;
             BtnExit.Name = "BtnExit";
             BtnExit.ChangeSize(200, 50);
             BtnExit.Center();

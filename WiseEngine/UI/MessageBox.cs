@@ -4,7 +4,7 @@ using WiseEngine.MonogamePart;
 
 namespace WiseEngine;
 /// <summary>
-/// 
+/// Box with boundaries and text inside
 /// </summary>
 public class MessageBox : InterfaceComponent    
 {   
@@ -16,11 +16,6 @@ public class MessageBox : InterfaceComponent
         Layer = 1.0f;         
         IsCentered = true;
     }
-    public void Move(Vector2 pos)
-    {
-        Pos = pos;
-    }
-
     public override void Render(SpriteBatch spriteBatch)
     {        
         TextColor = Color.Black;

@@ -20,7 +20,7 @@ public class BaseMovementView : View
         Button BtnReturn = new Button(new Vector2(150, 200), LoadableObjects.GetFont("MainFont"), "Вернуться в главное меню");
         BtnReturn.ChangeSize(400, 50);
         //BtnReturn.Center();
-        BtnReturn.OnClick += BtnReturn_Click;
+        BtnReturn.Clicked += BtnReturn_Click;
 
         _interfaceManager.AddElement(mb);
         _interfaceManager.AddElement(BtnReturn);

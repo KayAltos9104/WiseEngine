@@ -3,19 +3,26 @@ using Microsoft.Xna.Framework.Graphics;
 using WiseEngine.MonogamePart;
 
 namespace WiseEngine;
-
+/// <summary>
+/// UI component which can be clicked and then some action can be done
+/// </summary>
 public class Button : MessageBox
 {
-    public event EventHandler<ClickEventArgs>? OnClick;
+    /// <summary>
+    /// Occurs when button is clicked
+    /// </summary>
+    public event EventHandler<ClickEventArgs>? Clicked;
     public Button(Vector2 pos, SpriteFont font, string text) : base(pos, font, text)
     {
         IsChosen = false;
         IsInteractive = true;
     }
-
-    public override void PerformClick()
+    /// <summary>
+    /// Raises the <see cref="Clicked"/> event
+    /// </summary>
+    public override void OnClicked()
     {
-        OnClick?.Invoke(this, new ClickEventArgs());
+        Clicked?.Invoke(this, new ClickEventArgs());
     }
     
     public override void Render(SpriteBatch spriteBatch)
@@ -41,30 +48,6 @@ public class Button : MessageBox
             base.Render(spriteBatch);
         }
     }
-
-    //protected override void RenderText(SpriteBatch spriteBatch)
-    //{
-    //    if (Text == null)
-    //        return;
-    //    _textSize = Font.MeasureString(Text) != Vector2.Zero ?
-    //            Font.MeasureString(Text) :
-    //            Vector2.One;
-    //    Vector2 textShift = new Vector2(
-    //         (IsCentered ? Bounds.Width / 2 : 0) - _textSize.X/2,
-    //         (IsCentered ? Bounds.Height / 2 : 0) - _textSize.Y/2
-    //        );
-    //    spriteBatch.DrawString(
-    //                spriteFont: Font,
-    //                Text,
-    //                position: Pos + textShift,
-    //                color: TextColor,
-    //                rotation: 0,
-    //                origin: Vector2.Zero,
-    //                scale: 1,
-    //                SpriteEffects.None,
-    //                layerDepth: 0
-    //                );
-    //}
 }
 
 public class ClickEventArgs:EventArgs

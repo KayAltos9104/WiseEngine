@@ -51,7 +51,7 @@ public interface IComponent
     /// <summary>
     /// Method is called when element was affected by user
     /// </summary>
-    void PerformClick();
+    void OnClicked();
     /// <summary>
     /// Method contains code to draw element
     /// </summary>

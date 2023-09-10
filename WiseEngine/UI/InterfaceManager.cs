@@ -24,6 +24,9 @@ public class InterfaceManager
     /// Moves cursor to the next UI element
     /// </summary>
     /// <param name="step">Direction of cursor moving - next or previous element in list</param>
+    /// <remarks>
+    /// Can be used for cursor position initialization
+    /// </remarks>
     public void MoveCursor(CursorStep step)
     {
         if (InterfaceElements.Count > 0 && InterfaceElements.All(e => e.IsInteractive == false))
@@ -39,7 +42,10 @@ public class InterfaceManager
 
         CursorPos = InterfaceElements[currentIndex].Bounds.Center;
     }
-
+    /// <summary>
+    /// Adds new UI component in list
+    /// </summary>
+    /// <param name="component">Component to add</param>
     public void AddElement(IComponent component)
     {
         InterfaceElements.Add(component);
@@ -48,18 +54,28 @@ public class InterfaceManager
             MoveCursor(CursorStep.Down);
         }
     }
+    /// <summary>
+    /// Gets interface component on which cursor in current time
+    /// </summary>
+    /// <returns><see cref="IComponent"/> from list or <c>null</c> if cursor is not in <Bounds> of any component</returns>
     public IComponent? GetCurrentElement()
     {
         return InterfaceElements.FirstOrDefault(c => c.IsInteractive && c.Bounds.Contains(CursorPos));
     }
+    /// <summary>
+    /// Calls <see cref="IComponent.OnClicked"/> method for element on which cursor is
+    /// </summary>
     public void ClickCurrentElement ()
     {
         var chosenElement = GetCurrentElement();
         if (chosenElement != null)
         {
-            chosenElement.PerformClick();
+            chosenElement.OnClicked();
         }
     }
+    /// <summary>
+    /// Updates components state
+    /// </summary>
     public void Update()
     {
         InterfaceElements.ForEach(element => element.IsChosen = false);
@@ -69,21 +85,20 @@ public class InterfaceManager
             e.IsChosen = true;
         }
     }
-
+    /// <summary>
+    /// Moves cursor to a given coordinate
+    /// </summary>
+    /// <param name="cursorPos">New cursor position</param>
     public void TransformCursor(Point cursorPos)
     {
         CursorPos = cursorPos;        
     }
-
+    /// <summary>
+    /// Directions in whick cursor can move
+    /// </summary>
     public enum CursorStep: byte
     {
         Up,
         Down,
     }
-}
-
-public class InterfaceInputsEventArgs : EventArgs
-{
-    public List<IComponent>? InterfaceElements { get; set; } = new List<IComponent>();
-    public Point CursorPoint { get; set; }
 }
