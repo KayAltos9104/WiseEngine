@@ -11,6 +11,7 @@ public class Witch : IObject
     public Vector2 Pos { get; set; }
     public Vector2 Speed { get; set; }
     public Vector2 Scale { get; set; }
+    public bool IsDisposed { get; set; } = false;
     public Witch (Vector2 initPos)
     {
         //Scale = Vector2.One;

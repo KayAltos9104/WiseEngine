@@ -22,7 +22,8 @@ Globals.ResourcesPath = Path.Combine(new string []{projectRoot, "Resources"});
 var game = new GameProcessor(
     new List<(string, string)>()
     {
-                ("ExampleWitch", "ExampleWitch")
+                ("ExampleWitch", "ExampleWitch"),
+                ("RedOrb", "RedOrb")
     },
     new List<(string, string)>()
     {

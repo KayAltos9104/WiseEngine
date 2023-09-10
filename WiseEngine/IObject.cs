@@ -26,6 +26,10 @@ public interface IObject
     /// The <c>Pos</c> property represents position where object is placed
     /// </value>
     Vector2 Pos { get; set; }
+    /// <value>
+    /// The <c>IsDisposed</c> property says should model remove object from scene
+    /// </value>
+    bool IsDisposed { get; set; }
     /// <summary>
     /// Updates object state
     /// </summary>

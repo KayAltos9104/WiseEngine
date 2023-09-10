@@ -65,11 +65,21 @@ public abstract class Model
     /// </remarks>
     public virtual void Update(ViewCycleFinishedEventArgs e)
     {
+        List<IObject> disposableObjects = new List<IObject>();
         _inputData = e.CurrentViewData;
         foreach (var obj in GameObjects)
         {
-            obj.Update();
+            if (obj.IsDisposed)
+            {
+                disposableObjects.Add(obj);
+            }
+            else
+            {
+                obj.Update();
+            }            
         }
+        GameObjects.RemoveAll(o => disposableObjects.Contains(o));
+
         _outputData.CurrentFrameObjects = new List<IObject>(GameObjects);
         OnCycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs() { ModelViewData = _outputData});
     }
