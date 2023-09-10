@@ -53,7 +53,7 @@ public class BaseMovementView : View
             var chosenElement = _interfaceManager.GetCurrentElement();
             if (chosenElement != null)
             {
-                (chosenElement as Button).PerformClick();
+                chosenElement.PerformClick();
             }
         }
 

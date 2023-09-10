@@ -40,6 +40,10 @@ public abstract class InterfaceComponent : IComponent
         IsChosen = false;
         Bounds = new Rectangle((int)pos.X, (int)pos.Y, 100, 50);
     }
+    public virtual void PerformClick()
+    {
+
+    }
     public void LoadSprite(string spriteName, Vector2 pos)
     {
         Sprites.Add((spriteName, pos));

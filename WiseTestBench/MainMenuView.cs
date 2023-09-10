@@ -62,7 +62,7 @@ namespace WiseTestBench
                     var chosenElement = _interfaceManager.GetCurrentElement();
                     if (chosenElement != null)
                     {
-                        (chosenElement as Button).PerformClick();
+                        chosenElement.PerformClick();
                     }
                 }
             }
@@ -74,10 +74,16 @@ namespace WiseTestBench
                 if (InputsManager.IsSinglePressed(Keys.S))
                     _interfaceManager.MoveCursor(InterfaceManager.CursorStep.Down);
                 if (InputsManager.IsSinglePressed(Keys.Space))
-                    (_interfaceManager.GetCurrentElement() as Button).PerformClick();
+                {
+                    var chosenElement = _interfaceManager.GetCurrentElement();
+                    if (chosenElement != null)
+                    {
+                        chosenElement.PerformClick();
+                    }
+                }
             }
             GameConsole.Clear();
-            GameConsole.WriteLine($"Позиция курсора клавиатуры: {_interfaceManager.CursorPos}");
+            GameConsole.WriteLine($"Позиция курсора: {_interfaceManager.CursorPos}");
             var cursorChoosed = _interfaceManager.GetCurrentElement() != null ? _interfaceManager.GetCurrentElement().Name : "None";
             GameConsole.WriteLine($"Имя выбранного элемента: {cursorChoosed}");
 

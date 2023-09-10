@@ -10,7 +10,8 @@ public interface IComponent
     string Text { get; set; }
     bool IsCentered { get; set; }
     float Layer { get; set; }
-    public bool IsChosen { get; set; }
-    public bool IsInteractive { get; set; }
+    bool IsChosen { get; set; }
+    bool IsInteractive { get; set; }
+    void PerformClick();
     void Render(SpriteBatch spriteBatch);
 }

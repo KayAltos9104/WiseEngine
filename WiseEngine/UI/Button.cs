@@ -13,7 +13,7 @@ public class Button : MessageBox
         IsInteractive = true;
     }
 
-    public void PerformClick()
+    public override void PerformClick()
     {
         OnClick?.Invoke(this, new ClickEventArgs());
     }

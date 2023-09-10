@@ -7,25 +7,61 @@ namespace WiseEngine.MonogamePart;
 /// </summary>
 public static class Graphics2D
 {
+    /// <summary>
+    /// <see cref="Rectangle">Area in which objects will be drawing</see>
+    /// </summary>
+    /// <remarks>
+    /// Used for optimization
+    /// </remarks>
+    private static Rectangle _visionArea;
+    /// <summary>
+    /// Common Monogame <see cref="SpriteBatch"/> for drawing
+    /// </summary>
     public static SpriteBatch SpriteBatch { get; set; }
+    /// <summary>
+    /// Monogame <see cref="GraphicsDeviceManager"/>
+    /// </summary>
     public static GraphicsDeviceManager Graphics { get; set; }
-    public static Vector2 VisualShift = new Vector2(0, 0);
-    private static Rectangle VisionArea;
-
+    /// <summary>
+    /// Value of objects shifts for drawing - in other words, its view shift for camera
+    /// </summary>
+    /// <remarks>
+    /// In future camera will be implemented with <see cref="Matrix"/> class
+    /// </remarks>
+    public static Vector2 VisualShift = new Vector2(0, 0);   
+    /// <summary>
+    /// Changes <see cref="_visionArea"/>
+    /// </summary>
     public static void UpdateVisionArea()
     {
-        VisionArea = new Rectangle(-100, -100,
+        _visionArea = new Rectangle(-100, -100,
             Globals.Resolution.Width + 100, Globals.Resolution.Height + 100);
     }
+    /// <summary>
+    /// Changes <see cref="_visionArea"/>
+    /// </summary>
+    /// <param name="x">X coordinate for left top rectangle corner</param>
+    /// <param name="y">Y coordinate for left top rectangle corner</param>
+    /// <param name="width">Width of vision area</param>
+    /// <param name="height">Height of vision area</param>
     public static void UpdateVisionArea(int x, int y, int width, int height)
     {
-        VisionArea = new Rectangle(x, y, width, height);
+        _visionArea = new Rectangle(x, y, width, height);
     }
+    /// <summary>
+    /// Checks if coordinate is in current vision area
+    /// </summary>
+    /// <param name="pos">Coordinate for checking</param>
+    /// <returns><c>True</c> if coordinate is inside the vision area</returns>
     public static bool IsInVisionArea(Vector2 pos)
     {
-        if (VisionArea.Contains(pos)) return true;
+        if (_visionArea.Contains(pos)) return true;
         else return false;
     }
+    /// <summary>
+    /// Renders <see cref="IObject">game object</see>
+    /// </summary>
+    /// <param name="obj">Object for drawing</param>
     public static void RenderObject(IObject obj)
     {
         foreach (var sprite in obj.Sprites)
@@ -57,7 +93,13 @@ public static class Graphics2D
             }
         }
     }
-
+    /// <summary>
+    /// Renders text
+    /// </summary>
+    /// <param name="pos">Text position</param>
+    /// <param name="text">Text</param>
+    /// <param name="font">Font</param>
+    /// <param name="textColor">Text color</param>
     public static void OutputText(Vector2 pos, string text, SpriteFont font, Color textColor)
     {
         var textSize = font.MeasureString(text);
@@ -77,7 +119,11 @@ public static class Graphics2D
                     layerDepth: 0
                     );
     }
-
+    /// <summary>
+    /// Renders text with default font and color
+    /// </summary>
+    /// <param name="pos">Text position</param>
+    /// <param name="text">Text</param>
     public static void OutputText (Vector2 pos, string text)
     {
         OutputText(pos, text, LoadableObjects.GetFont("SystemFont"), Color.Yellow);
@@ -111,12 +157,26 @@ public static class Graphics2D
     //        }
     //    }
     //}
-
+    /// <summary>
+    /// Renders straight line
+    /// </summary>
+    /// <param name="point1">Line begin</param>
+    /// <param name="point2">Line end</param>
+    /// <param name="color">Line color</param>
     public static void DrawLine(Vector2 point1, Vector2 point2, Color color)
     {
         DrawLine(point1, point2, color, 1);
     }
-
+    /// <summary>
+    /// Renders straight line
+    /// </summary>
+    /// <param name="point1">Line begin</param>
+    /// <param name="point2">Line end</param>
+    /// <param name="color">Line color</param>
+    /// <param name="width">Line width</param>
+    /// <remarks>
+    /// Made by ChatGPT
+    /// </remarks>
     public static void DrawLine(Vector2 point1, Vector2 point2, Color color, int width)
     {
         Texture2D pixel = new Texture2D(SpriteBatch.GraphicsDevice, 1, width);
@@ -136,7 +196,15 @@ public static class Graphics2D
     {
         DrawRectangle(x, y, width, height, color, 1);
     }
-
+    /// <summary>
+    /// Renders rectangle
+    /// </summary>
+    /// <param name="x">X coordinate for left top rectangle corner</param>
+    /// <param name="y">Y coordinate for left top rectangle corner</param>
+    /// <param name="width">Rectangle width</param>
+    /// <param name="height">Rectangle height</param>
+    /// <param name="color">Rectangle contour color</param>
+    /// <param name="contourWidth"></param>
     public static void DrawRectangle(int x, int y, int width, int height, Color color, int contourWidth)
     {
         Vector2 leftTop = new Vector2(x, y);

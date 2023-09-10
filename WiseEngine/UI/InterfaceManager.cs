@@ -13,9 +13,7 @@ public class InterfaceManager
 
     public InterfaceManager()
     { 
-        InterfaceElements = new List<IComponent>();
-        //Cursor = cursor;
-        //OnInputsChanged += Cursor.Update;
+        InterfaceElements = new List<IComponent>();        
         Update();       
     }
 
