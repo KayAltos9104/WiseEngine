@@ -86,10 +86,6 @@ namespace WiseTestBench
             GameConsole.WriteLine($"Позиция курсора: {_interfaceManager.CursorPos}");
             var cursorChoosed = _interfaceManager.GetCurrentElement() != null ? _interfaceManager.GetCurrentElement().Name : "None";
             GameConsole.WriteLine($"Имя выбранного элемента: {cursorChoosed}");
-
-
-            
-
             base.Update();
         }       
         private void BtnTest1_Click(object sender, ClickEventArgs e)

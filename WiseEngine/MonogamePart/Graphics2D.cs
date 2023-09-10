@@ -204,7 +204,10 @@ public static class Graphics2D
     /// <param name="width">Rectangle width</param>
     /// <param name="height">Rectangle height</param>
     /// <param name="color">Rectangle contour color</param>
-    /// <param name="contourWidth"></param>
+    /// <param name="contourWidth">Rectangle contour width</param>
+    /// <remarks>
+    /// Made by ChatGPT
+    /// </remarks>
     public static void DrawRectangle(int x, int y, int width, int height, Color color, int contourWidth)
     {
         Vector2 leftTop = new Vector2(x, y);
@@ -216,7 +219,17 @@ public static class Graphics2D
         DrawLine(rightBottom, leftBottom, color, contourWidth);
         DrawLine(leftBottom, leftTop, color, contourWidth);
     }
-
+    /// <summary>
+    /// Renders rectangle filled with chosen color
+    /// </summary>
+    /// <param name="x">X coordinate for left top rectangle corner</param>
+    /// <param name="y">Y coordinate for left top rectangle corner</param>
+    /// <param name="width">Rectangle width</param>
+    /// <param name="height">Rectangle height</param>
+    /// <param name="color">Rectangle contour color</param>
+    /// <remarks>
+    /// Made by ChatGPT
+    /// </remarks>
     public static void FillRectangle(int x, int y, int width, int height, Color color)
     {
         Texture2D pixel = new Texture2D(SpriteBatch.GraphicsDevice, width, height);
@@ -228,7 +241,15 @@ public static class Graphics2D
         pixel.SetData(colorArray);
         SpriteBatch.Draw(pixel, new Rectangle(x, y, width, height), color);
     }
-
+    /// <summary>
+    /// Renders circle
+    /// </summary>
+    /// <param name="center">Circle center coordinate</param>
+    /// <param name="radius">Circle radius</param>
+    /// <param name="color">Circle color</param>
+    /// <remarks>
+    /// Made by ChatGPT
+    /// </remarks>
     public static void DrawCircle(Vector2 center, float radius, Color color)
     {
         float angle = 0f;
@@ -246,8 +267,16 @@ public static class Graphics2D
             p1 = p2;
         }
     }
-
-    public static void FillCircle(int radius)
+    /// <summary>
+    /// Renders circle filled with chosen color
+    /// </summary>
+    /// <param name="center">Circle center coordinate</param>
+    /// <param name="radius">Circle radius</param>
+    /// <param name="color">Circle color</param>
+    /// <remarks>
+    /// Made by ChatGPT
+    /// </remarks>
+    public static void FillCircle(Vector2 center, int radius, Color color)
     {
         Texture2D circleTexture = new Texture2D(SpriteBatch.GraphicsDevice, radius * 2, radius * 2);
 
@@ -263,7 +292,7 @@ public static class Graphics2D
                 float distanceSquared = (x - radius) * (x - radius) + (y - radius) * (y - radius);
                 if (distanceSquared <= radiusSquared)
                 {
-                    data[x + y * circleTexture.Width] = Color.White;
+                    data[x + y * circleTexture.Width] = color;
                 }
                 else
                 {
@@ -273,6 +302,6 @@ public static class Graphics2D
         }
 
         circleTexture.SetData(data);
-        SpriteBatch.Draw(circleTexture, new Vector2(300, 300), Color.White);
+        SpriteBatch.Draw(circleTexture, center, color);
     }
 }

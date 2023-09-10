@@ -169,29 +169,7 @@ public sealed class GameProcessor : Game
             _elapsedTime = new TimeSpan();
             _elapsedFrames = 0;
         }
-        
-        //if (_elapsedTime.TotalSeconds > 0)
-        //{
-        //    string FPS = $"FPS: {_elapsedFrames / _elapsedTime.TotalSeconds}";
-        //    var font = LoadableObjects.GetFont("SystemFont");
-        //    var textSize =  font.MeasureString(FPS);
-        //    Vector2 textShift = new Vector2(
-        //        (textSize.X - textSize.X) / 2,
-        //        (textSize.Y - textSize.Y) / 2
-        //        );
-        //    Graphics2D.SpriteBatch.DrawString(
-        //                spriteFont: font,
-        //                FPS,
-        //                position: textShift,
-        //                color: Color.Yellow,
-        //                rotation: 0,
-        //                origin: Vector2.Zero,
-        //                scale: 1,
-        //                SpriteEffects.None,
-        //                layerDepth: 0
-        //                );
-        //}
-            
+           
         base.Update(gameTime);
     }
     /// <summary>
@@ -214,6 +192,9 @@ public sealed class GameProcessor : Game
             GameConsole.Render(Graphics2D.SpriteBatch);
         if (Globals.FPSIsVisible)
             Graphics2D.OutputText(Vector2.Zero, $"FPS: {(int)(_elapsedFrames / _elapsedTime.TotalSeconds)}");
+
+        Graphics2D.FillCircle(new Vector2(500, 500), 100, Color.Red);
+
         Graphics2D.SpriteBatch.End();
         base.Draw(gameTime);
     }
