@@ -31,8 +31,18 @@ namespace WiseTestBench
             BtnLaunchBaseMovementScene.ChangeSize(600, 50);
             BtnLaunchBaseMovementScene.Center();
 
+            Button BtnLaunchButtonsWorkExampleScene = new Button(
+                basePos + Vector2.UnitY * 200,
+                LoadableObjects.GetFont("MainFont"),
+                "Перейти к сцене работы с кнопками"
+                );
+            BtnLaunchButtonsWorkExampleScene.Clicked += BtnLaunchButtonsWorkExampleScene_Click;
+            BtnLaunchButtonsWorkExampleScene.Name = "BtnLaunchButtonsWorkExampleScene";
+            BtnLaunchButtonsWorkExampleScene.ChangeSize(600, 50);
+            BtnLaunchButtonsWorkExampleScene.Center();
+
             Button BtnExit = new Button(
-                basePos + Vector2.UnitY * 200, 
+                basePos + Vector2.UnitY * 300, 
                 LoadableObjects.GetFont("MainFont"), 
                 "Выход"
                 );
@@ -44,7 +54,8 @@ namespace WiseTestBench
             BtnExit.Center();
 
             _interfaceManager.AddElement(MbxTest);
-            _interfaceManager.AddElement(BtnLaunchBaseMovementScene);      
+            _interfaceManager.AddElement(BtnLaunchBaseMovementScene);
+            _interfaceManager.AddElement(BtnLaunchButtonsWorkExampleScene);
             _interfaceManager.AddElement(BtnExit);
         }
 
@@ -74,13 +85,20 @@ namespace WiseTestBench
             }
             GameConsole.Clear();
             GameConsole.WriteLine($"Позиция курсора: {_interfaceManager.CursorPos}");
-            var cursorChoosed = _interfaceManager.GetCurrentElement() != null ? _interfaceManager.GetCurrentElement().Name : "None";
+            var cursorChoosed = _interfaceManager.GetCurrentElement() != null 
+                ? _interfaceManager.GetCurrentElement().Name 
+                : "None";
             GameConsole.WriteLine($"Имя выбранного элемента: {cursorChoosed}");
             base.Update();
         }       
         private void BtnTest1_Click(object sender, ClickEventArgs e)
         {
             OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "BaseMovement" });
+        }
+
+        private void BtnLaunchButtonsWorkExampleScene_Click(object sender, ClickEventArgs e)
+        {
+            OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "BaseButtons" });
         }
 
         private void BtnExit_Click(object sender, ClickEventArgs e)

@@ -10,8 +10,9 @@ public class BaseMovementView : View
 {
     MessageBox mb;
     public override void Initialize()
-    {        
+    {
         _outputData = new BaseMovementViewModelData();
+        _inputData = new BaseMovementModelViewData();
         mb = new MessageBox(new Vector2(150, 50), LoadableObjects.GetFont("MainFont"),
             "0");
         mb.ChangeSize(250, 50);
@@ -25,8 +26,7 @@ public class BaseMovementView : View
         _interfaceManager.AddElement(mb);
         _interfaceManager.AddElement(BtnReturn);
 
-        _outputData = new BaseMovementViewModelData(); 
-        _inputData = new BaseMovementModelViewData();
+      
     } 
     public override void Update()
     {

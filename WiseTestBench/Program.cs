@@ -6,6 +6,7 @@ using WiseTestBench;
 using WiseEngine;
 using System.Reflection;
 using WiseTestBench.BaseMovementScene;
+using WiseTestBench.ButtonsWorkExampleScene;
 
 string projectRoot = Directory.GetCurrentDirectory();
 string projectName = Assembly.GetEntryAssembly().GetName().Name;
@@ -38,6 +39,11 @@ var m2 = new BaseMovementModel();
 var scene2 = new Scene (v2, m2, new Presenter(game, v2, m2));
 
 game.Scenes.Add("BaseMovement", scene2);
+
+var v3 = new ButtonsWorkExampleView();
+var m3 = new ButtonsWorkExampleModel();
+var scene3 = new Scene (v3, m3, new Presenter (game, v3, m3));
+game.Scenes.Add("BaseButtons", scene3);
 
 game.SetCurrentScene("MainMenu");
 game.Run();
