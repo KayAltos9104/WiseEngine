@@ -3,7 +3,6 @@ using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
 using WiseEngine;
 using Microsoft.Xna.Framework;
-using WiseEngine.UI;
 
 namespace WiseTestBench.BaseMovementScene;
 
@@ -11,8 +10,7 @@ public class BaseMovementView : View
 {
     MessageBox mb;
     public override void Initialize()
-    {
-        _interfaceManager = new InterfaceManager();
+    {        
         _outputData = new BaseMovementViewModelData();
         mb = new MessageBox(new Vector2(150, 50), LoadableObjects.GetFont("MainFont"),
             "0");
@@ -48,13 +46,9 @@ public class BaseMovementView : View
 
         _interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
 
-        if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
+        if (InputsManager.IsSingleClicked(InputsManager.MouseButton.Left))
         {
-            var chosenElement = _interfaceManager.GetCurrentElement();
-            if (chosenElement != null)
-            {
-                chosenElement.PerformClick();
-            }
+            _interfaceManager.ClickCurrentElement();
         }
 
         data.DeltaSpeedPlayer = sV;

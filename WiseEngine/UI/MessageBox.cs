@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using WiseEngine.MonogamePart;
 
 namespace WiseEngine;
+/// <summary>
+/// 
+/// </summary>
 public class MessageBox : InterfaceComponent    
 {   
     public MessageBox(Vector2 pos, SpriteFont font, string text) : base(pos, font)
@@ -10,8 +13,7 @@ public class MessageBox : InterfaceComponent
         Pos = pos;
         Text = text;
         TextPos = Vector2.Zero;  
-        Layer = 1.0f; 
-        //MarginText = new Vector2 (20, 0);
+        Layer = 1.0f;         
         IsCentered = true;
     }
     public void Move(Vector2 pos)

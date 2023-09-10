@@ -10,7 +10,15 @@ public sealed class Presenter
     private readonly GameProcessor _processor;
     private readonly View _view;
     private readonly Model? _model;
-
+    /// <summary>
+    /// Constructor for base MVP Presenter
+    /// </summary>
+    /// <param name="processor"><see cref="GameProcessor"/> of the game</param>
+    /// <param name="view"><see cref="View"/> of MVP</param>
+    /// <param name="model"><see cref="Model"/> of MVP</param>
+    /// <remarks>
+    /// Cannot be inherited. Should not be changed in game project
+    /// </remarks>
     public Presenter(GameProcessor processor, View view, Model model)
     {
         _processor = processor;

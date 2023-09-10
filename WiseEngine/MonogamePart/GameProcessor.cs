@@ -192,8 +192,7 @@ public sealed class GameProcessor : Game
             GameConsole.Render(Graphics2D.SpriteBatch);
         if (Globals.FPSIsVisible)
             Graphics2D.OutputText(Vector2.Zero, $"FPS: {(int)(_elapsedFrames / _elapsedTime.TotalSeconds)}");
-
-        Graphics2D.FillCircle(new Vector2(500, 500), 100, Color.Red);
+        
 
         Graphics2D.SpriteBatch.End();
         base.Draw(gameTime);

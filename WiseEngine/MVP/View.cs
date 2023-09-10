@@ -33,11 +33,9 @@ public abstract class View
     /// Processed in presenter because Exit method is in <see cref="GameProcessor"/>
     /// </remarks>
     public EventHandler? GameFinished;
-
-
     public View()
     {        
-        //_interfaceManager = new InterfaceManager(); 
+        _interfaceManager = new InterfaceManager(); 
         _outputData = new ViewModelData();
         _inputData = new ModelViewData();
     }

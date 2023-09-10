@@ -10,9 +10,7 @@ namespace WiseTestBench
     public class MainMenuView : View
     {
         public override void Initialize()
-        {
-            
-            _interfaceManager = new InterfaceManager();
+        {          
             var basePos = new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 - 200);
             MessageBox MbxTest = new MessageBox(
                 basePos, 
@@ -59,11 +57,7 @@ namespace WiseTestBench
                 _interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
                 if (InputsManager.IsSingleClicked(InputsManager.MouseButton.Left))
                 {
-                    var chosenElement = _interfaceManager.GetCurrentElement();
-                    if (chosenElement != null)
-                    {
-                        chosenElement.PerformClick();
-                    }
+                    _interfaceManager.ClickCurrentElement();
                 }
             }
             else
@@ -75,11 +69,7 @@ namespace WiseTestBench
                     _interfaceManager.MoveCursor(InterfaceManager.CursorStep.Down);
                 if (InputsManager.IsSinglePressed(Keys.Space))
                 {
-                    var chosenElement = _interfaceManager.GetCurrentElement();
-                    if (chosenElement != null)
-                    {
-                        chosenElement.PerformClick();
-                    }
+                    _interfaceManager.ClickCurrentElement();
                 }
             }
             GameConsole.Clear();

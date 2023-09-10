@@ -83,11 +83,22 @@ public static class InputsManager
         }
         
     }
-
+    /// <summary>
+    /// Mouse buttons enums
+    /// </summary>
     public enum MouseButton:byte
     {
+        /// <summary>
+        /// Left mouse button
+        /// </summary>
         Left,
+        /// <summary>
+        /// Right mouse button
+        /// </summary>
         Right,
+        /// <summary>
+        /// Middle mouse button
+        /// </summary>
         Middle,
     }
 }

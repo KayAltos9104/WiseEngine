@@ -5,23 +5,35 @@ using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace WiseEngine;
-
+/// <summary>
+/// Basic clas for interface components
+/// </summary>
 public abstract class InterfaceComponent : IComponent
 {
-    public string Name { get; set; }
-
     protected Vector2 _textSize;
+    public string Name { get; set; }
+    
     public Rectangle Bounds { get; set; }
+    /// <summary>
+    /// Text margin
+    /// </summary>
     public Vector2 MarginText { get; set; }
+    /// <summary>
+    /// List of sprites which are used in component drawing
+    /// </summary>
     public List<(string ImageName, Vector2 ImagePos)> Sprites { get; set; }    
     public Vector2 Pos { get; protected set; }
     public Vector2 TextPos { get; set; }
     public string Text { get; set; }
     public bool IsCentered { get; set; }
     public float Layer { get; set; }
-    
+    /// <summary>
+    /// Component text color
+    /// </summary>
     public Color TextColor { get; set; }
-
+    /// <summary>
+    /// Component font for text
+    /// </summary>
     public SpriteFont Font { get; set; }
     public bool IsChosen { get; set; }
     public bool IsInteractive { get; set; }
@@ -44,11 +56,20 @@ public abstract class InterfaceComponent : IComponent
     {
 
     }
+    /// <summary>
+    /// Loads component sprite
+    /// </summary>
+    /// <param name="spriteName">Sprite name from <see cref="LoadableObjects"/></param>
+    /// <param name="pos">Sprite ralative position</param>
     public void LoadSprite(string spriteName, Vector2 pos)
     {
         Sprites.Add((spriteName, pos));
     }
     public abstract void Render(SpriteBatch spriteBatch);  
+    /// <summary>
+    /// Method renders component sprites
+    /// </summary>
+    /// <param name="spriteBatch">Monogame <see cref="SpriteBatch"/></param>
     protected void RenderSprites(SpriteBatch spriteBatch)
     {
         foreach (var sprite in Sprites)
@@ -65,7 +86,13 @@ public abstract class InterfaceComponent : IComponent
                    layerDepth: Layer);
         }
     }
-
+    /// <summary>
+    /// Moves component to the new position
+    /// </summary>
+    /// <param name="newPos">New component coordinate</param>
+    /// <remarks>
+    /// Moves both <see cref="Pos"/> and <see cref="Bounds"/>
+    /// </remarks>
     public void Transform (Vector2 newPos)
     {
         Pos = newPos;
@@ -73,17 +100,27 @@ public abstract class InterfaceComponent : IComponent
         Bounds = new Rectangle((int)newPos.X, (int)newPos.Y, bounds.X, bounds.Y);
        
     }
-
+    /// <summary>
+    /// Shifts component to make current <see cref="Pos"/> lie in the center of the component
+    /// </summary>
     public void Center()
     {
         var newPos = Pos - new Vector2(Bounds.Width / 2, Bounds.Height / 2);
         Transform(newPos);
     }
-
+    /// <summary>
+    /// Change <see cref="Bounds"/> of component
+    /// </summary>
+    /// <param name="width">New width</param>
+    /// <param name="height">New height</param>
     public void ChangeSize(int width, int height)
     {
         Bounds = new Rectangle((int)Pos.X, (int)Pos.Y, width, height);
     }
+    /// <summary>
+    /// Renders component text
+    /// </summary>
+    /// <param name="spriteBatch">Monogame <see cref="SpriteBatch"/></param>
     protected virtual void RenderText (SpriteBatch spriteBatch) 
     {
         if (Text == null)

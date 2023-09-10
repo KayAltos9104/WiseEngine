@@ -2,21 +2,28 @@
 
 
 namespace WiseEngine.UI;
-
+/// <summary>
+/// Manages interaction between inputs and interface elements
+/// </summary>
 public class InterfaceManager
 {
+    /// <summary>
+    /// List with all UI components on View
+    /// </summary>
     public List<IComponent> InterfaceElements { get; private set; }
-    
+    /// <summary>
+    /// Current cursor position
+    /// </summary>
     public Point CursorPos { get; private set; }
-    public EventHandler<InterfaceInputsEventArgs>? OnInputsChanged { get; set; }
-    
-
     public InterfaceManager()
     { 
         InterfaceElements = new List<IComponent>();        
         Update();       
     }
-
+    /// <summary>
+    /// Moves cursor to the next UI element
+    /// </summary>
+    /// <param name="step">Direction of cursor moving - next or previous element in list</param>
     public void MoveCursor(CursorStep step)
     {
         if (InterfaceElements.Count > 0 && InterfaceElements.All(e => e.IsInteractive == false))
@@ -32,6 +39,7 @@ public class InterfaceManager
 
         CursorPos = InterfaceElements[currentIndex].Bounds.Center;
     }
+
     public void AddElement(IComponent component)
     {
         InterfaceElements.Add(component);
@@ -44,7 +52,14 @@ public class InterfaceManager
     {
         return InterfaceElements.FirstOrDefault(c => c.IsInteractive && c.Bounds.Contains(CursorPos));
     }
-
+    public void ClickCurrentElement ()
+    {
+        var chosenElement = GetCurrentElement();
+        if (chosenElement != null)
+        {
+            chosenElement.PerformClick();
+        }
+    }
     public void Update()
     {
         InterfaceElements.ForEach(element => element.IsChosen = false);
