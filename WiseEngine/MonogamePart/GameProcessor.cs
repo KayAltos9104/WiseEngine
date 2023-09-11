@@ -18,6 +18,7 @@ public sealed class GameProcessor : Game
 
     private TimeSpan _elapsedTime = new TimeSpan();
     private int _elapsedFrames = 0;
+   
     /// <value>
     /// The <c>Scenes</c> property represents a dictionary with all scenes used in game
     /// </value>
@@ -51,7 +52,7 @@ public sealed class GameProcessor : Game
     protected override void Initialize()
     {
         base.Initialize();
-        Window.Title = "KARC";        
+        Window.Title = "WiseEngine 0.2.0 alpha";        
         SetResolution(Globals.Resolution.Width, Globals.Resolution.Height);
         SetFullScreenMode(Globals.IsFullScreen);
 
@@ -180,19 +181,21 @@ public sealed class GameProcessor : Game
     /// Its override of original Monogame Draw and is called automatically
     /// </remarks>
     protected override void Draw(GameTime gameTime)
-    {
+    {        
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        Graphics2D.SpriteBatch.Begin();
+
+        
         if (_currentScene != null)
         {
             _currentScene.Draw();
         }
+       
 
+        Graphics2D.SpriteBatch.Begin();
         if (GameConsole.IsShown)    
             GameConsole.Render(Graphics2D.SpriteBatch);
         if (Globals.FPSIsVisible)
-            Graphics2D.OutputText(Vector2.Zero, $"FPS: {(int)(_elapsedFrames / _elapsedTime.TotalSeconds)}");
-        
+            Graphics2D.OutputText(Vector2.Zero, $"FPS: {(int)(_elapsedFrames / _elapsedTime.TotalSeconds)}");        
 
         Graphics2D.SpriteBatch.End();
         base.Draw(gameTime);
@@ -208,4 +211,6 @@ public sealed class GameProcessor : Game
         else
             GameConsole.WriteLine($"Scene {sceneName} is missed");
     }
+
+ 
 }

@@ -1,4 +1,5 @@
-﻿using WiseEngine.MonogamePart;
+﻿using Microsoft.Xna.Framework;
+using WiseEngine.MonogamePart;
 using static WiseEngine.MVP.Model;
 
 namespace WiseEngine.MVP;
@@ -25,7 +26,7 @@ public sealed class Presenter
         _view = view;
         _model = model;
         
-        _view.CycleFinished += UpdateModel;
+        _view.CycleFinished += UpdateModel;        
         _view.SceneFinished += SwitchScene;
         _view.GameFinished += CallExit;
 
@@ -77,4 +78,5 @@ public sealed class Presenter
     {
         _processor.SetCurrentScene(e.NewSceneName);
     }
+   
 }

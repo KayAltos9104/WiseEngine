@@ -112,7 +112,7 @@ public class ButtonsWorkExampleView : View
     private void BtnFire_Click(object sender, ClickEventArgs e)
     {
         //GameConsole.Clear();
-        GameConsole.WriteLine("Пиф-паф!");
+        //GameConsole.WriteLine("Пиф-паф!");
         var data = GetOutputData<ButtonsWorkExampleViewModelData>();
         data.DoPlayerShoot = true;
     }

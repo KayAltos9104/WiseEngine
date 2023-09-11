@@ -1,4 +1,5 @@
-﻿using WiseEngine.MonogamePart;
+﻿using Microsoft.Xna.Framework;
+using WiseEngine.MonogamePart;
 using WiseEngine.UI;
 
 namespace WiseEngine.MVP;
@@ -8,6 +9,13 @@ namespace WiseEngine.MVP;
 /// </summary>
 public abstract class View
 {
+    /// <summary>
+    /// Presents drawing offset for game objects
+    /// </summary>
+    /// <remarks>
+    /// Doesn't affect on interface elements
+    /// </remarks>
+    protected Matrix _cameraOffset { get; set; }
     /// <value>
     /// Property <c>_outputData</c> contains game data for transfering to view
     /// </value>
@@ -38,6 +46,7 @@ public abstract class View
         _interfaceManager = new InterfaceManager(); 
         _outputData = new ViewModelData();
         _inputData = new ModelViewData();
+        _cameraOffset = Matrix.CreateTranslation (0, 0, 0);
     }
     /// <summary>
     /// Gets <c>_inputData</c> 
@@ -101,7 +110,8 @@ public abstract class View
     /// Draws all game objects and interface elements.
     /// </summary>
     public virtual void Draw()
-    {        
+    {
+        Graphics2D.SpriteBatch.Begin(transformMatrix: _cameraOffset);
         if (_inputData != null)
         {
             foreach (var o in _inputData.CurrentFrameObjects)
@@ -112,11 +122,15 @@ public abstract class View
                 //    Graphics2D.RenderAnimation(o as IAnimated);
             }
         }
+        Graphics2D.SpriteBatch.End();
+
+        Graphics2D.SpriteBatch.Begin();
         if (_interfaceManager != null)
         {
             foreach (var ui in _interfaceManager.InterfaceElements)
                 ui.Render(Graphics2D.SpriteBatch);
-        } 
+        }
+        Graphics2D.SpriteBatch.End();
     }
     /// <summary>
     /// Process all inputs from user (inputs should be taken from <see cref="InputsManager"/>).

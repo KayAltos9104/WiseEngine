@@ -30,9 +30,8 @@ public class BaseMovementView : View
     } 
     public override void Update()
     {
-        
-        mb.Text = GetInputData<BaseMovementModelViewData>().PlayerPos.ToString();
-
+        var playerPos = GetInputData<BaseMovementModelViewData>().PlayerPos;
+        mb.Text = playerPos.ToString();
         Vector2 sV = Vector2.Zero;
         var data = (BaseMovementViewModelData)_outputData;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.W))
@@ -52,7 +51,9 @@ public class BaseMovementView : View
         }
 
         data.DeltaSpeedPlayer = sV;
+        
         base.Update();
+       
     }   
     
     public void BtnReturn_Click (object sender, ClickEventArgs e)
