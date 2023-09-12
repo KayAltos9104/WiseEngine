@@ -19,7 +19,10 @@ public abstract class Model
     /// Property <c>GameObjects</c> contains all game objects in <see cref="Scene">scene</see>
     /// </value>
     public List<IObject> GameObjects { get; set; }
-    
+    /// <value>
+    /// Property <c>Triggers</c> contains all triggers in <see cref="Scene">scene</see>
+    /// </value>
+    public List<ITrigger> Triggers { get; set; }
     /// <value>
     /// Event <c>OnCycleFinished</c> that activates when Model ended cycle processing
     /// </value>
@@ -29,7 +32,8 @@ public abstract class Model
     public EventHandler<ModelCycleFinishedEventArgs>? OnCycleFinished;
     public Model()
     {
-        GameObjects = new List<IObject>();        
+        GameObjects = new List<IObject>(); 
+        Triggers = new List<ITrigger>();
     }
     /// <summary>
     /// Gets <c>_inputData</c> 
@@ -81,6 +85,7 @@ public abstract class Model
         GameObjects.RemoveAll(o => disposableObjects.Contains(o));
 
         _outputData.CurrentFrameObjects = new List<IObject>(GameObjects);
+        _outputData.Triggers = new List<ITrigger>(Triggers);
         OnCycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs() { ModelViewData = _outputData});
     }
 

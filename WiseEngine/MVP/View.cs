@@ -121,6 +121,16 @@ public abstract class View
                 //if (o is IAnimated)
                 //    Graphics2D.RenderAnimation(o as IAnimated);
             }
+            // TODO: Тестовый код, потом прибраться
+            foreach (var t in _inputData.Triggers)
+            {
+                if (t is RectangleCollider)
+                {
+                    var r = t as RectangleCollider;
+                    Graphics2D.DrawRectangle(r.Area.X, r.Area.Y, r.Area.Width, r.Area.Height, Color.Yellow, 3);
+                }
+                
+            }
         }
         Graphics2D.SpriteBatch.End();
 
