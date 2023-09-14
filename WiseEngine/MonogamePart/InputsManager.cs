@@ -29,8 +29,7 @@ public static class InputsManager
     public static void ReadInputs()
     {
         PressedCurrentFrame = Keyboard.GetState();
-        MouseStateCurrentFrame = Mouse.GetState();
-        //TODO: Потом добавить мышу
+        MouseStateCurrentFrame = Mouse.GetState();        
     }
 
     /// <summary>

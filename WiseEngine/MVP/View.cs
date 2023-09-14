@@ -52,7 +52,7 @@ public abstract class View
     /// Gets <c>_inputData</c> 
     /// </summary>
     /// <typeparam name="T">Correct successor of <see cref="ModelViewData"/></typeparam>
-    /// <returns><c>_inputData</c> which should be transferred to model</returns>
+    /// <returns><c>_inputData</c> which was transferred from model</returns>
     public T? GetInputData<T>() where T : ModelViewData
     {
         return (T)_inputData;
