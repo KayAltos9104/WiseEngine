@@ -7,6 +7,7 @@ using WiseEngine;
 using System.Reflection;
 using WiseTestBench.BaseMovementScene;
 using WiseTestBench.ButtonsWorkExampleScene;
+using WiseTestBench.ExampleSceneTriggerWork;
 
 string projectRoot = Directory.GetCurrentDirectory();
 string projectName = Assembly.GetEntryAssembly().GetName().Name;
@@ -45,6 +46,11 @@ var v3 = new ButtonsWorkExampleView();
 var m3 = new ButtonsWorkExampleModel();
 var scene3 = new Scene (v3, m3, new Presenter (game, v3, m3));
 game.Scenes.Add("BaseButtons", scene3);
+
+var v4 = new TriggerWorkExampleView();
+var m4 = new TriggerWorkExampleModel();
+var scene4 = new Scene(v4, m4, new Presenter(game, v4, m4));
+game.Scenes.Add("Triggers", scene4);
 
 game.SetCurrentScene("MainMenu");
 game.Run();

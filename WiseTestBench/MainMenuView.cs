@@ -41,8 +41,20 @@ namespace WiseTestBench
             BtnLaunchButtonsWorkExampleScene.ChangeSize(600, 50);
             BtnLaunchButtonsWorkExampleScene.Center();
 
+            Button BtnLaunchTriggersWorkExampleScene = new Button(
+                basePos + Vector2.UnitY * 300,
+                LoadableObjects.GetFont("MainFont"),
+                "Перейти к сцене работы с триггерами"
+                );
+            BtnLaunchTriggersWorkExampleScene.Clicked += BtnLaunchTriggerWorkExampleScene_Click;
+            BtnLaunchTriggersWorkExampleScene.Name = "BtnLaunchButtonsWorkExampleScene";
+            BtnLaunchTriggersWorkExampleScene.ChangeSize(600, 50);
+            BtnLaunchTriggersWorkExampleScene.Center();
+
+            
+
             Button BtnExit = new Button(
-                basePos + Vector2.UnitY * 300, 
+                basePos + Vector2.UnitY * 400, 
                 LoadableObjects.GetFont("MainFont"), 
                 "Выход"
                 );
@@ -56,7 +68,9 @@ namespace WiseTestBench
             _interfaceManager.AddElement(MbxTest);
             _interfaceManager.AddElement(BtnLaunchBaseMovementScene);
             _interfaceManager.AddElement(BtnLaunchButtonsWorkExampleScene);
+            _interfaceManager.AddElement(BtnLaunchTriggersWorkExampleScene);
             _interfaceManager.AddElement(BtnExit);
+            
         }
 
         public override void Update()
@@ -101,6 +115,10 @@ namespace WiseTestBench
             OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "BaseButtons" });
         }
 
+        private void BtnLaunchTriggerWorkExampleScene_Click (object sender, ClickEventArgs e) 
+        {
+            OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "Triggers" });
+        }
         private void BtnExit_Click(object sender, ClickEventArgs e)
         {
             OnGameFinished();

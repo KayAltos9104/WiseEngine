@@ -2,6 +2,7 @@
 using WiseEngine;
 using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
+using WiseTestBench.ExampleSceneTriggerWork;
 
 namespace WiseTestBench.BaseMovementScene;
 
@@ -38,6 +39,5 @@ public class BaseMovementModel : Model
             MathHelper.Clamp(_player.Pos.X, 0, Globals.Resolution.Width - t.Width * _player.Scale.X),
             MathHelper.Clamp(_player.Pos.Y, 0, Globals.Resolution.Height - t.Height * _player.Scale.Y)
             );
-
     }
 }
