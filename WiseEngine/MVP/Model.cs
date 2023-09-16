@@ -1,4 +1,6 @@
-﻿namespace WiseEngine.MVP;
+﻿using System.Diagnostics;
+
+namespace WiseEngine.MVP;
 /// <summary>
 /// Abstract class which contains all game logic
 /// </summary>
@@ -20,9 +22,9 @@ public abstract class Model
     /// </value>
     public List<IObject> GameObjects { get; set; }
     /// <value>
-    /// Property <c>Triggers</c> contains all triggers in <see cref="Scene">scene</see>
+    /// Property <c>_triggers</c> contains all triggers in <see cref="Scene">scene</see>
     /// </value>
-    public List<ITrigger> Triggers { get; set; }
+    public TriggerManager TriggerManager { get; set; }
     /// <value>
     /// Event <c>OnCycleFinished</c> that activates when Model ended cycle processing
     /// </value>
@@ -33,7 +35,7 @@ public abstract class Model
     public Model()
     {
         GameObjects = new List<IObject>(); 
-        Triggers = new List<ITrigger>();
+        TriggerManager = new TriggerManager();
         _outputData = new ModelViewData();
         _inputData = new ViewModelData();
     }
@@ -82,12 +84,16 @@ public abstract class Model
             else
             {
                 obj.Update();
-            }            
+            }
+            if (obj is IShaped)
+            {
+                TriggerManager.Update(obj as IShaped);
+            }
         }
         GameObjects.RemoveAll(o => disposableObjects.Contains(o));
 
         _outputData.CurrentFrameObjects = new List<IObject>(GameObjects);
-        _outputData.Triggers = new List<ITrigger>(Triggers);
+        _outputData.Triggers = new List<ITrigger>(TriggerManager.GetTriggers());
         OnCycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs() { ModelViewData = _outputData});
     }
 
