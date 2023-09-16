@@ -123,13 +123,8 @@ public abstract class View
             }
             // TODO: Тестовый код, потом прибраться
             foreach (var t in _inputData.Triggers)
-            {
-                if (t is RectangleCollider)
-                {
-                    var r = t as RectangleCollider;
-                    Graphics2D.DrawRectangle(r.Area.X, r.Area.Y, r.Area.Width, r.Area.Height, Color.Yellow, 3);
-                }
-                
+            {                
+                t.GetCollider().Draw(Graphics2D.SpriteBatch);   
             }
         }
         Graphics2D.SpriteBatch.End();

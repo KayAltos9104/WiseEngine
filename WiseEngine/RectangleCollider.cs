@@ -1,6 +1,8 @@
 ﻿
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using WiseEngine.MonogamePart;
 
 namespace WiseEngine;
 
@@ -16,5 +18,23 @@ public class RectangleCollider : Collider
     {
         Area = new Rectangle (newPos.ToPoint(), new Point (Area.Width, Area.Height));
         Position = newPos;
+    }
+
+    public override bool IsIntersects(Collider other)
+    {
+        if (other is RectangleCollider)
+        {
+            return Area.Intersects((other as RectangleCollider).Area);
+        }            
+        else
+        {
+            GameConsole.WriteLine("Warning: In this version you can't calculate intersection between different collider types");
+            return false;
+        }            
+    }
+
+    public override void Draw(SpriteBatch spriteBatch)
+    {
+        Graphics2D.DrawRectangle(Area.X, Area.Y, Area.Width, Area.Height, Color.Yellow, 3);
     }
 }

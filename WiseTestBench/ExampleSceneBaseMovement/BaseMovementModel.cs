@@ -16,8 +16,7 @@ public class BaseMovementModel : Model
             Globals.Resolution.Height / 2)
             );
         GameObjects.Add(_player);
-        TestTrigger testTrigger = new TestTrigger(new Vector2(100, 400), 300, 200);
-        Triggers.Add(testTrigger);
+
         
         _outputData = new BaseMovementModelViewData();
         _inputData = new BaseMovementViewModelData();

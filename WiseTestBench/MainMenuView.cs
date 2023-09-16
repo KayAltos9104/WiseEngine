@@ -11,7 +11,7 @@ namespace WiseTestBench
     {
         public override void Initialize()
         {          
-            var basePos = new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 - 200);
+            var basePos = new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 - 400);
             MessageBox MbxTest = new MessageBox(
                 basePos, 
                 LoadableObjects.GetFont("MainFont"),                     

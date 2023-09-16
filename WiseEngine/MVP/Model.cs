@@ -34,6 +34,8 @@ public abstract class Model
     {
         GameObjects = new List<IObject>(); 
         Triggers = new List<ITrigger>();
+        _outputData = new ModelViewData();
+        _inputData = new ViewModelData();
     }
     /// <summary>
     /// Gets <c>_inputData</c> 
