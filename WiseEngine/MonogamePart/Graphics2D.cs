@@ -90,6 +90,11 @@ public static class Graphics2D
                         (int)(LoadableObjects.GetTexture(sprite.ImageName).Height * obj.Scale.Y),
                         Color.Red, 3);
                 }
+
+                if (Globals.CollidersAreVisible && obj is IShaped)
+                {                    
+                        (obj as IShaped).GetCollider().Draw(SpriteBatch);
+                }
             }
         }
     }

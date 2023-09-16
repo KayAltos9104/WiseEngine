@@ -118,6 +118,7 @@ public abstract class View
             {
                 Graphics2D.RenderObject(o);
                 
+                
                 //if (o is IAnimated)
                 //    Graphics2D.RenderAnimation(o as IAnimated);
             }
