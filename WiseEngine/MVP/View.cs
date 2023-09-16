@@ -15,7 +15,7 @@ public abstract class View
     /// <remarks>
     /// Doesn't affect on interface elements
     /// </remarks>
-    protected Matrix _cameraOffset { get; set; }
+    protected Camera2D Camera { get; set; }
     /// <value>
     /// Property <c>_outputData</c> contains game data for transfering to view
     /// </value>
@@ -46,7 +46,7 @@ public abstract class View
         _interfaceManager = new InterfaceManager(); 
         _outputData = new ViewModelData();
         _inputData = new ModelViewData();
-        _cameraOffset = Matrix.CreateTranslation (0, 0, 0);
+        Camera = new Camera2D();
     }
     /// <summary>
     /// Gets <c>_inputData</c> 
@@ -111,7 +111,8 @@ public abstract class View
     /// </summary>
     public virtual void Draw()
     {
-        Graphics2D.SpriteBatch.Begin(transformMatrix: _cameraOffset);
+        Camera.Update();
+        Graphics2D.SpriteBatch.Begin(transformMatrix: Camera.Transform);
         if (_inputData != null)
         {
             foreach (var o in _inputData.CurrentFrameObjects)

@@ -9,8 +9,6 @@ namespace WiseTestBench.ExampleSceneTriggerWork;
 public class TriggerWorkExampleModel : Model
 {
     private ShapeWitch _player;
-    private CommonTrigger _playerTrigger1;
-    private CommonTrigger _playerTrigger2;
     public override void Initialize()
     {
         _player = new ShapeWitch(new Vector2(
@@ -18,19 +16,16 @@ public class TriggerWorkExampleModel : Model
             Globals.Resolution.Height / 2)
             );
         GameObjects.Add(_player);
+
         CommonTrigger testTrigger = new CommonTrigger(new Vector2(100, 300), 300, 200);
+        testTrigger.Name = "TestTrigger1";
+        testTrigger.Triggered += ShowIntersectingMessage;
         TriggerManager.AddTrigger(testTrigger);
-        _playerTrigger1 = testTrigger;
-        _playerTrigger1.Name = "TestTrigger1";
-        _playerTrigger1.Triggered += ShowIntersectingMessage;
 
         testTrigger = new CommonTrigger(new Vector2(1000, 400), 300, 200);
         TriggerManager.AddTrigger(testTrigger);
-        _playerTrigger2 = testTrigger;
-        _playerTrigger2.Name = "TestTrigger2";
-        _playerTrigger2.Triggered += ShowIntersectingMessage;
-
-
+        testTrigger.Name = "TestTrigger2";
+        testTrigger.Triggered += ShowIntersectingMessage;
 
         _outputData = new TriggerWorkModelViewData();
         _inputData = new TriggerWorkViewModelData();

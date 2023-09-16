@@ -7,14 +7,14 @@ using Microsoft.Xna.Framework;
 
 namespace WiseTestBench.ExampleSceneTriggerWork;
 
-public class TriggerWorkExampleView : View
-{
+public class TriggerWorkAndCameraExampleView : View
+{    
     public override void Initialize()
     {
         _outputData = new TriggerWorkViewModelData();
         _inputData = new TriggerWorkModelViewData();
         
-
+        
         Button BtnReturn = new Button(new Vector2(0, 0), LoadableObjects.GetFont("MainFont"), "Обратно");
         BtnReturn.ChangeSize(200, 50);
         BtnReturn.Clicked += BtnReturn_Click;
@@ -26,7 +26,7 @@ public class TriggerWorkExampleView : View
     public override void Update()
     {
         var playerPos = GetInputData<TriggerWorkModelViewData>().PlayerPos;
-        
+
         Vector2 sV = Vector2.Zero;
         var data = (BaseMovementViewModelData)_outputData;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.W))
@@ -38,6 +38,48 @@ public class TriggerWorkExampleView : View
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.D))
             sV += Vector2.UnitX;
 
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.Right))
+        {
+            Camera.Translate(-10, 0, 0);
+            GameConsole.WriteLine($"{Camera.Transform.Translation}");
+        }
+        else if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.Left))
+        {
+            Camera.Translate(10, 0, 0);
+            GameConsole.WriteLine($"{Camera.Transform.Translation}");
+        }
+
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.Up))
+        {
+            Camera.Translate(0, 10, 0);
+            GameConsole.WriteLine($"{Camera.Transform.Translation}");
+        }
+        else if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.Down))
+        {
+            Camera.Translate(0, -10, 0);
+            GameConsole.WriteLine($"{Camera.Transform.Translation}");
+        }
+
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.PageUp))
+        {
+            Camera.Translate(0, 0, 0.01f);
+            GameConsole.WriteLine($"{Camera.Transform.Translation}");
+        }
+        else if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.PageDown))
+        {
+            Camera.Translate(0, 0, -0.01f);
+            GameConsole.WriteLine($"{Camera.Transform.Translation}");
+        }
+
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.Q))
+        {
+            Camera.Rotation += 0.01f;
+        }
+        else if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.E))
+        {
+            Camera.Rotation -= 0.01f;
+        }
+
         _interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
 
         if (InputsManager.IsSingleClicked(InputsManager.MouseButton.Left))
@@ -47,7 +89,12 @@ public class TriggerWorkExampleView : View
 
         data.DeltaSpeedPlayer = sV;
 
+        
+
         base.Update();
+        Camera.Follow(this, new CameraPositionEventArgs() { Position = 
+            new Vector2 (Globals.Resolution.Width/2, Globals.Resolution.Height / 2)- playerPos });
+
 
     }
 

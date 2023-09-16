@@ -47,7 +47,7 @@ var m3 = new ButtonsWorkExampleModel();
 var scene3 = new Scene (v3, m3, new Presenter (game, v3, m3));
 game.Scenes.Add("BaseButtons", scene3);
 
-var v4 = new TriggerWorkExampleView();
+var v4 = new TriggerWorkAndCameraExampleView();
 var m4 = new TriggerWorkExampleModel();
 var scene4 = new Scene(v4, m4, new Presenter(game, v4, m4));
 game.Scenes.Add("Triggers", scene4);
