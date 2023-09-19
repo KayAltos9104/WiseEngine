@@ -4,11 +4,21 @@ using WiseEngine;
 using WiseEngine.MVP;
 using WiseEngine.UI;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace WiseTestBench
 {
     public class MainMenuView : View
     {
+        private int _currentRes = 2;
+        private List<(int, int)> _possibleResolutions = new List<(int, int)>()
+        {
+            (800, 600),
+            (1280, 1024),
+            (1600, 900),
+            (1920, 1080),
+        };
+        Button BtnChangeResolution;
         public override void Initialize()
         {          
             var basePos = new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 - 400);
@@ -30,7 +40,8 @@ namespace WiseTestBench
             MbxInstructions.IsCentered = false;
             MbxInstructions.MarginText = new Vector2(10, 10);
 
-            Button BtnChangeResolution = new Button(Vector2.UnitY * 600, LoadableObjects.GetFont("MainFont"),"Поменять разрешение");
+            BtnChangeResolution = new Button(Vector2.UnitY * 400, LoadableObjects.GetFont("MainFont"), 
+                $"{Globals.Resolution.Width}x{Globals.Resolution.Height}");
             BtnChangeResolution.Clicked += BtnChangeResolution_Click;
             BtnChangeResolution.ChangeSize(400, 50);
 
@@ -141,7 +152,9 @@ namespace WiseTestBench
         }
         private void BtnChangeResolution_Click(object sender, ClickEventArgs e)
         {
-            OnSettingsChanged(new SettingsEventArgs((1200, 720), null));
+            _currentRes = (_currentRes + 1 + _possibleResolutions.Count) % _possibleResolutions.Count;
+            OnSettingsChanged(new SettingsEventArgs(_possibleResolutions[_currentRes], null));
+            BtnChangeResolution.Text = $"{Globals.Resolution.Width}x{Globals.Resolution.Height}";
         }
     }
 }
