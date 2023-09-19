@@ -14,13 +14,13 @@ public static class GameConsole
     /// <value>
     /// Property <c>IsShown</c> is flag for console visibility
     /// </value>
-    public static bool IsShown { get; private set; } = true;
+    public static bool IsShown { get; private set; } = false;
 
     static GameConsole()
     {
         _log = new List<string>
         {
-            "WiseEngine 0.2.0",
+            "WiseEngine 0.2.2",
             "Ctrl+ =>  Q: show/hide console; R: clear console; S: show/hide sprite borders; C: show/hide colliders; F: show/hide FPS",
             "Console log:"
         };

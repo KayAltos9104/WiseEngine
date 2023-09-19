@@ -27,6 +27,10 @@ public class TriggerWorkExampleModel : Model
         testTrigger.Name = "TestTrigger2";
         testTrigger.Triggered += ShowIntersectingMessage;
 
+        CommonTrigger borders = new CommonTrigger(new Vector2(0, 0), 1600, 900);
+        borders.Name = "Borders";
+        TriggerManager.AddTrigger(borders);
+
         _outputData = new TriggerWorkModelViewData();
         _inputData = new TriggerWorkViewModelData();
     }

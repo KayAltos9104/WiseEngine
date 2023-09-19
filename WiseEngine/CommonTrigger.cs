@@ -25,7 +25,7 @@ public class CommonTrigger : ITrigger
     {
         if (e.ActivatedTrigger == this)
         {
-            Triggered.Invoke(this, e);
+            Triggered?.Invoke(this, e);
         } 
     }
 

@@ -8,6 +8,9 @@ namespace WiseEngine;
 /// </summary>
 public class MessageBox : InterfaceComponent    
 {   
+    public Color BackgroundColor { get; set; }
+    public Color ContourColor { get; set; }
+    public int ContourWidth { get; set; }
     public MessageBox(Vector2 pos, SpriteFont font, string text) : base(pos, font)
     {
         Pos = pos;
@@ -15,6 +18,9 @@ public class MessageBox : InterfaceComponent
         TextPos = Vector2.Zero;  
         Layer = 1.0f;         
         IsCentered = true;
+        BackgroundColor = Color.DarkSeaGreen;
+        ContourColor = Color.Black;
+        ContourWidth = 3;
     }
     public override void Render(SpriteBatch spriteBatch)
     {        
@@ -22,10 +28,10 @@ public class MessageBox : InterfaceComponent
         Graphics2D.FillRectangle(
             (int)Pos.X, (int)Pos.Y,
             Bounds.Width, Bounds.Height,
-            Color.DarkSeaGreen);
+            BackgroundColor);
         Graphics2D.DrawRectangle((int)Pos.X, (int)Pos.Y,
             Bounds.Width, Bounds.Height,
-            Color.Black, 3);
+            ContourColor, ContourWidth);
         RenderText(spriteBatch);       
     }
 }

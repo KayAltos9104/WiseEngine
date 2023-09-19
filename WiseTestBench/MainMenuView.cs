@@ -20,6 +20,15 @@ namespace WiseTestBench
             MbxTest.IsCentered = true;
             MbxTest.ChangeSize(300, 50);
             MbxTest.Center();
+            string instructions = "WiseEngine 0.2.2\n\nДанная сцена - главное меню, \n" +
+                "из которого можно попасть\nв другие сцены, показывающие\nработу движка WiseEngine. \n\n" +
+                "Для вызова консоли\nнажмите ctrl+Q.";
+            MessageBox MbxInstructions = new MessageBox(Vector2.Zero, LoadableObjects.GetFont("MainFont"), instructions);
+            MbxInstructions.BackgroundColor = new Color(0, 120, 120, 120);
+            MbxInstructions.ContourWidth = 2;
+            MbxInstructions.ChangeSize(480, 350);
+            MbxInstructions.IsCentered = false;
+            MbxInstructions.MarginText = new Vector2(10, 10);
 
             Button BtnLaunchBaseMovementScene = new Button(
                 basePos + Vector2.UnitY * 100,
@@ -66,6 +75,7 @@ namespace WiseTestBench
             BtnExit.Center();
 
             _interfaceManager.AddElement(MbxTest);
+            _interfaceManager.AddElement(MbxInstructions);
             _interfaceManager.AddElement(BtnLaunchBaseMovementScene);
             _interfaceManager.AddElement(BtnLaunchButtonsWorkExampleScene);
             _interfaceManager.AddElement(BtnLaunchTriggersWorkExampleScene);
