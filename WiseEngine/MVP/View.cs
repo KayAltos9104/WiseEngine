@@ -41,6 +41,10 @@ public abstract class View
     /// Processed in presenter because Exit method is in <see cref="GameProcessor"/>
     /// </remarks>
     public EventHandler? GameFinished;
+    /// <value>
+    /// Event <c>Settings</c> invokes when we should change settings such as screen resolution
+    /// </value>
+    public EventHandler<SettingsEventArgs>? SettingsChanged;
     public View()
     {        
         _interfaceManager = new InterfaceManager(); 
@@ -81,7 +85,13 @@ public abstract class View
     {
         GameFinished?.Invoke(this, EventArgs.Empty);
     }
-
+    /// <summary>
+    /// Invokes <see cref="SettingsChanged"/> event
+    /// </summary>
+    protected void OnSettingsChanged(SettingsEventArgs e)
+    {
+        SettingsChanged?.Invoke(this, e);   
+    }
     /// <summary>
     /// Initialize all view elements. Must be called. 
     /// </summary>
@@ -159,5 +169,26 @@ public class ViewCycleFinishedEventArgs : EventArgs
 public class SceneFinishedEventArgs : EventArgs
 {
     public string NewSceneName { get; set; } = "";
+}
+/// <summary>
+/// Class that contains new settings of the game
+/// </summary>
+public class SettingsEventArgs : EventArgs
+{
+    public (int width, int height)? Resolution {get;}
+    public bool? IsFullScreen { get;}
+
+    public SettingsEventArgs ((int width, int height)? res = null, bool? isFullScreen = null)
+    {        
+        if (res == Globals.Resolution)
+            Resolution = null;
+        else
+            Resolution = res;
+
+        if (isFullScreen == Globals.IsFullScreen)
+            IsFullScreen = null;
+        else
+            IsFullScreen = isFullScreen;
+    }
 }
 

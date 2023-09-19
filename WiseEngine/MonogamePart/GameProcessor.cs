@@ -52,7 +52,7 @@ public sealed class GameProcessor : Game
     protected override void Initialize()
     {
         base.Initialize();
-        Window.Title = "WiseEngine 0.2.0 alpha";        
+        Window.Title = "WiseEngine 0.2.2 alpha";        
         SetResolution(Globals.Resolution.Width, Globals.Resolution.Height);
         SetFullScreenMode(Globals.IsFullScreen);
 
@@ -72,6 +72,9 @@ public sealed class GameProcessor : Game
     /// <param name="height">Screen height</param>
     public void SetResolution (int width, int height)
     {
+        if (width < 0 || height < 0)
+            throw new ArgumentException ("Resolution cannot be negative!");
+            
         Globals.Resolution = (width, height);
         Graphics2D.Graphics.PreferredBackBufferWidth = Globals.Resolution.Width;
         Graphics2D.Graphics.PreferredBackBufferHeight = Globals.Resolution.Height;           
@@ -212,5 +215,4 @@ public sealed class GameProcessor : Game
             GameConsole.WriteLine($"Scene {sceneName} is missed");
     }
 
- 
 }

@@ -28,6 +28,7 @@ public sealed class Presenter
         
         _view.CycleFinished += UpdateModel;        
         _view.SceneFinished += SwitchScene;
+        _view.SettingsChanged += ChangeSettings;
         _view.GameFinished += CallExit;
 
         if (_model != null) 
@@ -77,6 +78,24 @@ public sealed class Presenter
     private void SwitchScene (object? sender, SceneFinishedEventArgs e)
     {
         _processor.SetCurrentScene(e.NewSceneName);
+    }
+    /// <summary>
+    /// Changes global settings of the game
+    /// </summary>
+    /// <param name="sender">ender of the <c>_view.SceneFinished</c> event</param>
+    /// <param name="e">Data from <see cref="_view"/></param>
+    private void ChangeSettings(object? sender, SettingsEventArgs e)
+    {
+        if (e.IsFullScreen != null)
+        {
+            Globals.IsFullScreen = (bool)e.IsFullScreen;
+            _processor.SetFullScreenMode(Globals.IsFullScreen);
+        }
+        if (e.Resolution != null)
+        {
+            Globals.Resolution = ((int Width, int Height))e.Resolution;
+            _processor.SetResolution(Globals.Resolution.Width, Globals.Resolution.Height);
+        }        
     }
    
 }

@@ -30,6 +30,11 @@ namespace WiseTestBench
             MbxInstructions.IsCentered = false;
             MbxInstructions.MarginText = new Vector2(10, 10);
 
+            Button BtnChangeResolution = new Button(Vector2.UnitY * 600, LoadableObjects.GetFont("MainFont"),"Поменять разрешение");
+            BtnChangeResolution.Clicked += BtnChangeResolution_Click;
+            BtnChangeResolution.ChangeSize(400, 50);
+
+
             Button BtnLaunchBaseMovementScene = new Button(
                 basePos + Vector2.UnitY * 100,
                 LoadableObjects.GetFont("MainFont"), 
@@ -76,6 +81,7 @@ namespace WiseTestBench
 
             _interfaceManager.AddElement(MbxTest);
             _interfaceManager.AddElement(MbxInstructions);
+            _interfaceManager.AddElement(BtnChangeResolution);
             _interfaceManager.AddElement(BtnLaunchBaseMovementScene);
             _interfaceManager.AddElement(BtnLaunchButtonsWorkExampleScene);
             _interfaceManager.AddElement(BtnLaunchTriggersWorkExampleScene);
@@ -132,6 +138,10 @@ namespace WiseTestBench
         private void BtnExit_Click(object sender, ClickEventArgs e)
         {
             OnGameFinished();
+        }
+        private void BtnChangeResolution_Click(object sender, ClickEventArgs e)
+        {
+            OnSettingsChanged(new SettingsEventArgs((1200, 720), null));
         }
     }
 }
