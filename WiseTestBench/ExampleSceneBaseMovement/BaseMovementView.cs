@@ -13,18 +13,27 @@ public class BaseMovementView : View
     {
         _outputData = new BaseMovementViewModelData();
         _inputData = new BaseMovementModelViewData();
-        mb = new MessageBox(new Vector2(150, 50), LoadableObjects.GetFont("MainFont"),
+        mb = new MessageBox(new Vector2(0, 100), LoadableObjects.GetFont("MainFont"),
             "0");
         mb.ChangeSize(250, 50);
         //mb.Center();
 
-        Button BtnReturn = new Button(new Vector2(150, 200), LoadableObjects.GetFont("MainFont"), "Вернуться в главное меню");
+        string instructions = "Нажимайте W, A, S, D для управления";
+        MessageBox MbxInstructions = new MessageBox(Vector2.UnitY * 450, LoadableObjects.GetFont("MainFont"), instructions);
+        MbxInstructions.BackgroundColor = new Color(0, 120, 120, 120);
+        MbxInstructions.ContourWidth = 2;
+        MbxInstructions.ChangeSize(600, 70);
+        MbxInstructions.IsCentered = false;
+        MbxInstructions.MarginText = new Vector2(10, 10);
+
+        Button BtnReturn = new Button(new Vector2(0, 0), LoadableObjects.GetFont("MainFont"), "Обратно");
         BtnReturn.ChangeSize(400, 50);
         //BtnReturn.Center();
         BtnReturn.Clicked += BtnReturn_Click;
 
         _interfaceManager.AddElement(mb);
         _interfaceManager.AddElement(BtnReturn);
+        _interfaceManager.AddElement(MbxInstructions);
 
       
     } 

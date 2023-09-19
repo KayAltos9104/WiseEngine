@@ -103,6 +103,7 @@ public abstract class View
     public virtual void Update()
     {
         _interfaceManager.Update();
+        
         CycleFinished?.Invoke(this, new ViewCycleFinishedEventArgs() { CurrentViewData = _outputData });
     }
     /// <summary>
@@ -123,6 +124,7 @@ public abstract class View
     {
         Camera.Update();
         Graphics2D.SpriteBatch.Begin(transformMatrix: Camera.Transform);
+        
         if (_inputData != null)
         {
             foreach (var o in _inputData.CurrentFrameObjects)
@@ -148,6 +150,7 @@ public abstract class View
                 ui.Render(Graphics2D.SpriteBatch);
         }
         Graphics2D.SpriteBatch.End();
+        
     }
     /// <summary>
     /// Process all inputs from user (inputs should be taken from <see cref="InputsManager"/>).

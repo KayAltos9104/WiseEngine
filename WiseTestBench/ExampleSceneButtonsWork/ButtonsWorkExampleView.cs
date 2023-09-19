@@ -33,12 +33,18 @@ public class ButtonsWorkExampleView : View
         BtnFire.Name = "BtnFire";
         BtnFire.ChangeSize(100, 100);
 
-        Button BtnReturn = new Button(new Vector2(1400, 100), LoadableObjects.GetFont("MainFont"), "Обратно");
+        Button BtnReturn = new Button(new Vector2(0, 0), LoadableObjects.GetFont("MainFont"), "Обратно");
         BtnReturn.ChangeSize(180, 50);
         BtnReturn.Clicked += BtnReturn_Click;
 
 
-        _interfaceManager.AddElement(BtnReturn);
+        string instructions = "Нажимайте кнопки для управления\nВ консоли выводятся сообщения\nо статусе снаряда";
+        MessageBox MbxInstructions = new MessageBox(Vector2.UnitY * 450, LoadableObjects.GetFont("MainFont"), instructions);
+        MbxInstructions.BackgroundColor = new Color(0, 120, 120, 120);
+        MbxInstructions.ContourWidth = 2;
+        MbxInstructions.ChangeSize(560, 150);
+        MbxInstructions.IsCentered = false;
+        MbxInstructions.MarginText = new Vector2(10, 10);
 
         BtnUp.Clicked += WitchBtn_Click;
         BtnDown.Clicked += WitchBtn_Click;
@@ -52,6 +58,7 @@ public class ButtonsWorkExampleView : View
         _interfaceManager.AddElement(BtnLeft);
         _interfaceManager.AddElement(BtnFire);
         _interfaceManager.AddElement(BtnReturn);
+        _interfaceManager.AddElement(MbxInstructions);
     }
 
     public override void Update()

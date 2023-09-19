@@ -19,7 +19,19 @@ public class TriggerWorkAndCameraExampleView : View
         BtnReturn.ChangeSize(200, 50);
         BtnReturn.Clicked += BtnReturn_Click;
 
+        string instructions = "Нажимайте W, A, S, D для управления\n" +
+            "PgUp, PgDown - масштабирование\n" +
+            "R, T - поворот камеры";
+            
+        MessageBox MbxInstructions = new MessageBox(Vector2.UnitY * 450, LoadableObjects.GetFont("MainFont"), instructions);
+        MbxInstructions.BackgroundColor = new Color(0, 120, 120, 120);
+        MbxInstructions.ContourWidth = 2;
+        MbxInstructions.ChangeSize(600, 150);
+        MbxInstructions.IsCentered = false;
+        MbxInstructions.MarginText = new Vector2(10, 10);
+
         _interfaceManager.AddElement(BtnReturn);
+        _interfaceManager.AddElement(MbxInstructions);
 
 
     }
@@ -71,11 +83,11 @@ public class TriggerWorkAndCameraExampleView : View
             GameConsole.WriteLine($"{Camera.Transform.Translation}");
         }
 
-        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.Q))
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.R))
         {
             Camera.Rotation += 0.01f;
         }
-        else if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.E))
+        else if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.T))
         {
             Camera.Rotation -= 0.01f;
         }
@@ -89,13 +101,13 @@ public class TriggerWorkAndCameraExampleView : View
 
         data.DeltaSpeedPlayer = sV;
 
-        
-
+        Camera.Follow(this, new CameraPositionEventArgs()
+        {
+            Position =
+            new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2) - playerPos
+            
+        });
         base.Update();
-        Camera.Follow(this, new CameraPositionEventArgs() { Position = 
-            new Vector2 (Globals.Resolution.Width/2, Globals.Resolution.Height / 2)- playerPos });
-
-
     }
 
     public void BtnReturn_Click(object sender, ClickEventArgs e)
