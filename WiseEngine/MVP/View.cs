@@ -49,13 +49,7 @@ public abstract class View
     /// Event <c>SceneReloaded</c> invokes when we want to initialize scene again
     /// </value>
     public EventHandler SceneReloaded;
-    public View()
-    {        
-        _interfaceManager = new InterfaceManager(); 
-        _outputData = new ViewModelData();
-        _inputData = new ModelViewData();
-        Camera = new Camera2D();
-    }
+
     /// <summary>
     /// Gets <c>_inputData</c> 
     /// </summary>
@@ -108,10 +102,11 @@ public abstract class View
     /// </summary>
     public virtual void Initialize()
     {
+        Camera = new Camera2D();
         _interfaceManager = new InterfaceManager();
         _outputData = new ViewModelData();
         _inputData = new ModelViewData();
-        Camera = new Camera2D();
+        
     }
 
     /// <summary>
@@ -141,13 +136,15 @@ public abstract class View
     public virtual void Draw()
     {
         //Camera.Update();
-        Graphics2D.SpriteBatch.Begin(transformMatrix: Camera.Transform);
+        Graphics2D.SpriteBatch.Begin(transformMatrix: Camera != null ? 
+            Camera.Transform : 
+            Matrix.CreateTranslation(Vector3.UnitZ));
         
         if (_inputData != null)
         {
             foreach (var o in _inputData.CurrentFrameObjects)
             {
-                Graphics2D.RenderObject(o);
+                Graphics2D.RenderObject(o, Camera);
                 
                 
                 //if (o is IAnimated)

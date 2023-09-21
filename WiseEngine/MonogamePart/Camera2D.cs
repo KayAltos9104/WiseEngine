@@ -10,15 +10,25 @@ namespace WiseEngine.MonogamePart;
 /// </remarks>
 public class Camera2D
 {
+    /// <summary>
+    /// <see cref="Rectangle">Area in which objects will be drawing</see>
+    /// </summary>
+    /// <remarks>
+    /// Used for optimization
+    /// </remarks>
+    public Rectangle _visionArea;
+
     public Vector3 Pos { get; set; }
     public float Rotation { get; set; } 
     public Matrix Transform { get; set; }
 
+    
     public Camera2D()
     {
         Pos = new Vector3 (0, 0, 1);
         Rotation = 0;
         Transform = Matrix.CreateTranslation(Pos);
+        UpdateVisionArea((int)Pos.X, (int)Pos.Y);
     }
     public Matrix GetView ()
     {
@@ -28,6 +38,7 @@ public class Camera2D
     public void Translate (Vector3 translation)
     {
         Pos += translation;
+        UpdateVisionArea(-(int)Pos.X, -(int)Pos.Y);
         
     }
 
@@ -48,6 +59,45 @@ public class Camera2D
         //Translate(e.Position.X, e.Position.Y, 0);
         Pos = new Vector3(e.Position.X, e.Position.Y, Pos.Z);
         Update ();
+    }
+    /// <summary>
+    /// Changes <see cref="_visionArea"/>
+    /// </summary>
+    public void UpdateVisionArea()
+    {
+        _visionArea = new Rectangle(-100, -100,
+            Globals.Resolution.Width + 100, Globals.Resolution.Height + 100);
+    }
+    /// <summary>
+    /// Changes <see cref="_visionArea"/>
+    /// </summary>
+    /// <param name="x">X coordinate for left top rectangle corner</param>
+    /// <param name="y">Y coordinate for left top rectangle corner</param>
+    public void UpdateVisionArea(int x, int y)
+    {
+        _visionArea = new Rectangle(x-100, y-100,
+            Globals.Resolution.Width + 100, Globals.Resolution.Height + 100);
+    }
+    /// <summary>
+    /// Changes <see cref="_visionArea"/>
+    /// </summary>
+    /// <param name="x">X coordinate for left top rectangle corner</param>
+    /// <param name="y">Y coordinate for left top rectangle corner</param>
+    /// <param name="width">Width of vision area</param>
+    /// <param name="height">Height of vision area</param>
+    public void UpdateVisionArea(int x, int y, int width, int height)
+    {
+        _visionArea = new Rectangle(x, y, width, height);
+    }
+    /// <summary>
+    /// Checks if coordinate is in current vision area
+    /// </summary>
+    /// <param name="pos">Coordinate for checking</param>
+    /// <returns><c>True</c> if coordinate is inside the vision area</returns>
+    public bool IsInVisionArea(Vector2 pos)
+    {
+        if (_visionArea.Contains(pos)) return true;
+        else return false;
     }
 }
 public class CameraPositionEventArgs

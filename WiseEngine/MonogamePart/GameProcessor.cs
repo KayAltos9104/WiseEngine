@@ -79,7 +79,7 @@ public sealed class GameProcessor : Game
         Graphics2D.Graphics.PreferredBackBufferWidth = Globals.Resolution.Width;
         Graphics2D.Graphics.PreferredBackBufferHeight = Globals.Resolution.Height;           
         Graphics2D.Graphics.ApplyChanges();
-        Graphics2D.UpdateVisionArea();
+        
     }
     /// <summary>
     /// Sets fullscreen mode true or false

@@ -32,10 +32,7 @@ public abstract class Model
     /// This event sends <see cref="ModelCycleFinishedEventArgs"/> which contains game logic data for view
     /// </remarks>
     public EventHandler<ModelCycleFinishedEventArgs>? OnCycleFinished;
-    public Model()
-    {
-        
-    }
+
     /// <summary>
     /// Gets <c>_inputData</c> 
     /// </summary>
@@ -49,7 +46,7 @@ public abstract class Model
     /// Gets <c>_outputData</c> 
     /// </summary>
     /// <typeparam name="T">Correct successor of <see cref="ModelViewData"/></typeparam>
-    /// <returns><c>__outputData</c> which should be transferred to model</returns>
+    /// <returns><c>_outputData</c> which should be transferred to model</returns>
     public T? GetOutputData<T>() where T : ModelViewData
     {
         return (T)_outputData;
@@ -58,7 +55,7 @@ public abstract class Model
     /// Initializes model - objects, parameters, etc.
     /// </summary>
     /// <remarks>
-    /// Should be called after <c>Model</c> creating
+    /// Should be called after <c>Model</c> creating and <u><b>base method</b></u> should be called
     /// </remarks>
     public virtual void Initialize()
     {
