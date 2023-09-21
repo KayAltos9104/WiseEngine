@@ -19,17 +19,20 @@ public class TriggerWorkExampleModel : Model
 
         CommonTrigger testTrigger = new CommonTrigger(new Vector2(100, 300), 300, 200);
         testTrigger.Name = "TestTrigger1";
-        testTrigger.Triggered += ShowIntersectingMessage;
+        testTrigger.TriggeredInside += ShowIntersectingMessage;
         TriggerManager.AddTrigger(testTrigger);
 
         testTrigger = new CommonTrigger(new Vector2(1000, 400), 300, 200);
         TriggerManager.AddTrigger(testTrigger);
         testTrigger.Name = "TestTrigger2";
-        testTrigger.Triggered += ShowIntersectingMessage;
+        testTrigger.TriggeredInside += ShowIntersectingMessage;
 
         CommonTrigger borders = new CommonTrigger(new Vector2(0, 0), 1600, 900);
         borders.Name = "Borders";
+        borders.TriggeredInside += SwitchInside;
+        borders.TriggeredOutside += SwitchOutside;
         TriggerManager.AddTrigger(borders);
+        
 
         _outputData = new TriggerWorkModelViewData();
         _inputData = new TriggerWorkViewModelData();
@@ -39,6 +42,7 @@ public class TriggerWorkExampleModel : Model
     {
         var outData = GetOutputData<TriggerWorkModelViewData>();
         outData.PlayerPos = _player.Pos;
+        
         var inputData = GetInputData<TriggerWorkViewModelData>();
         _player.Speed += inputData.DeltaSpeedPlayer;  
 
@@ -59,4 +63,15 @@ public class TriggerWorkExampleModel : Model
         GameConsole.WriteLine($"Триггер: {e.ActivatedTrigger.Name}");
         //p.Collider.Color = Color.Red;
     }
+    private void SwitchInside (object sender, TriggerEventArgs e)
+    {
+        var outData = GetOutputData<TriggerWorkModelViewData>();
+        outData.IsPlayerInsideArea = true;
+    }
+    private void SwitchOutside(object sender, TriggerEventArgs e)
+    {
+        var outData = GetOutputData<TriggerWorkModelViewData>();
+        outData.IsPlayerInsideArea = false;
+    }
+
 }

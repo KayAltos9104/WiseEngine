@@ -16,7 +16,7 @@ public class Camera2D
     /// <remarks>
     /// Used for optimization
     /// </remarks>
-    public Rectangle _visionArea;
+    public Rectangle VisionArea { get; set; }
 
     public Vector3 Pos { get; set; }
     public float Rotation { get; set; } 
@@ -61,25 +61,25 @@ public class Camera2D
         Update ();
     }
     /// <summary>
-    /// Changes <see cref="_visionArea"/>
+    /// Changes <see cref="VisionArea"/>
     /// </summary>
     public void UpdateVisionArea()
     {
-        _visionArea = new Rectangle(-100, -100,
+        VisionArea = new Rectangle(-100, -100,
             Globals.Resolution.Width + 100, Globals.Resolution.Height + 100);
     }
     /// <summary>
-    /// Changes <see cref="_visionArea"/>
+    /// Changes <see cref="VisionArea"/>
     /// </summary>
     /// <param name="x">X coordinate for left top rectangle corner</param>
     /// <param name="y">Y coordinate for left top rectangle corner</param>
     public void UpdateVisionArea(int x, int y)
     {
-        _visionArea = new Rectangle(x-100, y-100,
+        VisionArea = new Rectangle(x-100, y-100,
             Globals.Resolution.Width + 100, Globals.Resolution.Height + 100);
     }
     /// <summary>
-    /// Changes <see cref="_visionArea"/>
+    /// Changes <see cref="VisionArea"/>
     /// </summary>
     /// <param name="x">X coordinate for left top rectangle corner</param>
     /// <param name="y">Y coordinate for left top rectangle corner</param>
@@ -87,7 +87,7 @@ public class Camera2D
     /// <param name="height">Height of vision area</param>
     public void UpdateVisionArea(int x, int y, int width, int height)
     {
-        _visionArea = new Rectangle(x, y, width, height);
+        VisionArea = new Rectangle(x, y, width, height);
     }
     /// <summary>
     /// Checks if coordinate is in current vision area
@@ -96,7 +96,7 @@ public class Camera2D
     /// <returns><c>True</c> if coordinate is inside the vision area</returns>
     public bool IsInVisionArea(Vector2 pos)
     {
-        if (_visionArea.Contains(pos)) return true;
+        if (VisionArea.Contains(pos)) return true;
         else return false;
     }
 }

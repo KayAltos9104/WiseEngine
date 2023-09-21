@@ -9,7 +9,8 @@ public class CommonTrigger : ITrigger
     public Vector2 Pos { get; set; }
     public RectangleCollider Collider { get; private set; }
    
-    public event EventHandler<TriggerEventArgs> Triggered;
+    public event EventHandler<TriggerEventArgs>? TriggeredInside;
+    public event EventHandler<TriggerEventArgs>? TriggeredOutside;
 
     public CommonTrigger(Vector2 pos, int width, int height)
     {
@@ -20,12 +21,20 @@ public class CommonTrigger : ITrigger
         Collider = new RectangleCollider(Vector2.Zero, width, height);
         Collider.Color = Color.White;
     }
-    public virtual void OnTriggered(object sender, TriggerEventArgs e)
+    public virtual void OnTriggeredInside(object sender, TriggerEventArgs e)
     {
         if (e.ActivatedTrigger == this)
         {
-            Triggered?.Invoke(this, e);
+            TriggeredInside?.Invoke(this, e);
         } 
+    }
+
+    public virtual void OnTriggeredOutside(object sender, TriggerEventArgs e)
+    {
+        if (e.ActivatedTrigger == this)
+        {
+            TriggeredOutside?.Invoke(this, e);
+        }
     }
 
     public Collider GetCollider()

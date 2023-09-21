@@ -32,10 +32,10 @@ public static class Graphics2D
     public static void RenderObject(IObject obj, Camera2D camera)
     {
         DrawRectangle(
-            camera._visionArea.X, 
-            camera._visionArea.Y, 
-            camera._visionArea.Width, 
-            camera._visionArea.Height, Color.Violet, 
+            camera.VisionArea.X, 
+            camera.VisionArea.Y, 
+            camera.VisionArea.Width, 
+            camera.VisionArea.Height, Color.Violet, 
             4);
 
         foreach (var sprite in obj.Sprites)

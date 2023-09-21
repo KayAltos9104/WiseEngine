@@ -8,7 +8,9 @@ public interface ITrigger : IShaped
     string Name { get; }
     Vector2 Pos { get; set; }
 
-    event EventHandler<TriggerEventArgs>? Triggered;
+    event EventHandler<TriggerEventArgs>? TriggeredInside;
+    event EventHandler<TriggerEventArgs>? TriggeredOutside;
 
-    void OnTriggered(object? sender, TriggerEventArgs e);
+    void OnTriggeredInside(object? sender, TriggerEventArgs e);
+    void OnTriggeredOutside(object? sender, TriggerEventArgs e);
 }

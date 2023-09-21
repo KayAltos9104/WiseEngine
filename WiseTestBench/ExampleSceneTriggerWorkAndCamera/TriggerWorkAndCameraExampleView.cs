@@ -11,6 +11,7 @@ namespace WiseTestBench.ExampleSceneTriggerWork;
 public class TriggerWorkAndCameraExampleView : View
 {    
     public event EventHandler<CameraPositionEventArgs> CameraPositionChanged;
+    public MessageBox MbxPlayerStatus;
     public override void Initialize()
     {
         base.Initialize();
@@ -39,10 +40,17 @@ public class TriggerWorkAndCameraExampleView : View
         MbxInstructions.ChangeSize(600, 200);
         MbxInstructions.IsCentered = false;
         MbxInstructions.MarginText = new Vector2(10, 10);
+    
+        MbxPlayerStatus = new MessageBox(new Vector2(Globals.Resolution.Width/2, 25), LoadableObjects.GetFont("MainFont"), "");
+        MbxPlayerStatus.ChangeSize(350, 50);
+        MbxPlayerStatus.IsCentered = true;
+        MbxPlayerStatus.Center();
+        
 
         _interfaceManager.AddElement(BtnReturn);
         _interfaceManager.AddElement(MbxInstructions);
         _interfaceManager.AddElement(BtnReload);
+        _interfaceManager.AddElement(MbxPlayerStatus);
 
     }
    
@@ -117,6 +125,16 @@ public class TriggerWorkAndCameraExampleView : View
 
         data.DeltaSpeedPlayer = sV;
 
+        if (GetInputData<TriggerWorkModelViewData>().IsPlayerInsideArea)
+        {
+            MbxPlayerStatus.Text = "Ведьма в области";
+            MbxPlayerStatus.BackgroundColor = Color.Green;
+        }
+        else
+        {
+            MbxPlayerStatus.Text = "Ведьма не в области";
+            MbxPlayerStatus.BackgroundColor = Color.Red;
+        }
         
         base.Update(); 
     }
