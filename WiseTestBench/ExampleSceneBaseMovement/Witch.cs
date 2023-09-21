@@ -34,7 +34,7 @@ public class Witch : IObject
         return selfInfo;
     }
     public void Update()
-    {
+    {        
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
         Speed = Vector2.Zero;
     }

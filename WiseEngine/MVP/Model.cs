@@ -34,10 +34,7 @@ public abstract class Model
     public EventHandler<ModelCycleFinishedEventArgs>? OnCycleFinished;
     public Model()
     {
-        GameObjects = new List<IObject>(); 
-        TriggerManager = new TriggerManager();
-        _outputData = new ModelViewData();
-        _inputData = new ViewModelData();
+        
     }
     /// <summary>
     /// Gets <c>_inputData</c> 
@@ -63,7 +60,13 @@ public abstract class Model
     /// <remarks>
     /// Should be called after <c>Model</c> creating
     /// </remarks>
-    public abstract void Initialize();
+    public virtual void Initialize()
+    {
+        GameObjects = new List<IObject>();
+        TriggerManager = new TriggerManager();
+        _outputData = new ModelViewData();
+        _inputData = new ViewModelData();
+    }
     /// <summary>
     /// Updates game logic for scene
     /// </summary>

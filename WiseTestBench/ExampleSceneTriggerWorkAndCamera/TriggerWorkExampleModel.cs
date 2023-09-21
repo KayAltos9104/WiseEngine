@@ -11,6 +11,7 @@ public class TriggerWorkExampleModel : Model
     private ShapeWitch _player;
     public override void Initialize()
     {
+        base.Initialize();
         _player = new ShapeWitch(new Vector2(
             Globals.Resolution.Width / 2,
             Globals.Resolution.Height / 2)
@@ -40,17 +41,14 @@ public class TriggerWorkExampleModel : Model
         var outData = GetOutputData<TriggerWorkModelViewData>();
         outData.PlayerPos = _player.Pos;
         var inputData = GetInputData<TriggerWorkViewModelData>();
-        _player.Speed += inputData.DeltaSpeedPlayer;       
-
-        
+        _player.Speed += inputData.DeltaSpeedPlayer;  
 
         var t = LoadableObjects.GetTexture(_player.Sprites[0].ImageName);
         base.Update(e);
         _player.Pos = new Vector2(
-            MathHelper.Clamp(_player.Pos.X, 0, Globals.Resolution.Width - t.Width * _player.Scale.X),
-            MathHelper.Clamp(_player.Pos.Y, 0, Globals.Resolution.Height - t.Height * _player.Scale.Y)
-            );
-        
+             MathHelper.Clamp(_player.Pos.X, 0, Globals.Resolution.Width - t.Width * _player.Scale.X),
+             MathHelper.Clamp(_player.Pos.Y, 0, Globals.Resolution.Height - t.Height * _player.Scale.Y)
+             );
     }
 
     private void ShowIntersectingMessage(object sender, TriggerEventArgs e)

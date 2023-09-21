@@ -20,7 +20,8 @@ namespace WiseTestBench
         };
         Button BtnChangeResolution;
         public override void Initialize()
-        {          
+        {    
+            base.Initialize();
             var basePos = new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 - 400);
             MessageBox MbxTest = new MessageBox(
                 basePos, 

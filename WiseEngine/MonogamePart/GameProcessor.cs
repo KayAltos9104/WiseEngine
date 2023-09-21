@@ -214,5 +214,24 @@ public sealed class GameProcessor : Game
         else
             GameConsole.WriteLine($"Scene {sceneName} is missed");
     }
+    /// <summary>
+    /// Initalize scene
+    /// </summary>
+    /// <param name="sceneName">Scene name to reload</param>
+    public void ReloadScene (string sceneName)
+    {
+        if (Scenes.ContainsKey(sceneName))
+            Scenes[sceneName].Initialize();
+        else
+            GameConsole.WriteLine($"Scene {sceneName} is missed");
+    }
+    /// <summary>
+    /// Initializes current scene
+    /// </summary>
+    public void ReloadScene()
+    {
+        if (_currentScene != null)
+            _currentScene.Initialize();
+    }
 
 }

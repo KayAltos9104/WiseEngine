@@ -29,6 +29,7 @@ public sealed class Presenter
         _view.CycleFinished += UpdateModel;        
         _view.SceneFinished += SwitchScene;
         _view.SettingsChanged += ChangeSettings;
+        _view.SceneReloaded += ReloadScene;
         _view.GameFinished += CallExit;
 
         if (_model != null) 
@@ -96,6 +97,11 @@ public sealed class Presenter
             Globals.Resolution = ((int Width, int Height))e.Resolution;
             _processor.SetResolution(Globals.Resolution.Width, Globals.Resolution.Height);
         }        
+    }
+
+    private void ReloadScene(object? sender, EventArgs e)
+    {
+        _processor.ReloadScene();
     }
    
 }

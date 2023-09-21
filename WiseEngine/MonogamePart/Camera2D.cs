@@ -47,6 +47,7 @@ public class Camera2D
     {
         //Translate(e.Position.X, e.Position.Y, 0);
         Pos = new Vector3(e.Position.X, e.Position.Y, Pos.Z);
+        Update ();
     }
 }
 public class CameraPositionEventArgs

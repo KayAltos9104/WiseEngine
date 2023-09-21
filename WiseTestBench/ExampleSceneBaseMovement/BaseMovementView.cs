@@ -11,6 +11,7 @@ public class BaseMovementView : View
     MessageBox mb;
     public override void Initialize()
     {
+        base.Initialize();
         _outputData = new BaseMovementViewModelData();
         _inputData = new BaseMovementModelViewData();
         mb = new MessageBox(new Vector2(0, 100), LoadableObjects.GetFont("MainFont"),

@@ -42,9 +42,13 @@ public abstract class View
     /// </remarks>
     public EventHandler? GameFinished;
     /// <value>
-    /// Event <c>Settings</c> invokes when we should change settings such as screen resolution
+    /// Event <c>SettingsChanged</c> invokes when we should change settings such as screen resolution
     /// </value>
     public EventHandler<SettingsEventArgs>? SettingsChanged;
+    /// <value>
+    /// Event <c>SceneReloaded</c> invokes when we want to initialize scene again
+    /// </value>
+    public EventHandler SceneReloaded;
     public View()
     {        
         _interfaceManager = new InterfaceManager(); 
@@ -93,9 +97,22 @@ public abstract class View
         SettingsChanged?.Invoke(this, e);   
     }
     /// <summary>
+    /// Invokes <see cref="SceneReloaded"/> event
+    /// </summary>
+    protected void OnSceneReloaded()
+    {
+        SceneReloaded?.Invoke(this, EventArgs.Empty);
+    }
+    /// <summary>
     /// Initialize all view elements. Must be called. 
     /// </summary>
-    public abstract void Initialize();
+    public virtual void Initialize()
+    {
+        _interfaceManager = new InterfaceManager();
+        _outputData = new ViewModelData();
+        _inputData = new ModelViewData();
+        Camera = new Camera2D();
+    }
 
     /// <summary>
     /// Processes inputs, draws objects and invoke event about cycle ending.
@@ -105,6 +122,7 @@ public abstract class View
         _interfaceManager.Update();
         
         CycleFinished?.Invoke(this, new ViewCycleFinishedEventArgs() { CurrentViewData = _outputData });
+        Camera.Update();
     }
     /// <summary>
     /// Loads game model data (list of objects for example).
@@ -122,7 +140,7 @@ public abstract class View
     /// </summary>
     public virtual void Draw()
     {
-        Camera.Update();
+        //Camera.Update();
         Graphics2D.SpriteBatch.Begin(transformMatrix: Camera.Transform);
         
         if (_inputData != null)

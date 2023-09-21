@@ -11,6 +11,7 @@ public class BaseMovementModel : Model
     private Witch _player;
     public override void Initialize()
     {
+        base.Initialize();
         _player = new Witch(new Vector2(
             Globals.Resolution.Width / 2,
             Globals.Resolution.Height / 2)
