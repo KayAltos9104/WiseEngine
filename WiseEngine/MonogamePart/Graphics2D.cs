@@ -31,31 +31,36 @@ public static class Graphics2D
     /// <param name="obj">Object for drawing</param>
     public static void RenderObject(IObject obj, Camera2D camera)
     {
-        
-
-        foreach (var sprite in obj.Sprites)
-        {
-            //if (sprite.ImageName == "NULL")
-            //    continue;
-            Vector2 v = obj.Pos + sprite.ImagePos - VisualShift;
-            if (camera.IsInVisionArea(v))
+        if (obj is IRenderable == false) 
+            return;  
+        IRenderable raw = obj as IRenderable;
+        foreach (var sprite in raw.Sprites)
+        {     
+            Vector2 texturePos = obj.Pos + sprite.Pos;
+            if (camera.IsInVisionArea(texturePos))
             {
+                var texture = LoadableObjects.GetTexture(sprite.TextureName);
+                if (texture == null) 
+                    throw new ArgumentNullException($"Texture with name {sprite.TextureName} was not found");
+
                 SpriteBatch.Draw(
-                texture: LoadableObjects.GetTexture(sprite.ImageName),
-                position: obj.Pos - VisualShift + sprite.ImagePos,
+                texture: texture,
+                position: texturePos,
                 sourceRectangle: null,
-                Color.White,
-                rotation: 0,
+                color: sprite.Color,
+                rotation: sprite.Rotation,
                 origin: Vector2.Zero,
-                scale: obj.Scale,
-                SpriteEffects.None,
-                layerDepth: obj.Layer);
+                scale: sprite.Scale,
+                effects: sprite.IsReflectedOY ? SpriteEffects.FlipHorizontally 
+                : sprite.IsReflectedOX ? SpriteEffects.FlipVertically 
+                : SpriteEffects.None,
+                layerDepth: raw.Layer);
 
                 if (Globals.SpriteBordersAreVisible)
                 {
-                    DrawRectangle((int)v.X, (int)v.Y,
-                        (int)(LoadableObjects.GetTexture(sprite.ImageName).Width * obj.Scale.X),
-                        (int)(LoadableObjects.GetTexture(sprite.ImageName).Height * obj.Scale.Y),
+                    DrawRectangle((int)texturePos.X, (int)texturePos.Y,
+                        (int)(LoadableObjects.GetTexture(sprite.TextureName).Width * sprite.Scale.X),
+                        (int)(LoadableObjects.GetTexture(sprite.TextureName).Height * sprite.Scale.Y),
                         Color.Red, 3);
                 }
 

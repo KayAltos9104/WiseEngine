@@ -10,8 +10,8 @@ public class ShapeWitch : Witch, IShaped
     public RectangleCollider Collider { get; set; }
     public ShapeWitch(Vector2 initPos) : base(initPos)
     {
-        int width = (int)(LoadableObjects.GetTexture(Sprites[0].ImageName).Width * Scale.X);
-        int height = (int)(LoadableObjects.GetTexture(Sprites[0].ImageName).Height * Scale.Y);
+        int width = (int)(LoadableObjects.GetTexture(Sprites[0].TextureName).Width * Scale.X);
+        int height = (int)(LoadableObjects.GetTexture(Sprites[0].TextureName).Height * Scale.Y);
         Collider = new RectangleCollider (Vector2.Zero, width, height);
     }
     public Collider GetCollider()

@@ -65,8 +65,7 @@ public class Camera2D
     /// </summary>
     public void UpdateVisionArea()
     {
-        VisionArea = new Rectangle(-100, -100,
-            Globals.Resolution.Width + 100, Globals.Resolution.Height + 100);
+        UpdateVisionArea(0,0);        
     }
     /// <summary>
     /// Changes <see cref="VisionArea"/>

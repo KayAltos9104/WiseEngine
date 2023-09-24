@@ -44,10 +44,9 @@ public class ButtonsWorkExampleModel : Model
         base.Update(e);
 
         foreach (var obj in GameObjects)
-        {
-            
+        {            
 
-            var t = LoadableObjects.GetTexture(obj.Sprites[0].ImageName);
+            var t = LoadableObjects.GetTexture((obj as IRenderable).Sprites[0].TextureName);
             
 
             if (obj is RedOrb)
@@ -62,8 +61,8 @@ public class ButtonsWorkExampleModel : Model
             else
             {
                 obj.Pos = new Vector2(
-                MathHelper.Clamp(obj.Pos.X, 0, Globals.Resolution.Width - t.Width * obj.Scale.X),
-                MathHelper.Clamp(obj.Pos.Y, 0, Globals.Resolution.Height - t.Height * obj.Scale.Y)
+                MathHelper.Clamp(obj.Pos.X, 0, Globals.Resolution.Width - t.Width * (obj as IRenderable).Sprites[0].Scale.X),
+                MathHelper.Clamp(obj.Pos.Y, 0, Globals.Resolution.Height - t.Height * (obj as IRenderable).Sprites[0].Scale.Y)
                 );
             }
         }
@@ -73,7 +72,7 @@ public class ButtonsWorkExampleModel : Model
     {
         RedOrb projectile = new RedOrb(Vector2.Zero);
         projectile.Pos = _player.Pos + new Vector2(
-            LoadableObjects.GetTexture(projectile.Sprites[0].ImageName).Width * 0.45f, 
+            LoadableObjects.GetTexture(projectile.Sprites[0].TextureName).Width * 0.45f, 
             50);
         projectile.Speed = Vector2.UnitX * 0.3f;
         GameObjects.Add(projectile);
