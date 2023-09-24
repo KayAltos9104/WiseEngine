@@ -33,24 +33,24 @@ public class ProjectileWorkModel : Model
     {
         var inputData = GetInputData<ProjectileWorkViewModelData>();
         _player.Speed += inputData.DeltaSpeedPlayer;
-        List<IObject> disposableObjects = new List<IObject>();
-        _inputData = e.CurrentViewData;
-        foreach (var obj in GameObjects)
-        {
-            if (obj.IsDisposed)
-            {
-                disposableObjects.Add(obj);
-            }
-            else
-            {
-                obj.Update();
-            }
-            if (obj is IShaped)
-            {
-                TriggerManager.Update(obj as IShaped);
-            }
-        }
-        GameObjects.RemoveAll(o => disposableObjects.Contains(o));
+        //List<IObject> disposableObjects = new List<IObject>();
+        //_inputData = e.CurrentViewData;
+        //foreach (var obj in GameObjects)
+        //{
+        //    if (obj.IsDisposed)
+        //    {
+        //        disposableObjects.Add(obj);
+        //    }
+        //    else
+        //    {
+        //        obj.Update();
+        //    }
+        //    if (obj is IShaped)
+        //    {
+        //        TriggerManager.Update(obj as IShaped);
+        //    }
+        //}
+        //GameObjects.RemoveAll(o => disposableObjects.Contains(o));
 
         //TODO: 
         // Вынести обновление данных в отдельный метод, потому что иначе цикл завершается до того, как данные 
@@ -58,10 +58,11 @@ public class ProjectileWorkModel : Model
 
         _outputData.CurrentFrameObjects = new List<IObject>(GameObjects);
         _outputData.Triggers = new List<ITrigger>(TriggerManager.GetTriggers());
+        
         var outData = GetOutputData<ProjectileWorkModelViewData>();
-        outData.PlayerPos = _player.Pos;
-
-        OnCycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs() { ModelViewData = _outputData });
+        outData.Player = _player;
+        base.Update(e);
+        //OnCycleFinished?.Invoke(this, new ModelCycleFinishedEventArgs() { ModelViewData = _outputData });
 
         var t = LoadableObjects.GetTexture(_player.Sprites[0].TextureName);
         _player.Pos = new Vector2(

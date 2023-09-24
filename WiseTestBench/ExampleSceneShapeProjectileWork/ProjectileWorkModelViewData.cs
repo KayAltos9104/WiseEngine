@@ -5,5 +5,6 @@ namespace WiseTestBench.ExampleSceneShapeProjectileWork;
 
 public class ProjectileWorkModelViewData : ModelViewData
 {
-    public Vector2 PlayerPos { get; set; } = Vector2.Zero;
+    //public Vector2 PlayerPos { get; set; } = Vector2.Zero;
+    public LittleShapeWitch Player { get; set; }
 }

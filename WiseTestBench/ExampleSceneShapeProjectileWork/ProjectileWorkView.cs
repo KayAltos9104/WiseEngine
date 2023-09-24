@@ -29,8 +29,8 @@ public class ProjectileWorkView : View
 
     public override void Update()
     {
-        base.Update();
 
+        base.Update();
         Vector2 sV = Vector2.Zero;
         var data = (ProjectileWorkViewModelData)_outputData;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.W))
@@ -43,7 +43,7 @@ public class ProjectileWorkView : View
             sV += Vector2.UnitX;
 
         data.DeltaSpeedPlayer = sV;
-
+        
         _interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
 
         if (InputsManager.IsSingleClicked(InputsManager.MouseButton.Left))
@@ -51,11 +51,12 @@ public class ProjectileWorkView : View
             _interfaceManager.ClickCurrentElement();
         }
         var inputData = GetInputData<ProjectileWorkModelViewData>();
+        
+
+        Camera.Follow(inputData.Player.Pos);
+        //Camera.Follow(inputData.CurrentFrameObjects[0].Pos);
 
 
-        Camera.Follow(inputData.PlayerPos);
-        
-        
 
     }
     public void BtnReturn_Click(object sender, ClickEventArgs e)
