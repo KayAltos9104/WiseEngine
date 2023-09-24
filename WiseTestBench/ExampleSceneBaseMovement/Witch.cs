@@ -11,14 +11,12 @@ public class Witch : IObject, IRenderable
     
     public Vector2 Pos { get; set; }
     public Vector2 Speed { get; set; }
-    public Vector2 Scale { get; set; }
+
     public bool IsDisposed { get; set; } = false;
     public List<Sprite> Sprites { get; set; }
 
     public Witch (Vector2 initPos)
-    {
-        //Scale = Vector2.One;
-        Scale = new Vector2 (3, 3);
+    {        
         Pos = initPos;
         Speed = Vector2.Zero;
         var witchSprite = new Sprite("ExampleWitch");

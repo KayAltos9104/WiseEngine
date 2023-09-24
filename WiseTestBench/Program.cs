@@ -8,6 +8,7 @@ using System.Reflection;
 using WiseTestBench.BaseMovementScene;
 using WiseTestBench.ButtonsWorkExampleScene;
 using WiseTestBench.ExampleSceneTriggerWork;
+using WiseTestBench.ExampleSceneShapeProjectileWork;
 
 string projectRoot = Directory.GetCurrentDirectory();
 string projectName = Assembly.GetEntryAssembly().GetName().Name;
@@ -51,6 +52,11 @@ var v4 = new TriggerWorkAndCameraExampleView();
 var m4 = new TriggerWorkExampleModel();
 var scene4 = new Scene(v4, m4, new Presenter(game, v4, m4));
 game.Scenes.Add("Triggers", scene4);
+
+var v5 = new ProjectileWorkView();
+var m5 = new ProjectileWorkModel();
+var scene5 = new Scene(v5, m5, new Presenter(game, v5, m5));
+game.Scenes.Add("Projectiles", scene5);
 
 game.SetCurrentScene("MainMenu");
 game.Run();

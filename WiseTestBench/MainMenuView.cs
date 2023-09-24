@@ -31,7 +31,7 @@ namespace WiseTestBench
             MbxTest.IsCentered = true;
             MbxTest.ChangeSize(300, 50);
             MbxTest.Center();
-            string instructions = "WiseEngine 0.2.3\n\nДанная сцена - главное меню, \n" +
+            string instructions = "WiseEngine 0.2.4\n\nДанная сцена - главное меню, \n" +
                 "из которого можно попасть\nв другие сцены, показывающие\nработу движка WiseEngine. \n\n" +
                 "Для вызова консоли\nнажмите ctrl+Q.";
             MessageBox MbxInstructions = new MessageBox(Vector2.Zero, LoadableObjects.GetFont("MainFont"), instructions);
@@ -77,10 +77,19 @@ namespace WiseTestBench
             BtnLaunchTriggersWorkExampleScene.ChangeSize(600, 50);
             BtnLaunchTriggersWorkExampleScene.Center();
 
-            
+            Button BtnLaunchProjectilesWorkExampleScene = new Button(
+                basePos + Vector2.UnitY * 400,
+                LoadableObjects.GetFont("MainFont"),
+                "Перейти к сцене работы со снарядами"
+                );
+            BtnLaunchProjectilesWorkExampleScene.Clicked += BtnLaunchProjectilesWorkExampleScene_Click;
+            BtnLaunchProjectilesWorkExampleScene.Name = "BtnLaunchProjectilesWorkExampleScene";
+            BtnLaunchProjectilesWorkExampleScene.ChangeSize(600, 50);
+            BtnLaunchProjectilesWorkExampleScene.Center();
+
 
             Button BtnExit = new Button(
-                basePos + Vector2.UnitY * 400, 
+                basePos + Vector2.UnitY * 500, 
                 LoadableObjects.GetFont("MainFont"), 
                 "Выход"
                 );
@@ -97,6 +106,7 @@ namespace WiseTestBench
             _interfaceManager.AddElement(BtnLaunchBaseMovementScene);
             _interfaceManager.AddElement(BtnLaunchButtonsWorkExampleScene);
             _interfaceManager.AddElement(BtnLaunchTriggersWorkExampleScene);
+            _interfaceManager.AddElement(BtnLaunchProjectilesWorkExampleScene);
             _interfaceManager.AddElement(BtnExit);
             
         }
@@ -146,6 +156,11 @@ namespace WiseTestBench
         private void BtnLaunchTriggerWorkExampleScene_Click (object sender, ClickEventArgs e) 
         {
             OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "Triggers" });
+        }
+
+        private void BtnLaunchProjectilesWorkExampleScene_Click(object sender, ClickEventArgs e)
+        {
+            OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "Projectiles" });
         }
         private void BtnExit_Click(object sender, ClickEventArgs e)
         {

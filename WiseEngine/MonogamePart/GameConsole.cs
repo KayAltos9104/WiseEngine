@@ -20,7 +20,7 @@ public static class GameConsole
     {
         _log = new List<string>
         {
-            "WiseEngine 0.2.3",
+            "WiseEngine 0.2.4",
             "Ctrl+ =>  Q: show/hide console; " +
             "R: clear console; " +
             "S: show/hide sprite borders; " +

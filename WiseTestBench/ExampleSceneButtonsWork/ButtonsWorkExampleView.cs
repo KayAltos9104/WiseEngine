@@ -14,6 +14,7 @@ public class ButtonsWorkExampleView : View
         base.Initialize();
         _inputData = new ButtonsWorkExampleModelViewData();
         _outputData = new ButtonsWorkExampleViewModelData();
+
         Button BtnUp = new Button(new Vector2(150, 100), LoadableObjects.GetFont("MainFont"), "Верх");
         BtnUp.Name = "BtnUp";
         BtnUp.ChangeSize(100, 100);

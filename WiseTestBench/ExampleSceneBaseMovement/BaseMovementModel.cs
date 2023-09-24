@@ -36,8 +36,8 @@ public class BaseMovementModel : Model
         base.Update(e);
         var t = LoadableObjects.GetTexture(_player.Sprites[0].TextureName);
         _player.Pos = new Vector2(
-            MathHelper.Clamp(_player.Pos.X, 0, Globals.Resolution.Width - t.Width * _player.Scale.X),
-            MathHelper.Clamp(_player.Pos.Y, 0, Globals.Resolution.Height - t.Height * _player.Scale.Y)
+            MathHelper.Clamp(_player.Pos.X, 0, Globals.Resolution.Width - t.Width * _player.Sprites[0].Scale.X),
+            MathHelper.Clamp(_player.Pos.Y, 0, Globals.Resolution.Height - t.Height * _player.Sprites[0].Scale.Y)
             );
     }
 }

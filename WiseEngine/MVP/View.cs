@@ -117,7 +117,7 @@ public abstract class View
         _interfaceManager.Update();
         
         CycleFinished?.Invoke(this, new ViewCycleFinishedEventArgs() { CurrentViewData = _outputData });
-        Camera.Update();
+        
     }
     /// <summary>
     /// Loads game model data (list of objects for example).

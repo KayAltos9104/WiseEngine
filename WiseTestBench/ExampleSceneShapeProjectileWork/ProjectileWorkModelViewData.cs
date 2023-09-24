@@ -1,11 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using WiseEngine.MVP;
 
-namespace WiseTestBench.ButtonsWorkExampleScene;
+namespace WiseTestBench.ExampleSceneShapeProjectileWork;
 
-public class ButtonsWorkExampleModelViewData : ModelViewData
+public class ProjectileWorkModelViewData : ModelViewData
 {
     public Vector2 PlayerPos { get; set; } = Vector2.Zero;
-
-    
 }

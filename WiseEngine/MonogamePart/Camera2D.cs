@@ -54,11 +54,17 @@ public class Camera2D
             Matrix.CreateRotationZ(Rotation);
     }
 
+    public void Follow (Vector2 position)
+    {
+        Pos = new Vector3(VisionArea.Width/2 - position.X, VisionArea.Height / 2 - position.Y, Pos.Z);
+        //Translate(position.X, position.Y, 0);
+        Update();
+    }
     public void Follow (object sender, CameraPositionEventArgs e)
     {
         //Translate(e.Position.X, e.Position.Y, 0);
         Pos = new Vector3(e.Position.X, e.Position.Y, Pos.Z);
-        Update ();
+        Update();
     }
     /// <summary>
     /// Changes <see cref="VisionArea"/>
