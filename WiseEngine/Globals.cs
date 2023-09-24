@@ -29,6 +29,11 @@ public static class Globals
     /// Flag to show/hide FPS counter
     /// </value>
     public static bool FPSIsVisible { get; set; }
+
+    /// <value>
+    /// Flag to show/hide camera area
+    /// </value>
+    public static bool CameraAreaIsVisible { get; set; }
     static Globals()
     {
         //TODO: Потом сделать, чтобы из файла с настройками тягал
@@ -37,6 +42,7 @@ public static class Globals
         SpriteBordersAreVisible = false;
         CollidersAreVisible = false;
         FPSIsVisible = false;
+        CameraAreaIsVisible = false;
     }
 
 }

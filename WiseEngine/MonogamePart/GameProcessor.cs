@@ -153,6 +153,8 @@ public sealed class GameProcessor : Game
             Globals.CollidersAreVisible = !Globals.CollidersAreVisible;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.F))
             Globals.FPSIsVisible = !Globals.FPSIsVisible;
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl) && InputsManager.IsSinglePressed(Keys.B))
+            Globals.CameraAreaIsVisible = !Globals.CameraAreaIsVisible;
 
         //if (InputsManager.MouseStateCurrentFrame.LeftButton == ButtonState.Pressed)
         //{

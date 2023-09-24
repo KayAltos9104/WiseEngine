@@ -31,12 +31,7 @@ public static class Graphics2D
     /// <param name="obj">Object for drawing</param>
     public static void RenderObject(IObject obj, Camera2D camera)
     {
-        DrawRectangle(
-            camera.VisionArea.X, 
-            camera.VisionArea.Y, 
-            camera.VisionArea.Width, 
-            camera.VisionArea.Height, Color.Violet, 
-            4);
+        
 
         foreach (var sprite in obj.Sprites)
         {

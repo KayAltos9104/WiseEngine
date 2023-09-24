@@ -139,7 +139,6 @@ public abstract class View
         Graphics2D.SpriteBatch.Begin(transformMatrix: Camera != null ? 
             Camera.Transform : 
             Matrix.CreateTranslation(Vector3.UnitZ));
-        
         if (_inputData != null)
         {
             foreach (var o in _inputData.CurrentFrameObjects)
@@ -156,6 +155,12 @@ public abstract class View
                 t.GetCollider().Draw(Graphics2D.SpriteBatch);   
             }
         }
+        if (Globals.CameraAreaIsVisible && Camera != null) Graphics2D.DrawRectangle(
+                Camera.VisionArea.X,
+                Camera.VisionArea.Y,
+                Camera.VisionArea.Width,
+                Camera.VisionArea.Height, Color.Violet,
+                4);
         Graphics2D.SpriteBatch.End();
 
         Graphics2D.SpriteBatch.Begin();
@@ -164,6 +169,7 @@ public abstract class View
             foreach (var ui in _interfaceManager.InterfaceElements)
                 ui.Render(Graphics2D.SpriteBatch);
         }
+        
         Graphics2D.SpriteBatch.End();
         
     }
