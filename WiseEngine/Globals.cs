@@ -4,6 +4,10 @@ namespace WiseEngine;
 
 public static class Globals
 {
+    /// <summary>
+    /// Global random object
+    /// </summary>
+    public static Random Random = new Random();
     /// <value>
     /// The <c>Resolution</c> property represents a tuple of screen width and height
     /// </value>
