@@ -135,7 +135,6 @@ public abstract class View
     /// </summary>
     public virtual void Draw()
     {
-        //Camera.Update();
         Graphics2D.SpriteBatch.Begin(transformMatrix: Camera != null ? 
             Camera.Transform : 
             Matrix.CreateTranslation(Vector3.UnitZ));
@@ -192,7 +191,7 @@ public class ViewCycleFinishedEventArgs : EventArgs
 /// </summary>
 public class SceneFinishedEventArgs : EventArgs
 {
-    public string NewSceneName { get; set; } = "";
+    public string NewSceneName { get; set; } = string.Empty;
 }
 /// <summary>
 /// Class that contains new settings of the game

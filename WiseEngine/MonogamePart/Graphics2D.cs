@@ -282,4 +282,19 @@ public static class Graphics2D
         circleTexture.SetData(data);
         SpriteBatch.Draw(circleTexture, center, color);
     }
+
+    public static void ReflectAllSprites (List<Sprite> sprites, bool isReflected = false, string axis = "Y")
+    {
+        switch (axis) 
+        {
+            case "X":
+                sprites.ForEach(s => s.IsReflectedOX = isReflected);
+                break;
+            case "Y":
+                sprites.ForEach(s => s.IsReflectedOY = isReflected);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException("Missing axis");                
+        }
+    }
 }

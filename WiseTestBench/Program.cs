@@ -25,7 +25,8 @@ var game = new GameProcessor(
     new List<(string, string)>()
     {
                 ("ExampleWitch", "ExampleWitch"),
-                ("RedOrb", "RedOrb")
+                ("RedOrb", "RedOrb"),
+                ("Goblin", "Goblin")
     },
     new List<(string, string)>()
     {

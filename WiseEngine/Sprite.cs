@@ -34,4 +34,13 @@ public class Sprite
         Alpha = 255;
         Rotation = 0;
     }
+
+    public Texture2D GetTexture()
+    {
+        var texture =  LoadableObjects.GetTexture(TextureName);
+        if (texture == null)
+            throw new ArgumentNullException($"Texture with {TextureName} was not found");
+        else
+            return texture;
+    }
 }

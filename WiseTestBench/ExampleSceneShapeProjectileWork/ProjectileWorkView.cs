@@ -42,6 +42,11 @@ public class ProjectileWorkView : View
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.D))
             sV += Vector2.UnitX;
 
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.Space))
+            data.DoPlayerShoot = true;
+        else 
+            data.DoPlayerShoot = false;
+
         data.DeltaSpeedPlayer = sV;
         
         _interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
@@ -53,11 +58,7 @@ public class ProjectileWorkView : View
         var inputData = GetInputData<ProjectileWorkModelViewData>();
         
 
-        Camera.Follow(inputData.Player.Pos);
-        //Camera.Follow(inputData.CurrentFrameObjects[0].Pos);
-
-
-
+        Camera.Follow(inputData.Player != null ? inputData.Player.Pos: Vector2.Zero);
     }
     public void BtnReturn_Click(object sender, ClickEventArgs e)
     {
