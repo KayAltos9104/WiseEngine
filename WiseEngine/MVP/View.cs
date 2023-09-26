@@ -5,7 +5,7 @@ using WiseEngine.UI;
 namespace WiseEngine.MVP;
 
 /// <summary>
-/// Parent class for all views in game. View draws objects and processes intercation with user
+/// Parent class for all views in game. View draws objects and processes interaction with user
 /// </summary>
 public abstract class View
 {
@@ -17,17 +17,17 @@ public abstract class View
     /// </remarks>
     protected Camera2D Camera { get; set; }
     /// <value>
-    /// Property <c>_outputData</c> contains game data for transfering to view
+    /// Property <c>_outputData</c> contains game data for transfering to view from
     /// </value>
     protected ViewModelData _outputData;
     /// <value>
-    /// Property <c>_inputData</c> contains game data for transfering to view
+    /// Property <c>_inputData</c> contains game data for transfering from view to model
     /// </value>
     protected ModelViewData _inputData;
     protected InterfaceManager _interfaceManager;
 
     /// <value>
-    /// Event <c>OnCycleFinished</c> invokes when View ended cycle processing
+    /// Event <c>CycleFinished</c> invokes when View ended cycle processing
     /// </value>
     public EventHandler<ViewCycleFinishedEventArgs>? CycleFinished;
     /// <value>
