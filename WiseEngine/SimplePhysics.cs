@@ -6,6 +6,8 @@ public class SimplePhysics : IPhysics
 {
     public void Update(IObject o1, IObject o2)
     {
+        bool t1 = o1 is ISolid;
+        bool t2 = o2 is ISolid;
         if (o1 is ISolid s1 && o2 is ISolid s2)
         {
             var collider1 = s1.GetCollider() as RectangleCollider;

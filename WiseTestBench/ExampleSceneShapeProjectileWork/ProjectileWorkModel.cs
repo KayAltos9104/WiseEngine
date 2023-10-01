@@ -10,15 +10,16 @@ namespace WiseTestBench.ExampleSceneShapeProjectileWork;
 
 public class ProjectileWorkModel : Model
 {
-    private const float _shotCooldown = 400.0f;
-    private const float _enemyBirthCooldown = 600.0f;
+    protected const float _shotCooldown = 400.0f;
+    protected const float _enemyBirthCooldown = 600.0f;
 
-    private float _shotCooldownTime = 0;
-    private float _enemyBirthCooldownTime = 0;
-    private LittleShapeWitch _player;
-    private CommonTrigger _borders;
-    private bool _isLoosed = false;
-    private int _score = 0;
+    protected float _shotCooldownTime = 0;
+    protected float _enemyBirthCooldownTime = 0;
+    protected LittleShapeWitch _player;
+    protected CommonTrigger _borders;
+    protected bool _isLoosed = false;
+    protected bool _doGoblins = true;
+    protected int _score = 0;
     
     public override void Initialize()
     {       
@@ -83,7 +84,7 @@ public class ProjectileWorkModel : Model
         
         outData.Score = _score;
         var borderArea = (_borders.GetCollider() as RectangleCollider).Area;
-        if (_enemyBirthCooldownTime > _enemyBirthCooldown)
+        if (_doGoblins && _enemyBirthCooldownTime > _enemyBirthCooldown)
         {
             var pos = new Vector2(1300, Globals.Random.Next(borderArea.Y + 100, borderArea.Y + borderArea.Height - 100));
             var goblin = new Goblin(pos, new Vector2(-(float)(Globals.Random.NextDouble() * 0.4), 0));
@@ -111,7 +112,7 @@ public class ProjectileWorkModel : Model
        
     }
 
-    private void SwitchOutside(object sender, TriggerEventArgs e)
+    protected void SwitchOutside(object sender, TriggerEventArgs e)
     {
         if (e.ActivatedObject is OrbProjectile)
         {
