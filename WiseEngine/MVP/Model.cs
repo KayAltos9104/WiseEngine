@@ -80,7 +80,7 @@ public abstract class Model
     {
         List<IObject> disposableObjects = new List<IObject>();
         _inputData = e.CurrentViewData;
-        CollisionManager.Update(GameObjects);
+        
 
         foreach (var obj in GameObjects)
         {
@@ -97,7 +97,7 @@ public abstract class Model
                 TriggerManager.Update(obj as IShaped);
             }
         }
-        
+        CollisionManager.Update(GameObjects);
         GameObjects.RemoveAll(o => disposableObjects.Contains(o));
 
         _outputData.CurrentFrameObjects = new List<IObject>(GameObjects);
