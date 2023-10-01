@@ -59,5 +59,10 @@ var m5 = new ProjectileWorkModel();
 var scene5 = new Scene(v5, m5, new Presenter(game, v5, m5));
 game.Scenes.Add("Projectiles", scene5);
 
+var v6 = new ProjectileWorkView();
+var m6 = new ProjectileWorkModel();
+var scene6 = new Scene(v6, m6, new Presenter(game, v6, m6));
+game.Scenes.Add("Physics", scene6);
+
 game.SetCurrentScene("MainMenu");
 game.Run();

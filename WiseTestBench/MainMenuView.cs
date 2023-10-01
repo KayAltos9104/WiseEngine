@@ -87,9 +87,18 @@ namespace WiseTestBench
             BtnLaunchProjectilesWorkExampleScene.ChangeSize(600, 50);
             BtnLaunchProjectilesWorkExampleScene.Center();
 
+            Button BtnLaunchPhysicsWorkExampleScene = new Button(
+                basePos + Vector2.UnitY * 500,
+                LoadableObjects.GetFont("MainFont"),
+                "Перейти к сцене работы с физикой"
+                );
+            BtnLaunchPhysicsWorkExampleScene.Clicked += BtnLaunchPhysicsWorkExampleScene_Click;
+            BtnLaunchPhysicsWorkExampleScene.Name = "BtnLaunchPhysicsWorkExampleScene";
+            BtnLaunchPhysicsWorkExampleScene.ChangeSize(600, 50);
+            BtnLaunchPhysicsWorkExampleScene.Center();
 
             Button BtnExit = new Button(
-                basePos + Vector2.UnitY * 500, 
+                basePos + Vector2.UnitY * 600, 
                 LoadableObjects.GetFont("MainFont"), 
                 "Выход"
                 );
@@ -107,6 +116,7 @@ namespace WiseTestBench
             _interfaceManager.AddElement(BtnLaunchButtonsWorkExampleScene);
             _interfaceManager.AddElement(BtnLaunchTriggersWorkExampleScene);
             _interfaceManager.AddElement(BtnLaunchProjectilesWorkExampleScene);
+            _interfaceManager.AddElement(BtnLaunchPhysicsWorkExampleScene);
             _interfaceManager.AddElement(BtnExit);
             
         }
@@ -161,6 +171,11 @@ namespace WiseTestBench
         private void BtnLaunchProjectilesWorkExampleScene_Click(object sender, ClickEventArgs e)
         {
             OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "Projectiles" });
+        }
+
+        private void BtnLaunchPhysicsWorkExampleScene_Click(object sender, ClickEventArgs e)
+        {
+            OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "Physics" });
         }
         private void BtnExit_Click(object sender, ClickEventArgs e)
         {
