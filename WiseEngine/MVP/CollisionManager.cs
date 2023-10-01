@@ -3,8 +3,14 @@
 public sealed class CollisionManager
 {
     public event EventHandler<ManageCollisionEventArgs>? Collided;
+
+    public IPhysics PhysicsManager;
     
-    
+    public CollisionManager ()
+    {
+        PhysicsManager = new SimplePhysics();
+        Collided += PhysicsManager.Update;
+    }
     public void Update (List<IObject> objects)
     {
         List<(IObject o1, IObject o2)> processed = new();        
@@ -34,6 +40,8 @@ public sealed class CollisionManager
             }            
         });
     }
+
+    
 }
 
 public class ManageCollisionEventArgs
