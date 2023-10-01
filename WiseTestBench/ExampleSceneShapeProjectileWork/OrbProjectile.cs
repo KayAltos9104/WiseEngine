@@ -18,6 +18,7 @@ public class OrbProjectile : IObject, IShaped, IRenderable
     public bool IsDisposed { get; set; }
     public List<Sprite> Sprites { get; set; }
     public float Layer { get; set; }
+    public EventHandler Died { get; set; }
 
     public OrbProjectile(Vector2 initPos, Vector2 speed) 
     {
@@ -49,6 +50,8 @@ public class OrbProjectile : IObject, IShaped, IRenderable
 
     public void OnCollided(object sender, CollisionEventArgs e)
     {
+        if (e.OtherObject is Goblin)
+            IsDisposed = true;
         Collided?.Invoke(this, e);
     }
 }

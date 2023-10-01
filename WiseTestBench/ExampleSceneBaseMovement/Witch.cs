@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using WiseEngine;
 using IRenderable = WiseEngine.IRenderable;
@@ -14,6 +15,7 @@ public class Witch : IObject, IRenderable
 
     public bool IsDisposed { get; set; } = false;
     public List<Sprite> Sprites { get; set; }
+    public EventHandler Died { get; set; }
 
     public Witch (Vector2 initPos)
     {        

@@ -9,12 +9,14 @@ namespace WiseTestBench.ExampleSceneShapeProjectileWork;
 
 public class Goblin : IObject, IShaped, IRenderable
 {
+   
     public RectangleCollider Collider { get; set; }
     public Vector2 Pos { get; set; }
     public Vector2 Speed { get; set; }
     public bool IsDisposed { get; set; }
     public List<Sprite> Sprites { get; set; }
     public float Layer { get; set; }
+    public EventHandler Died { get; set; }
 
     public Goblin (Vector2 initPos, Vector2 speed)
     {
@@ -49,6 +51,13 @@ public class Goblin : IObject, IShaped, IRenderable
 
     public void OnCollided(object sender, CollisionEventArgs e)
     {
+        if (e.OtherObject is OrbProjectile)
+        {
+            IsDisposed = true;
+            Died?.Invoke(this, EventArgs.Empty);
+            //GameConsole.WriteLine("Сдох");
+        }
+
         Collided?.Invoke(this, e);
     }
 }

@@ -27,7 +27,7 @@ public class ShapeWitch : Witch, IShaped
         { Color = Collider.Color };
     }
 
-    public void OnCollided(object sender, CollisionEventArgs e)
+    public virtual void OnCollided(object sender, CollisionEventArgs e)
     {
         Collided?.Invoke(this, e);
     }

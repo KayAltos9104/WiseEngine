@@ -10,7 +10,10 @@ namespace WiseEngine;
 /// </remarks>
 public interface IObject
 {
-    
+    /// <value>
+    /// The <c>Died</c> property invokes when object is disposed
+    /// </value>
+    EventHandler Died { get; set; }
     /// <value>
     /// The <c>Pos</c> property represents position where object is placed
     /// </value>
@@ -18,6 +21,7 @@ public interface IObject
     /// <value>
     /// The <c>IsDisposed</c> property says should model remove object from scene
     /// </value>
+    
     bool IsDisposed { get; set; }
     /// <summary>
     /// Updates object state
