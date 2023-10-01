@@ -44,7 +44,7 @@ public class Goblin : IObject, IShaped, IRenderable
         { Color = Collider.Color };
     }
 
-    public void Update()
+    public virtual void Update()
     {
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
     }

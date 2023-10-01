@@ -10,7 +10,13 @@ public class SolidGoblin : Goblin, ISolid
     {
     }
 
+    public override void Update()
+    {
+        PrevPos = new Vector2 (Pos.X, Pos.Y);
+        base.Update();
+    }
     public bool IsStatic { get; set; } = true;
     public float Mass { get; set; }
     public float Force { get; set; }
+    public Vector2 PrevPos { get; set; }
 }

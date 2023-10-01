@@ -39,7 +39,7 @@ public class Witch : IObject, IRenderable
 
         return selfInfo;
     }
-    public void Update()
+    public virtual void Update()
     {        
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
         Speed = Vector2.Zero;

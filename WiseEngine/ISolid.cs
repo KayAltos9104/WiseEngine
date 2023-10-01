@@ -8,5 +8,7 @@ public interface ISolid : IShaped
     float Mass { get; set; }
 
     Vector2 Speed { get; set; }
-    float Force { get; set; }    
+    Vector2 PrevPos { get; set; }
+    float Force { get; set; }
+    
 }
