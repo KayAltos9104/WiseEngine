@@ -2,7 +2,7 @@
 
 public sealed class CollisionManager
 {
-    public event EventHandler<CollisionEventArgs>? Collided;
+    public event EventHandler<ManageCollisionEventArgs>? Collided;
     
     
     public void Update (List<IObject> objects)
@@ -23,7 +23,8 @@ public sealed class CollisionManager
                     )
                     {
                         if (Collider.IsIntersects(s1.GetCollider(), s2.GetCollider()))
-                        {                            
+                        {
+                            Collided?.Invoke(this, new ManageCollisionEventArgs(o1, o2));
                             s1.OnCollided(this, new CollisionEventArgs(o2));
                             s2.OnCollided(this, new CollisionEventArgs(o1));
                         }
@@ -35,17 +36,17 @@ public sealed class CollisionManager
     }
 }
 
-//public class CollisionEventArgs
-//{
-//    public IObject Object1 { get; set; }
-//    public IObject Object2 { get; set; }
+public class ManageCollisionEventArgs
+{
+    public IObject Object1 { get; set; }
+    public IObject Object2 { get; set; }
 
-//    public CollisionEventArgs (IObject obj1, IObject obj2)
-//    {
-//        Object1 = obj1;
-//        Object2 = obj2;
-//    }
-//}
+    public ManageCollisionEventArgs(IObject obj1, IObject obj2)
+    {
+        Object1 = obj1;
+        Object2 = obj2;
+    }
+}
 public class CollisionEventArgs
 {
     public IObject OtherObject { get; set; }
