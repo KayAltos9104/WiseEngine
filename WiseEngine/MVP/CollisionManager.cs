@@ -1,12 +1,7 @@
-﻿
-using WiseEngine.MonogamePart;
-
-namespace WiseEngine.MVP;
+﻿namespace WiseEngine.MVP;
 
 public sealed class CollisionManager
 {
-    //private List<IShaped> _shapedObjects;
-
     public event EventHandler<CollisionEventArgs>? Collided;
     
     
@@ -28,8 +23,7 @@ public sealed class CollisionManager
                     )
                     {
                         if (Collider.IsIntersects(s1.GetCollider(), s2.GetCollider()))
-                        {
-                            //Collided?.Invoke(this, new CollisionEventArgs(o1 as IObject, o2 as IObject));
+                        {                            
                             s1.OnCollided(this, new CollisionEventArgs(o2));
                             s2.OnCollided(this, new CollisionEventArgs(o1));
                         }

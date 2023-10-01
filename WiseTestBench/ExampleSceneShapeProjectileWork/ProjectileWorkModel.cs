@@ -11,7 +11,7 @@ namespace WiseTestBench.ExampleSceneShapeProjectileWork;
 public class ProjectileWorkModel : Model
 {
     private const float _shotCooldown = 400.0f;
-    private const float _enemyBirthCooldown = 800.0f;
+    private const float _enemyBirthCooldown = 600.0f;
 
     private float _shotCooldownTime = 0;
     private float _enemyBirthCooldownTime = 0;
@@ -116,7 +116,12 @@ public class ProjectileWorkModel : Model
         if (e.ActivatedObject is OrbProjectile)
         {
             e.ActivatedObject.IsDisposed = true;
-        }        
+        }
+        if (e.ActivatedObject is Goblin)
+        {
+            e.ActivatedObject.IsDisposed = true;
+            _score--;
+        }
     }
 
     private void LooseProcess (object sender, EventArgs e)

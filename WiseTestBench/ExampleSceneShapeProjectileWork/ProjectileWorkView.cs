@@ -73,6 +73,11 @@ public class ProjectileWorkView : View
         var inputData = GetInputData<ProjectileWorkModelViewData>();
         _score = inputData.Score;
         _mbxScore.Text = $"Очки: {_score}";
+        if (_score >= 0)
+            _mbxScore.BackgroundColor = new Color(0, 255, 0);
+        else
+            _mbxScore.BackgroundColor = Color.Red;
+
         if (_gameLoosed == false && inputData.IsLoosed == true)
         {
             MessageBox MbxLoose = new MessageBox(new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2 - 100),
