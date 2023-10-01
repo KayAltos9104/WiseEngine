@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using WiseEngine;
 using WiseEngine.MonogamePart;
+using WiseEngine.MVP;
 
 namespace WiseTestBench.ExampleSceneShapeProjectileWork;
 
@@ -29,6 +31,9 @@ public class Goblin : IObject, IShaped, IRenderable
         Collider = new RectangleCollider(Vector2.Zero, width, height);
         Speed = speed;
     }
+
+    public event EventHandler<CollisionEventArgs> Collided;
+
     public Collider GetCollider()
     {
         return new RectangleCollider(Pos + Collider.Position,
@@ -40,5 +45,10 @@ public class Goblin : IObject, IShaped, IRenderable
     public void Update()
     {
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
+    }
+
+    public void OnCollided(object sender, CollisionEventArgs e)
+    {
+        Collided?.Invoke(this, e);
     }
 }

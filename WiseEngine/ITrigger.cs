@@ -3,8 +3,9 @@ using WiseEngine.MVP;
 
 namespace WiseEngine;
 
-public interface ITrigger : IShaped
-{  
+public interface ITrigger
+{
+    Collider GetCollider();
     string Name { get; }
     Vector2 Pos { get; set; }
 

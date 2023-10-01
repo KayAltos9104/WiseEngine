@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using WiseEngine;
 using WiseEngine.MonogamePart;
+using WiseEngine.MVP;
 using WiseTestBench.BaseMovementScene;
 
 namespace WiseTestBench.ExampleSceneTriggerWork;
@@ -14,11 +16,19 @@ public class ShapeWitch : Witch, IShaped
         int height = (int)(LoadableObjects.GetTexture(Sprites[0].TextureName).Height * Sprites[0].Scale.Y);
         Collider = new RectangleCollider (Vector2.Zero, width, height);
     }
+
+    public event EventHandler<CollisionEventArgs> Collided;
+
     public Collider GetCollider()
     {
         return new RectangleCollider(Pos + Collider.Position,
             Collider.Area.Width,
             Collider.Area.Height)
         { Color = Collider.Color };
+    }
+
+    public void OnCollided(object sender, CollisionEventArgs e)
+    {
+        Collided?.Invoke(this, e);
     }
 }

@@ -1,13 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using WiseEngine;
 using WiseEngine.MonogamePart;
+using WiseEngine.MVP;
 
 namespace WiseTestBench.ExampleSceneShapeProjectileWork;
 
 public class OrbProjectile : IObject, IShaped, IRenderable
 {
     private Vector2 _speed;
+
+    public event EventHandler<CollisionEventArgs> Collided;
+
     public RectangleCollider Collider { get; set; }
     public Vector2 Pos { get; set; }
     public bool IsDisposed { get; set; }
@@ -40,5 +45,10 @@ public class OrbProjectile : IObject, IShaped, IRenderable
     public void Update()
     {
         Pos += _speed * Globals.Time.ElapsedGameTime.Milliseconds;
+    }
+
+    public void OnCollided(object sender, CollisionEventArgs e)
+    {
+        Collided?.Invoke(this, e);
     }
 }

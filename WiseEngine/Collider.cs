@@ -25,7 +25,7 @@ public abstract class Collider
         }        
     }
 
-    //Yes, I understand that it breaks a bit dividing model and view, but it is more suitable in this case
+    //Yes, I understand that it breaks a bit division of model and view, but it is more suitable in this case
     public abstract void Draw (SpriteBatch spriteBatch);
 
 }

@@ -1,11 +1,16 @@
-﻿namespace WiseEngine.MVP;
+﻿using System.Diagnostics.Tracing;
+
+namespace WiseEngine.MVP;
 
 public sealed class TriggerManager
 {
     private Dictionary<(IObject obj, ITrigger t), bool> _previousState;
 
+
     public event EventHandler<TriggerEventArgs>? TriggerEntered;
     public event EventHandler<TriggerEventArgs>? TriggerExited;
+    
+
     
     /// <value>
     /// Field <c>_triggers</c> contains all triggers in <see cref="Scene">scene</see>
@@ -81,6 +86,8 @@ public sealed class TriggerManager
         TriggerExited += trigger.OnTriggeredOutside;
     }
 
+    
+
     public void ClearPreviousStates ()
     {
         _previousState.Clear();
@@ -88,9 +95,8 @@ public sealed class TriggerManager
     
 
 }
-
 public class TriggerEventArgs
 {
     public ITrigger ActivatedTrigger { get; set; }
-    public IObject ActivatedObject { get; set; }
+    public IObject? ActivatedObject { get; set; }
 }

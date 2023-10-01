@@ -22,9 +22,13 @@ public abstract class Model
     /// </value>
     public List<IObject> GameObjects { get; set; }
     /// <value>
-    /// Property <c>_triggers</c> contains all triggers in <see cref="Scene">scene</see>
+    /// Property <c>TriggerManager</c> contains all <see cref="TriggerManager"/> of the <see cref="Scene">scene</see>
     /// </value>
     public TriggerManager TriggerManager { get; set; }
+    /// <value>
+    /// Property <c>CollisionManager</c> contains all <see cref="CollisionManager"/> of the <see cref="Scene">scene</see>
+    /// </value>
+    public CollisionManager CollisionManager { get; set; }
     /// <value>
     /// Event <c>OnCycleFinished</c> that activates when Model ended cycle processing
     /// </value>
@@ -61,6 +65,7 @@ public abstract class Model
     {
         GameObjects = new List<IObject>();
         TriggerManager = new TriggerManager();
+        CollisionManager = new CollisionManager();
         _outputData = new ModelViewData();
         _inputData = new ViewModelData();
     }
@@ -90,6 +95,7 @@ public abstract class Model
                 TriggerManager.Update(obj as IShaped);
             }
         }
+        CollisionManager.Update(GameObjects);
         GameObjects.RemoveAll(o => disposableObjects.Contains(o));
 
         _outputData.CurrentFrameObjects = new List<IObject>(GameObjects);
