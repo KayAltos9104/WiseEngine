@@ -4,6 +4,7 @@ using WiseEngine;
 using WiseTestBench.ExampleSceneTriggerWork;
 using WiseEngine.MVP;
 using System;
+using WiseEngine.PhysicsAndCollisions;
 
 namespace WiseTestBench.ExampleSceneShapeProjectileWork;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace WiseEngine;
+namespace WiseEngine.MVP;
 
 public static class Globals
 {
@@ -16,7 +16,7 @@ public static class Globals
     /// <value>
     /// The <c>Time</c> property represents a <see cref="GameTime"/> object in game
     /// </value>
-    public static GameTime? Time { get; set;}
+    public static GameTime? Time { get; set; }
     /// <value>
     /// Full path to resources folder
     /// </value>

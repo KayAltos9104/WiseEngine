@@ -8,7 +8,7 @@ public class SimplePhysics : IPhysics
 {
     private const int collisionSolutionTries = 50;
     //private const float g = 9.81f;
-    public float g { set; get; } = 25f;
+    public float g { set; get; } = 55f;
     public void Update(IObject obj)
     {
         if (obj is ISolid solid && solid.IsStatic == false)

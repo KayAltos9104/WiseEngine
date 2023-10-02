@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace WiseEngine;
+namespace WiseEngine.Models;
 
 /// <summary>
 /// Base interface for game model, which represents game object (not interface element)
@@ -9,7 +9,7 @@ namespace WiseEngine;
 /// This interface should be inherited by classes that implement every game object on model 
 /// </remarks>
 public interface IObject
-{    
+{
     /// <value>
     /// The <c>Died</c> property invokes when object is disposed
     /// </value>
@@ -21,7 +21,7 @@ public interface IObject
     /// <value>
     /// The <c>IsDisposed</c> property says should model remove object from scene
     /// </value>
-    
+
     bool IsDisposed { get; set; }
     /// <summary>
     /// Updates object state

@@ -3,6 +3,8 @@
 using WiseEngine.MonogamePart;
 using WiseEngine;
 using Microsoft.Xna.Framework;
+using WiseEngine.Models;
+using WiseEngine.PhysicsAndCollisions;
 
 namespace WiseTestBench.SimplePhysicsExampleScene;
 
