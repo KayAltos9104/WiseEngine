@@ -25,7 +25,7 @@ public class PhysicsModel : Model
         base.Initialize();
         _player = new SolidWitch(new Vector2(
             Globals.Resolution.Width / 2,
-            Globals.Resolution.Height / 2)
+            Globals.Resolution.Height / 2-1000)
             );
         GameObjects.Add(_player);
 
@@ -37,15 +37,16 @@ public class PhysicsModel : Model
 
         //GameObjects.AddRange(new[] { goblin1, goblin2, goblin3 });
 
-        var platform1 = new Platform(new Vector2(100, 600));
-        var platform2 = new Platform(new Vector2(platform1.Pos.X+(platform1.GetCollider() as RectangleCollider).Area.Width, 600));
-        var platform3 = new Platform(new Vector2(platform2.Pos.X + (platform2.GetCollider() as RectangleCollider).Area.Width, 600));
+        var platform1 = new Platform(new Vector2(100, 800));
+        var platform2 = new Platform(new Vector2(platform1.Pos.X+(platform1.GetCollider() as RectangleCollider).Area.Width, 800));
+        var platform3 = new Platform(new Vector2(platform2.Pos.X + (platform2.GetCollider() as RectangleCollider).Area.Width, 800));
 
 
-        var platform4 = new LongPlatform(new Vector2(600, 600));
-        GameObjects.AddRange(new[] { platform1, platform2, platform3, platform4 });
+        var platform4 = new LongPlatform(new Vector2(600, 800));
+        var platform5 = new Platform(new Vector2(platform4.Pos.X, 800 - (platform4.GetCollider() as RectangleCollider).Area.Height));
+        GameObjects.AddRange(new[] { platform1, platform2, platform3, platform4, platform5 });
 
-        _borders = new CommonTrigger(new Vector2(100, 100), 1400, 700);
+        _borders = new CommonTrigger(new Vector2(100, 100), 1400, 800);
         _borders.Name = "Borders";
         _borders.TriggeredOutside += SwitchOutside;
         TriggerManager.AddTrigger(_borders);

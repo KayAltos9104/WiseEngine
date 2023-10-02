@@ -59,7 +59,7 @@ public class PhysicsView : View
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.D))
             sV += Vector2.UnitX;
 
-        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftControl))
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.LeftShift))
             data.DoPlayerShoot = true;
         else
             data.DoPlayerShoot = false;

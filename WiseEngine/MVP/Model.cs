@@ -90,15 +90,19 @@ public abstract class Model
             }
             else
             {
+                
                 obj.Update();
                 CollisionManager.PhysicsManager.Update(obj);
+
             }
             if (obj is IShaped)
             {
                 TriggerManager.Update(obj as IShaped);
             }
         }
+        //CollisionManager.PhysicsManager.Update(GameObjects);
         CollisionManager.Update(GameObjects);
+        
         GameObjects.RemoveAll(o => disposableObjects.Contains(o));
 
         _outputData.CurrentFrameObjects = new List<IObject>(GameObjects);

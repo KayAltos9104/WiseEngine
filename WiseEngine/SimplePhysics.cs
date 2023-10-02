@@ -13,8 +13,9 @@ public class SimplePhysics : IPhysics
         {
             Vector2 gravitationalForce = new Vector2(0, g * solid.Mass);
             solid.Force += gravitationalForce;
-            obj.Pos += solid.Force / solid.Mass * Globals.Time.ElapsedGameTime.Milliseconds / 1000.0f;
-            //solid.Force = Vector2.Zero;
+            Vector2 speed = solid.Force / solid.Mass * Globals.Time.ElapsedGameTime.Milliseconds / 1000.0f;
+            speed = new Vector2 ((float)Math.Round(speed.X, 0), (float)Math.Round(speed.Y, 0));
+            obj.Pos += speed;            
         }
     }
     public void Update (List<IObject> objects)
@@ -68,6 +69,7 @@ public class SimplePhysics : IPhysics
             bounceVector1 = bounceVector1!=Vector2.Zero ? Vector2.Normalize(bounceVector1) : Vector2.Zero;
             bounceVector2 = bounceVector2 != Vector2.Zero ? Vector2.Normalize(bounceVector2) : Vector2.Zero;
 
+            //Абсолютно неупругое соударение
             s1.Force = new Vector2(bounceVector1.X == 0 ? s1.Force.X : 0, bounceVector1.Y == 0 ? s1.Force.Y : 0);
             s2.Force = new Vector2(bounceVector2.X == 0 ? s2.Force.X : 0, bounceVector2.Y == 0 ? s2.Force.Y : 0);
             int tries = 0;
