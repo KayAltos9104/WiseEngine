@@ -31,7 +31,7 @@ namespace WiseTestBench
             MbxTest.IsCentered = true;
             MbxTest.ChangeSize(300, 50);
             MbxTest.Center();
-            string instructions = "WiseEngine 0.2.4\n\nДанная сцена - главное меню, \n" +
+            string instructions = "WiseEngine 0.4.0\n\nДанная сцена - главное меню, \n" +
                 "из которого можно попасть\nв другие сцены, показывающие\nработу движка WiseEngine. \n\n" +
                 "Для вызова консоли\nнажмите ctrl+Q.";
             MessageBox MbxInstructions = new MessageBox(Vector2.Zero, LoadableObjects.GetFont("MainFont"), instructions);

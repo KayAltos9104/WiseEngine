@@ -29,16 +29,16 @@ public class PhysicsView : View
         BtnReload.ChangeSize(200, 50);
         BtnReload.Clicked += BtnReload_Click;
 
-        _mbxScore = new MessageBox(new Vector2(Globals.Resolution.Width / 2, 70),
-            LoadableObjects.GetFont("MainFont"), $"Очки: {_score}");
-        _mbxScore.BackgroundColor = new Color(0, 255, 0);
-        _mbxScore.ContourWidth = 2;
-        _mbxScore.ChangeSize(200, 70);
-        _mbxScore.IsCentered = true;
-        _mbxScore.Center();
-        _mbxScore.MarginText = new Vector2(0, 0);
+        //_mbxScore = new MessageBox(new Vector2(Globals.Resolution.Width / 2, 70),
+        //    LoadableObjects.GetFont("MainFont"), $"Очки: {_score}");
+        //_mbxScore.BackgroundColor = new Color(0, 255, 0);
+        //_mbxScore.ContourWidth = 2;
+        //_mbxScore.ChangeSize(200, 70);
+        //_mbxScore.IsCentered = true;
+        //_mbxScore.Center();
+        //_mbxScore.MarginText = new Vector2(0, 0);
 
-        _interfaceManager.AddElement(_mbxScore);
+        //_interfaceManager.AddElement(_mbxScore);
 
         _interfaceManager.AddElement(BtnReload);
         _interfaceManager.AddElement(BtnReturn);
@@ -79,11 +79,11 @@ public class PhysicsView : View
         }
         var inputData = GetInputData<PhysicsModelViewData>();
         _score = inputData.Score;
-        _mbxScore.Text = $"Очки: {_score}";
-        if (_score >= 0)
-            _mbxScore.BackgroundColor = new Color(0, 255, 0);
-        else
-            _mbxScore.BackgroundColor = Color.Red;
+        //_mbxScore.Text = $"Очки: {_score}";
+        //if (_score >= 0)
+        //    _mbxScore.BackgroundColor = new Color(0, 255, 0);
+        //else
+        //    _mbxScore.BackgroundColor = Color.Red;
 
         if (_gameLoosed == false && inputData.IsLoosed == true)
         {

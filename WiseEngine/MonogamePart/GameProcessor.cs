@@ -52,7 +52,7 @@ public sealed class GameProcessor : Game
     protected override void Initialize()
     {
         base.Initialize();
-        Window.Title = "WiseEngine 0.2.4 alpha";        
+        Window.Title = "WiseEngine 0.4.0 alpha";        
         SetResolution(Globals.Resolution.Width, Globals.Resolution.Height);
         SetFullScreenMode(Globals.IsFullScreen);
 

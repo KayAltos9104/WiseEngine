@@ -39,15 +39,43 @@ public class PhysicsModel : Model
         //GameObjects.AddRange(new[] { goblin1, goblin2, goblin3 });
 
         var platform1 = new Platform(new Vector2(100, 800));
-        var platform2 = new Platform(new Vector2(platform1.Pos.X+(platform1.GetCollider() as RectangleCollider).Area.Width, 800));
-        var platform3 = new Platform(new Vector2(platform2.Pos.X + (platform2.GetCollider() as RectangleCollider).Area.Width, 800));
+        //var platform2 = new Platform(new Vector2(platform1.Pos.X+(platform1.GetCollider() as RectangleCollider).Area.Width, 800));
+        //var platform3 = new Platform(new Vector2(platform2.Pos.X + (platform2.GetCollider() as RectangleCollider).Area.Width, 800));
 
 
-        var platform4 = new LongPlatform(new Vector2(800, 800));
-        var platform5 = new Platform(new Vector2(platform4.Pos.X, 800 - (platform4.GetCollider() as RectangleCollider).Area.Height));
-        GameObjects.AddRange(new[] { platform1, platform2, platform3, platform4, platform5 });
+        //var platform4 = new LongPlatform(new Vector2(800, 800));
+        //var platform5 = new Platform(new Vector2(platform4.Pos.X, 800 - (platform4.GetCollider() as RectangleCollider).Area.Height));
+        //GameObjects.AddRange(new[] { platform1, platform2, platform3, platform4, platform5 });
 
-        _borders = new CommonTrigger(new Vector2(-1000, 100), 5400, 2000);
+        int tileSize = (platform1.GetCollider() as RectangleCollider).Area.Width;
+        bool[,] map = 
+        {
+            {true, true, true, true },
+            {true, false, false, true },
+            {false, true, false, true },
+            {false, true, false, false },
+            {false, false, false, true },
+            {false, false, true, true  },
+            {false, true, false, false },
+            {false, false, false, false },
+            {false, false, false, true },
+            {true, true, false, true },
+            };
+
+       
+        for (int i = 0; i < map.GetLength(0); i++)
+            for (int j = 0; j < map.GetLength(1); j++)
+            {
+                if (map[i,j])
+                {
+                    var platform = new Platform(new Vector2(i*tileSize, j*tileSize));
+                    GameObjects.Add(platform);
+                }                    
+            }
+
+        
+
+        _borders = new CommonTrigger(new Vector2(-1000, -400), 5400, 2700);
         _borders.Name = "Borders";
         _borders.TriggeredOutside += SwitchOutside;
         TriggerManager.AddTrigger(_borders);
@@ -70,7 +98,7 @@ public class PhysicsModel : Model
         _player.Speed += inputData.DeltaSpeedPlayer;
         if (inputData.DoJump && _player.IsOnPlatform)
         {
-            _player.Force += Vector2.UnitY * (-40000);            
+            _player.Force += Vector2.UnitY * (-45000);            
         }
         inputData.DoJump = false;
 
