@@ -5,6 +5,8 @@ namespace WiseEngine;
 public interface ISolid : IShaped
 {
     bool IsStatic { get; set; }
+
+    bool IsOnPlatform { get; set; }
     float Mass { get; set; }
 
     Vector2 Speed { get; set; }

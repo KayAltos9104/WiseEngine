@@ -66,6 +66,8 @@ public class PhysicsView : View
 
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.Space))
             data.DoJump = true;
+        else
+            data.DoJump = false;
 
         data.DeltaSpeedPlayer = sV;
 

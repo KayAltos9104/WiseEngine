@@ -6,7 +6,8 @@ namespace WiseEngine;
 public class SimplePhysics : IPhysics
 {
     private const int collisionSolutionTries = 50;
-    private const float g = 9.81f;
+    //private const float g = 9.81f;
+    private const float g = 22f;
     public void Update (IObject obj)
     {
         if (obj is ISolid solid && solid.IsStatic == false)
@@ -15,7 +16,8 @@ public class SimplePhysics : IPhysics
             solid.Force += gravitationalForce;
             Vector2 speed = solid.Force / solid.Mass * Globals.Time.ElapsedGameTime.Milliseconds / 1000.0f;
             speed = new Vector2 ((float)Math.Round(speed.X, 0), (float)Math.Round(speed.Y, 0));
-            obj.Pos += speed;            
+            obj.Pos += speed;
+            solid.IsOnPlatform = false;
         }
     }
     public void Update (List<IObject> objects)
@@ -64,14 +66,24 @@ public class SimplePhysics : IPhysics
             {
                 bounceVector1 += o1.Pos.Y != s1.PrevPos.Y ? Vector2.UnitY * (o1.Pos.Y - s1.PrevPos.Y) : Vector2.Zero; 
                 bounceVector2 += o2.Pos.Y != s2.PrevPos.Y ? Vector2.UnitY *( o2.Pos.Y - s2.PrevPos.Y) : Vector2.Zero;
-            }
 
+                if (s1.IsStatic == false && s2.IsStatic == true)
+                {
+                    s1.IsOnPlatform = true;
+                }
+                else if (s1.IsStatic == true && s2.IsStatic == false)
+                {
+                    s2.IsOnPlatform = true;
+                }
+            }            
             bounceVector1 = bounceVector1!=Vector2.Zero ? Vector2.Normalize(bounceVector1) : Vector2.Zero;
             bounceVector2 = bounceVector2 != Vector2.Zero ? Vector2.Normalize(bounceVector2) : Vector2.Zero;
 
             //Абсолютно неупругое соударение
             s1.Force = new Vector2(bounceVector1.X == 0 ? s1.Force.X : 0, bounceVector1.Y == 0 ? s1.Force.Y : 0);
             s2.Force = new Vector2(bounceVector2.X == 0 ? s2.Force.X : 0, bounceVector2.Y == 0 ? s2.Force.Y : 0);
+
+            
             int tries = 0;
             do
             {

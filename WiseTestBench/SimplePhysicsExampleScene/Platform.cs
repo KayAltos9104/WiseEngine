@@ -20,6 +20,7 @@ public class Platform : IObject, ISolid, IRenderable
     public Vector2 Force { get; set; }
     public List<Sprite> Sprites { get; set; }
     public float Layer { get; set; }
+    public bool IsOnPlatform { get; set; }
 
     public event EventHandler<CollisionEventArgs> Collided;
 
@@ -27,8 +28,8 @@ public class Platform : IObject, ISolid, IRenderable
     {
         Pos = initPos;
         Speed = Vector2.Zero;
-        var platformSprite = new Sprite("Platform1");
-        platformSprite.Scale = Vector2.One * 4;
+        var platformSprite = new Sprite("Platform3");
+        platformSprite.Scale = Vector2.One * 1;
         Layer = 0;
         Sprites = new()
         {

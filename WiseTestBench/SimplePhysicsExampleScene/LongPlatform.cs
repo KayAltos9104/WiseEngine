@@ -12,9 +12,9 @@ public class LongPlatform : Platform
     {
         Pos = initPos;
         Speed = Vector2.Zero;
-        var platformSprite = new Sprite("Platform1");
-        platformSprite.Scale = Vector2.One * 4;
-        platformSprite.Scale *= new Vector2(10, 1);
+        var platformSprite = new Sprite("Platform3");
+        platformSprite.Scale = Vector2.One * 1;
+        platformSprite.Scale *= new Vector2(2, 1);
         Layer = 0;
         Sprites = new()
         {

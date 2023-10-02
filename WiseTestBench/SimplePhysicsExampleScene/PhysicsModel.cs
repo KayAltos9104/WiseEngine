@@ -9,16 +9,17 @@ namespace WiseTestBench.SimplePhysicsExampleScene;
 
 public class PhysicsModel : Model
 {
-    protected const float _shotCooldown = 400.0f;
-    protected const float _enemyBirthCooldown = 600.0f;
+    private const float _shotCooldown = 400.0f;
+    private const float _enemyBirthCooldown = 600.0f;
+    
 
-    protected float _shotCooldownTime = 0;
-    protected float _enemyBirthCooldownTime = 0;
-    protected SolidWitch _player;
-    protected CommonTrigger _borders;
-    protected bool _isLoosed = false;
-    protected bool _doGoblins = false;
-    protected int _score = 0;
+    private float _shotCooldownTime = 0;
+    private float _enemyBirthCooldownTime = 0;
+    private SolidWitch _player;
+    private CommonTrigger _borders;
+    private bool _isLoosed = false;
+    private bool _doGoblins = false;
+    private int _score = 0;
 
     public override void Initialize()
     {
@@ -42,11 +43,11 @@ public class PhysicsModel : Model
         var platform3 = new Platform(new Vector2(platform2.Pos.X + (platform2.GetCollider() as RectangleCollider).Area.Width, 800));
 
 
-        var platform4 = new LongPlatform(new Vector2(600, 800));
+        var platform4 = new LongPlatform(new Vector2(800, 800));
         var platform5 = new Platform(new Vector2(platform4.Pos.X, 800 - (platform4.GetCollider() as RectangleCollider).Area.Height));
         GameObjects.AddRange(new[] { platform1, platform2, platform3, platform4, platform5 });
 
-        _borders = new CommonTrigger(new Vector2(100, 100), 1400, 800);
+        _borders = new CommonTrigger(new Vector2(-1000, 100), 5400, 2000);
         _borders.Name = "Borders";
         _borders.TriggeredOutside += SwitchOutside;
         TriggerManager.AddTrigger(_borders);
@@ -67,12 +68,12 @@ public class PhysicsModel : Model
 
         var inputData = GetInputData<PhysicsViewModelData>();
         _player.Speed += inputData.DeltaSpeedPlayer;
-        if (inputData.DoJump)
+        if (inputData.DoJump && _player.IsOnPlatform)
         {
-            _player.Force += Vector2.UnitY * (-1000);
-            inputData.DoJump = false;
-        }    
-            
+            _player.Force += Vector2.UnitY * (-40000);            
+        }
+        inputData.DoJump = false;
+
         if (_player.Speed.X > 0)
             Graphics2D.ReflectAllSprites(_player.Sprites);
         else if (_player.Speed.X < 0)

@@ -20,6 +20,7 @@ public class SolidWitch : IObject, IRenderable, ISolid
     public Vector2 Speed { get; set; }
     public Vector2 PrevPos { get; set; }
     public Vector2 Force { get; set; }
+    public bool IsOnPlatform { get; set; }
 
     public event EventHandler<CollisionEventArgs> Collided;
 
