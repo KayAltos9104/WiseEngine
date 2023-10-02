@@ -66,7 +66,12 @@ public class PhysicsModel : Model
 
         var inputData = GetInputData<PhysicsViewModelData>();
         _player.Speed += inputData.DeltaSpeedPlayer;
-
+        if (inputData.DoJump)
+        {
+            _player.Force += Vector2.UnitY * (-1000);
+            inputData.DoJump = false;
+        }    
+            
         if (_player.Speed.X > 0)
             Graphics2D.ReflectAllSprites(_player.Sprites);
         else if (_player.Speed.X < 0)

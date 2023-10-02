@@ -91,6 +91,7 @@ public abstract class Model
             else
             {
                 obj.Update();
+                CollisionManager.PhysicsManager.Update(obj);
             }
             if (obj is IShaped)
             {
