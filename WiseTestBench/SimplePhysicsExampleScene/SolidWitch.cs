@@ -70,7 +70,11 @@ public class SolidWitch : IObject, IRenderable, ISolid
             Collider.Area.Height)
         { Color = Collider.Color };
     }
-
+    public void OnDied()
+    {
+        Died?.Invoke(this, EventArgs.Empty);
+        IsDisposed = true;
+    }
     public virtual void OnCollided(object sender, CollisionEventArgs e)
     {
         Collided?.Invoke(this, e);

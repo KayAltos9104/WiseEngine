@@ -54,4 +54,10 @@ public class OrbProjectile : IObject, IShaped, IRenderable
             IsDisposed = true;
         Collided?.Invoke(this, e);
     }
+
+    public void OnDied()
+    {
+        Died?.Invoke(this, EventArgs.Empty);
+        IsDisposed = true;
+    }
 }

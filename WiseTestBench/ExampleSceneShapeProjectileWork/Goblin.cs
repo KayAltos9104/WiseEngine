@@ -60,4 +60,10 @@ public class Goblin : IObject, IShaped, IRenderable
 
         Collided?.Invoke(this, e);
     }
+
+    public void OnDied()
+    {
+        Died?.Invoke(this, EventArgs.Empty);
+        IsDisposed = true;
+    }
 }

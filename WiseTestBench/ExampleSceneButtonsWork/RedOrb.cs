@@ -34,4 +34,9 @@ public class RedOrb : IObject, IRenderable
     {
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
     }
+    public void OnDied()
+    {
+        Died?.Invoke(this, EventArgs.Empty);
+        IsDisposed = true;
+    }
 }

@@ -34,6 +34,7 @@ public class Witch : IObject, IRenderable
     public void OnDied()
     {
         Died?.Invoke(this, EventArgs.Empty);
+        IsDisposed = true;
     }
     public override string ToString()
     {

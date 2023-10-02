@@ -31,5 +31,6 @@ public interface IObject
     /// </remarks>
     ///  <param name="gameTime"> GameTime element parameter</param>
     void Update();
+    void OnDied();
 }
 

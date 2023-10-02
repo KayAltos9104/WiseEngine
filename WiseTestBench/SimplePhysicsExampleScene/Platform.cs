@@ -62,4 +62,10 @@ public class Platform : IObject, ISolid, IRenderable
     {
         PrevPos = Pos;
     }
+
+    public void OnDied()
+    {
+        Died?.Invoke(this, EventArgs.Empty);
+        IsDisposed = true;
+    }
 }

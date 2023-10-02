@@ -26,7 +26,7 @@ public class PhysicsModel : Model
         base.Initialize();
         _player = new SolidWitch(new Vector2(
             Globals.Resolution.Width / 2,
-            Globals.Resolution.Height / 2-1000)
+            Globals.Resolution.Height / 2-100)
             );
         GameObjects.Add(_player);
 
@@ -114,15 +114,15 @@ public class PhysicsModel : Model
         // Вынести обновление данных в отдельный метод, потому что иначе цикл завершается до того, как данные 
         // обновятся
         base.Update(e);
-        var t = LoadableObjects.GetTexture(_player.Sprites[0].TextureName);
-        _player.Pos = new Vector2(
-             MathHelper.Clamp(_player.Pos.X,
-             _borders.Pos.X,
-             _borders.Pos.X + borderArea.Width - t.Width * _player.Sprites[0].Scale.X),
-             MathHelper.Clamp(_player.Pos.Y,
-             _borders.Pos.Y,
-             _borders.Pos.Y + borderArea.Height - t.Height * _player.Sprites[0].Scale.Y)
-             );
+        //var t = LoadableObjects.GetTexture(_player.Sprites[0].TextureName);
+        //_player.Pos = new Vector2(
+        //     MathHelper.Clamp(_player.Pos.X,
+        //     _borders.Pos.X,
+        //     _borders.Pos.X + borderArea.Width - t.Width * _player.Sprites[0].Scale.X),
+        //     MathHelper.Clamp(_player.Pos.Y,
+        //     _borders.Pos.Y,
+        //     _borders.Pos.Y + borderArea.Height - t.Height * _player.Sprites[0].Scale.Y)
+        //     );
 
     }
 
@@ -136,6 +136,10 @@ public class PhysicsModel : Model
         {
             e.ActivatedObject.IsDisposed = true;
             _score--;
+        }
+        if (e.ActivatedObject is SolidWitch) 
+        {
+            _player.OnDied();
         }
     }
 
