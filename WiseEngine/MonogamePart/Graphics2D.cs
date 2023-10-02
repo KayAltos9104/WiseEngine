@@ -34,45 +34,79 @@ public static class Graphics2D
     /// <param name="obj">Object for drawing</param>
     public static void RenderObject(IObject obj, Camera2D camera)
     {
-        if (obj is IRenderable == false) 
-            return;  
-        IRenderable raw = obj as IRenderable;
-        foreach (var sprite in raw.Sprites)
-        {     
-            Vector2 texturePos = obj.Pos + sprite.Pos;
-            if (camera.IsInVisionArea(texturePos))
+        //if (obj is IRenderable == false && obj is IAnimated) 
+        //    return;  
+        if (obj is IRenderable raw)
+        {
+            foreach (var sprite in raw.Sprites)
             {
-                var texture = LoadableObjects.GetTexture(sprite.TextureName);
-                if (texture == null) 
-                    throw new ArgumentNullException($"Texture with name {sprite.TextureName} was not found");
-
-                SpriteBatch.Draw(
-                texture: texture,
-                position: texturePos,
-                sourceRectangle: null,
-                color: sprite.Color,
-                rotation: sprite.Rotation,
-                origin: Vector2.Zero,
-                scale: sprite.Scale,
-                effects: sprite.IsReflectedOY ? SpriteEffects.FlipHorizontally 
-                : sprite.IsReflectedOX ? SpriteEffects.FlipVertically 
-                : SpriteEffects.None,
-                layerDepth: raw.Layer);
-
-                if (Globals.SpriteBordersAreVisible)
+                Vector2 texturePos = obj.Pos + sprite.Pos;
+                if (camera.IsInVisionArea(texturePos))
                 {
-                    DrawRectangle((int)texturePos.X, (int)texturePos.Y,
-                        (int)(LoadableObjects.GetTexture(sprite.TextureName).Width * sprite.Scale.X),
-                        (int)(LoadableObjects.GetTexture(sprite.TextureName).Height * sprite.Scale.Y),
-                        Color.Red, 3);
-                }
+                    var texture = LoadableObjects.GetTexture(sprite.TextureName);
+                    if (texture == null)
+                        throw new ArgumentNullException($"Texture with name {sprite.TextureName} was not found");
 
-                if (Globals.CollidersAreVisible && obj is IShaped)
-                {                    
+                    SpriteBatch.Draw(
+                    texture: texture,
+                    position: texturePos,
+                    sourceRectangle: null,
+                    color: sprite.Color,
+                    rotation: sprite.Rotation,
+                    origin: Vector2.Zero,
+                    scale: sprite.Scale,
+                    effects: sprite.IsReflectedOY ? SpriteEffects.FlipHorizontally
+                    : sprite.IsReflectedOX ? SpriteEffects.FlipVertically
+                    : SpriteEffects.None,
+                    layerDepth: raw.Layer);
+
+                    if (Globals.SpriteBordersAreVisible)
+                    {
+                        DrawRectangle((int)texturePos.X, (int)texturePos.Y,
+                            (int)(LoadableObjects.GetTexture(sprite.TextureName).Width * sprite.Scale.X),
+                            (int)(LoadableObjects.GetTexture(sprite.TextureName).Height * sprite.Scale.Y),
+                            Color.Red, 3);
+                    }
+
+                    if (Globals.CollidersAreVisible && obj is IShaped)
+                    {
                         (obj as IShaped).GetCollider().Draw(SpriteBatch);
+                    }
                 }
             }
         }
+
+        if (obj is IAnimated anim)
+        {
+            if (anim.CurrentAnimation != null && anim.CurrentAnimation.IsActive)
+            {
+                Vector2 texturePos = obj.Pos + anim.CurrentAnimation.Pos;
+                var sprite = anim.CurrentAnimation.GetSprite();
+                Rectangle area = anim.CurrentAnimation.GetCurrentFrame();
+
+                if (camera.IsInVisionArea(texturePos))
+                {
+                    var texture = LoadableObjects.GetTexture(sprite.TextureName);
+                    if (texture == null)
+                        throw new ArgumentNullException($"Texture with name {sprite.TextureName} was not found");
+
+                    SpriteBatch.Draw(
+                    texture: texture,
+                    position: texturePos,
+                    sourceRectangle: area,
+                    color: sprite.Color,
+                    rotation: sprite.Rotation,
+                    origin: Vector2.Zero,
+                    scale: sprite.Scale,
+                    effects: sprite.IsReflectedOY ? SpriteEffects.FlipHorizontally
+                    : sprite.IsReflectedOX ? SpriteEffects.FlipVertically
+                    : SpriteEffects.None,
+                    layerDepth: anim.Layer);                    
+                }
+            }
+        }
+        
+        
     }
     /// <summary>
     /// Renders text
