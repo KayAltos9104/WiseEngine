@@ -21,8 +21,7 @@ public class LittleShapeWitch : ShapeWitch
     {
         if (e.OtherObject is Goblin)
         {
-            //IsDisposed = true;
-            Died?.Invoke(this, EventArgs.Empty);
+            OnDied();
         }
             
         base.OnCollided(sender, e);

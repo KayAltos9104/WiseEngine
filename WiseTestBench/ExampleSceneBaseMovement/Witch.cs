@@ -31,7 +31,10 @@ public class Witch : IObject, IRenderable
         };
        
     }
-
+    public void OnDied()
+    {
+        Died?.Invoke(this, EventArgs.Empty);
+    }
     public override string ToString()
     {
         string selfInfo = "";

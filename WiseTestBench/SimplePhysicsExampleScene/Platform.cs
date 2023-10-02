@@ -27,16 +27,21 @@ public class Platform : IObject, ISolid, IRenderable
     {
         Pos = initPos;
         Speed = Vector2.Zero;
-        var witchSprite = new Sprite("Platform1");
-        witchSprite.Scale = Vector2.One * 2;
+        var platformSprite = new Sprite("Platform1");
+        platformSprite.Scale = Vector2.One * 4;
         Layer = 0;
         Sprites = new()
         {
-            witchSprite
+            platformSprite
         };
         int width = (int)(LoadableObjects.GetTexture(Sprites[0].TextureName).Width * Sprites[0].Scale.X);
         int height = (int)(LoadableObjects.GetTexture(Sprites[0].TextureName).Height * Sprites[0].Scale.Y);
         Collider = new RectangleCollider(Vector2.Zero, width, height);
+        IsStatic = true;
+        Mass = 500;
+        Speed = Vector2.Zero;
+        PrevPos = Vector2.Zero;
+        Force = Vector2.Zero;
     }
 
     public Collider GetCollider()
@@ -54,6 +59,6 @@ public class Platform : IObject, ISolid, IRenderable
 
     public void Update()
     {
-        
+        PrevPos = Pos;
     }
 }

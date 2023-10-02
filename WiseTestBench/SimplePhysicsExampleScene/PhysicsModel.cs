@@ -17,7 +17,7 @@ public class PhysicsModel : Model
     protected SolidWitch _player;
     protected CommonTrigger _borders;
     protected bool _isLoosed = false;
-    protected bool _doGoblins = true;
+    protected bool _doGoblins = false;
     protected int _score = 0;
 
     public override void Initialize()
@@ -36,6 +36,14 @@ public class PhysicsModel : Model
         //var goblin3 = new Goblin(new Vector2(1200, 600), Vector2.Zero);
 
         //GameObjects.AddRange(new[] { goblin1, goblin2, goblin3 });
+
+        var platform1 = new Platform(new Vector2(100, 600));
+        var platform2 = new Platform(new Vector2(platform1.Pos.X+(platform1.GetCollider() as RectangleCollider).Area.Width, 600));
+        var platform3 = new Platform(new Vector2(platform2.Pos.X + (platform2.GetCollider() as RectangleCollider).Area.Width, 600));
+
+
+        var platform4 = new LongPlatform(new Vector2(600, 600));
+        GameObjects.AddRange(new[] { platform1, platform2, platform3, platform4 });
 
         _borders = new CommonTrigger(new Vector2(100, 100), 1400, 700);
         _borders.Name = "Borders";

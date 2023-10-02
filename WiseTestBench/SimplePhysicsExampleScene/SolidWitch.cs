@@ -10,7 +10,7 @@ namespace WiseTestBench.SimplePhysicsExampleScene;
 public class SolidWitch : IObject, IRenderable, ISolid
 {
     public RectangleCollider Collider { get; set; }
-    public EventHandler Died { get; set; }
+    public event EventHandler Died;
     public Vector2 Pos { get; set; }
     public bool IsDisposed { get; set; }
     public List<Sprite> Sprites { get; set; }

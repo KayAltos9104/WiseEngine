@@ -5,6 +5,7 @@ using WiseEngine.MVP;
 namespace WiseEngine;
 public class SimplePhysics : IPhysics
 {
+    private const int collisionSolutionTries = 50;
     public void Update (List<IObject> objects)
     {
 
@@ -55,14 +56,15 @@ public class SimplePhysics : IPhysics
 
             bounceVector1 = bounceVector1!=Vector2.Zero ? Vector2.Normalize(bounceVector1) : Vector2.Zero;
             bounceVector2 = bounceVector2 != Vector2.Zero ? Vector2.Normalize(bounceVector2) : Vector2.Zero;
-
+            int tries = 0;
             do
             {
                 o1.Pos -= bounceVector1;
                 o2.Pos -= bounceVector2;
                 collider1 = s1.GetCollider() as RectangleCollider;
                 collider2 = s2.GetCollider() as RectangleCollider;
-            } while (Collider.IsIntersects(collider1, collider2));  
+                tries++;
+            } while (Collider.IsIntersects(collider1, collider2) && tries < collisionSolutionTries);  
         }
     }
     public void SolveCollision (object sender, ManageCollisionEventArgs e)
