@@ -119,20 +119,29 @@ public class PhysicsModel : Model
         //else if (_player.Speed.X < 0)
         //    Graphics2D.ReflectAllSprites(_player.Sprites, true);
 
-        //if (inputData.DoPlayerShoot && _shotCooldownTime > _shotCooldown)
-        //{
-        //    Vector2 orbPos = new Vector2(
-        //        _player.Pos.X + _player.Sprites[0].GetTexture().Width * _player.Sprites[0].Scale.X / 2,
-        //        _player.Pos.Y + _player.Sprites[0].GetTexture().Height * _player.Sprites[0].Scale.Y / 1.8f);
-        //    var projectile = new OrbProjectile(orbPos, _player.Sprites[0].IsReflectedOY ? -Vector2.UnitX / 2 : Vector2.UnitX / 2);
-        //    //var projectile = new OrbProjectile(new Vector2(1200,200), Vector2.Zero);
-        //    GameObjects.Add(projectile);
-        //    _shotCooldownTime = 0;
-        //}
-        //else
-        //{
-        //    _shotCooldownTime += Globals.Time.ElapsedGameTime.Milliseconds;
-        //}
+        if (_player.Speed.X > 0)
+            Graphics2D.ReflectSprite(_player.CurrentAnimation.GetSprite());
+        else if (_player.Speed.X < 0)
+            Graphics2D.ReflectSprite(_player.CurrentAnimation.GetSprite(), true);
+
+        if (inputData.DoPlayerShoot && _shotCooldownTime > _shotCooldown)
+        {
+            //Vector2 orbPos = new Vector2(
+            //    _player.Pos.X + _player.Sprites[0].GetTexture().Width * _player.Sprites[0].Scale.X / 2,
+            //    _player.Pos.Y + _player.Sprites[0].GetTexture().Height * _player.Sprites[0].Scale.Y / 1.8f);
+            //var projectile = new OrbProjectile(orbPos, _player.Sprites[0].IsReflectedOY ? -Vector2.UnitX / 2 : Vector2.UnitX / 2);
+            Vector2 orbPos = new Vector2(
+                _player.Pos.X + _player.CurrentAnimation.GetCurrentFrame().Width * _player.CurrentAnimation.GetSprite().Scale.X / 2,
+                _player.Pos.Y + _player.CurrentAnimation.GetCurrentFrame().Height * _player.CurrentAnimation.GetSprite().Scale.Y / 1.8f);
+            var projectile = new OrbProjectile(orbPos, _player.CurrentAnimation.GetSprite().IsReflectedOY ? -Vector2.UnitX / 2 : Vector2.UnitX / 2);
+            //var projectile = new OrbProjectile(new Vector2(1200,200), Vector2.Zero);
+            GameObjects.Add(projectile);
+            _shotCooldownTime = 0;
+        }
+        else
+        {
+            _shotCooldownTime += Globals.Time.ElapsedGameTime.Milliseconds;
+        }
 
         var outData = GetOutputData<PhysicsModelViewData>();
 

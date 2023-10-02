@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
 using WiseEngine.Models;
-using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
 using WiseEngine.PhysicsAndCollisions;
 using WiseTestBench.SimplePhysicsExampleScene;
@@ -38,12 +37,12 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         Animations = new Dictionary<string, Animation>();
         AnimationFrame[] idleFrames = new AnimationFrame[13];
         int width = 25;
-        int height = 48;
-        Point pos = new Point(22,8);
+        int height = 49;
+        Point pos = new Point(20,8);
         for (int i = 0; i < idleFrames.Length; i++)
         {
             AnimationFrame a = new AnimationFrame(width, height, pos);
-            pos.X += 61;
+            pos.X += 85;
             idleFrames[i] = a;
         }
 
@@ -54,7 +53,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
 
         Layer = 0;       
         
-        Collider = new RectangleCollider(Vector2.Zero, width, height);
+        Collider = new RectangleCollider(Vector2.Zero, (int)(width*witchSheet.Scale.X), (int)(height * witchSheet.Scale.Y));
 
         IsDisposed = false;
         IsStatic = false;
@@ -77,6 +76,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         PrevPos = Pos;
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
         Speed = Vector2.Zero;
+        CurrentAnimation.Update();
     }
 
     public Collider GetCollider()

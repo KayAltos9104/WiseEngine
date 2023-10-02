@@ -103,6 +103,18 @@ public static class Graphics2D
                     : SpriteEffects.None,
                     layerDepth: anim.Layer);                    
                 }
+
+                if (Globals.SpriteBordersAreVisible)
+                {
+                    DrawRectangle((int)texturePos.X, (int)texturePos.Y,
+                        (int)(area.Width * sprite.Scale.X),
+                        (int)(area.Height * sprite.Scale.Y),
+                        Color.Red, 3);
+                }
+                if (Globals.CollidersAreVisible && obj is IShaped)
+                {
+                    (obj as IShaped).GetCollider().Draw(SpriteBatch);
+                }
             }
         }
         
@@ -332,6 +344,21 @@ public static class Graphics2D
                 break;
             default:
                 throw new ArgumentOutOfRangeException("Missing axis");                
+        }
+    }
+
+    public static void ReflectSprite(Sprite sprite, bool isReflected = false, string axis = "Y")
+    {
+        switch (axis)
+        {
+            case "X":
+                sprite.IsReflectedOX = isReflected;
+                break;
+            case "Y":
+                sprite.IsReflectedOY = isReflected;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException("Missing axis");
         }
     }
 }
