@@ -32,7 +32,8 @@ var game = new GameProcessor(
                 ("Goblin", "Goblin"),
                 ("Platform1", "Platform1"),
                 ("Platform2", "Platform2"),
-                ("Platform3", "Platform3")
+                ("Platform3", "Platform3"),
+                ("Gem1", "Gem1"),
     },
     new List<(string, string)>()
     {

@@ -18,34 +18,28 @@ public class PhysicsModel : Model
     private SolidWitch _player;
     private CommonTrigger _borders;
     private bool _isLoosed = false;
+    private bool _isWon = false;
     private bool _doGoblins = false;
     private int _score = 0;
 
     public override void Initialize()
     {
         base.Initialize();
+        //_player = new SolidWitch(new Vector2(
+        //    Globals.Resolution.Width / 2,
+        //    Globals.Resolution.Height / 2-100)
+        //    );
         _player = new SolidWitch(new Vector2(
-            Globals.Resolution.Width / 2,
-            Globals.Resolution.Height / 2-100)
+            200,
+            400)
             );
         GameObjects.Add(_player);
+        var platform1 = new Platform(new Vector2(2600, 400));
+        GameObjects.Add(platform1);
 
-        //var goblin1 = new Goblin(new Vector2(1200, 200), Vector2.Zero);
-        //goblin1.Died += ShotProccess;
-        //GameObjects.Add(goblin1);
-        //var goblin2 = new Goblin(new Vector2(1200, 400), Vector2.Zero);
-        //var goblin3 = new Goblin(new Vector2(1200, 600), Vector2.Zero);
-
-        //GameObjects.AddRange(new[] { goblin1, goblin2, goblin3 });
-
-        var platform1 = new Platform(new Vector2(100, 800));
-        //var platform2 = new Platform(new Vector2(platform1.Pos.X+(platform1.GetCollider() as RectangleCollider).Area.Width, 800));
-        //var platform3 = new Platform(new Vector2(platform2.Pos.X + (platform2.GetCollider() as RectangleCollider).Area.Width, 800));
-
-
-        //var platform4 = new LongPlatform(new Vector2(800, 800));
-        //var platform5 = new Platform(new Vector2(platform4.Pos.X, 800 - (platform4.GetCollider() as RectangleCollider).Area.Height));
-        //GameObjects.AddRange(new[] { platform1, platform2, platform3, platform4, platform5 });
+        var gem = new Gem(new Vector2(2690, 270));
+        gem.Died += WonProcess;
+        GameObjects.Add(gem);
 
         int tileSize = (platform1.GetCollider() as RectangleCollider).Area.Width;
         bool[,] map = 
@@ -73,8 +67,20 @@ public class PhysicsModel : Model
                 }                    
             }
 
-        
 
+        var goblin1 = new SolidGoblin(new Vector2(800, 400));
+        var goblin2 = new SolidGoblin(new Vector2(400, 0));
+        var goblin3 = new SolidGoblin(new Vector2(600, 0));
+        var goblin4 = new SolidGoblin(new Vector2(1200, 0));
+        var goblin5 = new SolidGoblin(new Vector2(1750, -200));
+
+        goblin1.Died += ShotProccess;
+        goblin2.Died += ShotProccess;
+        goblin3.Died += ShotProccess;
+        goblin4.Died += ShotProccess;
+        goblin5.Died += ShotProccess;
+
+        GameObjects.AddRange(new[] { goblin1, goblin2, goblin3, goblin4, goblin5 });
         _borders = new CommonTrigger(new Vector2(-1000, -400), 5400, 2700);
         _borders.Name = "Borders";
         _borders.TriggeredOutside += SwitchOutside;
@@ -86,6 +92,7 @@ public class PhysicsModel : Model
         outData.Player = _player;
         _player.Died += LooseProcess;
         _isLoosed = false;
+        _isWon = false;
         _score = 0;
     }
 
@@ -179,6 +186,12 @@ public class PhysicsModel : Model
         outData.IsLoosed = _isLoosed;
     }
 
+    private void WonProcess (object sender, EventArgs e)
+    {
+        _isWon = true;
+        var outData = GetOutputData<PhysicsModelViewData>();
+        outData.IsWon = _isWon;
+    }
     private void ShotProccess(object sender, EventArgs e)
     {
         IncreaseScore(1);

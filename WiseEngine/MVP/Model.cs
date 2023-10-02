@@ -101,6 +101,7 @@ public abstract class Model
             }
         }
         //CollisionManager.PhysicsManager.Update(GameObjects);
+        //TODO: Почему-то в этом месте от считает коллизию дважды, но если сунуть перед циклом, то дребезг у физики
         CollisionManager.Update(GameObjects);
         
         GameObjects.RemoveAll(o => disposableObjects.Contains(o));

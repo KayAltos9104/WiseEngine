@@ -4,34 +4,31 @@ using System.Collections.Generic;
 using WiseEngine;
 using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
-using WiseTestBench.SimplePhysicsExampleScene;
 
-namespace WiseTestBench.ExampleSceneShapeProjectileWork;
+namespace WiseTestBench.SimplePhysicsExampleScene;
 
-public class OrbProjectile : IObject, IShaped, IRenderable
+public class Gem : IObject, IShaped, IRenderable
 {
-    private Vector2 _speed;
-
-    public event EventHandler<CollisionEventArgs> Collided;
-
     public RectangleCollider Collider { get; set; }
     public Vector2 Pos { get; set; }
     public bool IsDisposed { get; set; }
     public List<Sprite> Sprites { get; set; }
     public float Layer { get; set; }
-    public event EventHandler Died;
 
-    public OrbProjectile(Vector2 initPos, Vector2 speed) 
+    public event EventHandler Died;
+    public event EventHandler<CollisionEventArgs> Collided;
+
+    public Gem (Vector2 initPos)
     {
         Pos = initPos;
-        _speed = speed;
-        var redOrbSprite = new Sprite("RedOrb");
-        redOrbSprite.Scale = new Vector2(0.2f, 0.1f);
+
+        var sprite = new Sprite("Gem1");
+
+        sprite.Scale = new Vector2(0.5f, 0.5f);
         Sprites = new()
         {
-            redOrbSprite
+            sprite
         };
-
         int width = (int)(LoadableObjects.GetTexture(Sprites[0].TextureName).Width * Sprites[0].Scale.X);
         int height = (int)(LoadableObjects.GetTexture(Sprites[0].TextureName).Height * Sprites[0].Scale.Y);
         Collider = new RectangleCollider(Vector2.Zero, width, height);
@@ -44,21 +41,23 @@ public class OrbProjectile : IObject, IShaped, IRenderable
         { Color = Collider.Color };
     }
 
-    public void Update()
-    {
-        Pos += _speed * Globals.Time.ElapsedGameTime.Milliseconds;
-    }
-
     public void OnCollided(object sender, CollisionEventArgs e)
     {
-        if (e.OtherObject is Goblin || e.OtherObject is SolidGoblin || e.OtherObject is Platform)
+        if (e.OtherObject is SolidWitch)
+        {
             OnDied();
-        Collided?.Invoke(this, e);
+            Collided?.Invoke(this, e);
+        }        
     }
 
     public void OnDied()
     {
-        Died?.Invoke(this, EventArgs.Empty);
         IsDisposed = true;
+        Died?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void Update()
+    {
+        
     }
 }
