@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using WiseEngine.MonogamePart;
 
-namespace WiseEngine;
+namespace WiseEngine.Models;
 
 public class Sprite
 {
@@ -23,11 +23,11 @@ public class Sprite
     public int Alpha { get; set; }
 
     public float Rotation { get; set; }
-    public Sprite (string textureName)
+    public Sprite(string textureName)
     {
         TextureName = textureName;
-        Pos = Vector2.Zero; 
-        Scale = Vector2.One; 
+        Pos = Vector2.Zero;
+        Scale = Vector2.One;
         IsReflectedOY = false;
         IsReflectedOX = false;
         Color = Color.White;
@@ -37,7 +37,7 @@ public class Sprite
 
     public Texture2D GetTexture()
     {
-        var texture =  LoadableObjects.GetTexture(TextureName);
+        var texture = LoadableObjects.GetTexture(TextureName);
         if (texture == null)
             throw new ArgumentNullException($"Texture with {TextureName} was not found");
         else

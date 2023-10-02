@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using WiseEngine;
 using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
+using WiseEngine.PhysicsAndCollisions;
 using WiseTestBench.BaseMovementScene;
 
 namespace WiseTestBench.ExampleSceneTriggerWork;

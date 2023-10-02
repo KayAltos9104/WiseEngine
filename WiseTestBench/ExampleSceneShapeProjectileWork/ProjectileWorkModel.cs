@@ -1,9 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using WiseEngine;
+using WiseEngine.Models;
 using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
+using WiseEngine.PhysicsAndCollisions;
 using WiseTestBench.ExampleSceneTriggerWork;
 
 namespace WiseTestBench.ExampleSceneShapeProjectileWork;

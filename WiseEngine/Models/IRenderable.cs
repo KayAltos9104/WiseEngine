@@ -1,4 +1,4 @@
-﻿namespace WiseEngine;
+﻿namespace WiseEngine.Models;
 
 public interface IRenderable
 {

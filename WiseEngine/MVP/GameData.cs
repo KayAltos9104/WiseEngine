@@ -1,4 +1,4 @@
-﻿namespace WiseEngine;
+﻿namespace WiseEngine.MVP;
 /// <summary>
 /// Class which contains game data that can be transfered and saved
 /// </summary>

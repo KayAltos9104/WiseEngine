@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using WiseEngine;
+using WiseEngine.Models;
 using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
 

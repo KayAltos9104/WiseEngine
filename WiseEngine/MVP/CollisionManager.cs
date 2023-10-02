@@ -1,4 +1,7 @@
-﻿namespace WiseEngine.MVP;
+﻿using WiseEngine.Models;
+using WiseEngine.PhysicsAndCollisions;
+
+namespace WiseEngine.MVP;
 
 public sealed class CollisionManager
 {

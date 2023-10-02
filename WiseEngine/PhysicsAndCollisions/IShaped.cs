@@ -1,6 +1,6 @@
 ﻿using WiseEngine.MVP;
 
-namespace WiseEngine;
+namespace WiseEngine.PhysicsAndCollisions;
 
 public interface IShaped
 {

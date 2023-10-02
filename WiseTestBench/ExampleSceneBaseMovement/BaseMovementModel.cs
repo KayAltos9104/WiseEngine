@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using WiseEngine;
 using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
 using WiseTestBench.ExampleSceneTriggerWork;

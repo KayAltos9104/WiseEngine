@@ -1,9 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using WiseEngine;
+using WiseEngine.Models;
 using WiseEngine.MonogamePart;
-using IRenderable = WiseEngine.IRenderable;
+using WiseEngine.MVP;
+using IRenderable = WiseEngine.Models.IRenderable;
 
 namespace WiseTestBench.BaseMovementScene;
 

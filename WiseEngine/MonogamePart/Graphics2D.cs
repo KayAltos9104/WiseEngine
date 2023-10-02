@@ -1,5 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using WiseEngine.Models;
+using WiseEngine.PhysicsAndCollisions;
+using WiseEngine.MVP;
 
 namespace WiseEngine.MonogamePart;
 /// <summary>

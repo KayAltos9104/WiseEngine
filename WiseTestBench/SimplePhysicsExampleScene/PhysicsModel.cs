@@ -1,9 +1,10 @@
-﻿using WiseEngine;
-using WiseTestBench.ExampleSceneShapeProjectileWork;
+﻿using WiseTestBench.ExampleSceneShapeProjectileWork;
 using WiseEngine.MVP;
 using Microsoft.Xna.Framework;
 using WiseEngine.MonogamePart;
 using System;
+using WiseEngine.PhysicsAndCollisions;
+using WiseEngine.Models;
 
 namespace WiseTestBench.SimplePhysicsExampleScene;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using WiseEngine.MVP;
 
 namespace WiseEngine.MonogamePart;
 /// <summary>

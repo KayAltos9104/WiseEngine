@@ -1,4 +1,6 @@
-﻿namespace WiseEngine.MVP;
+﻿using WiseEngine.Models;
+
+namespace WiseEngine.MVP;
 /// <summary>
 /// Class which contains data that model transfer to <see cref="View"/>
 /// </summary>

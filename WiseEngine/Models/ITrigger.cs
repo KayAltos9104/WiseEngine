@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using WiseEngine.MVP;
+using WiseEngine.PhysicsAndCollisions;
 
-namespace WiseEngine;
+namespace WiseEngine.Models;
 
 public interface ITrigger
 {

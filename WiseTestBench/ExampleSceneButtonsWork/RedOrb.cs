@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using WiseEngine;
+using WiseEngine.Models;
+using WiseEngine.MVP;
 
 namespace WiseTestBench.ButtonsWorkExampleScene;
 

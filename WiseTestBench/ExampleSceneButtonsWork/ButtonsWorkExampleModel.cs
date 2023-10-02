@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using WiseEngine;
+using WiseEngine.Models;
 using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
 using WiseTestBench.BaseMovementScene;

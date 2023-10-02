@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using WiseEngine.MVP;
 
 namespace WiseEngine.MonogamePart;
 

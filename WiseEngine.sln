@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiseEngine", "WiseEngine\WiseEngine.csproj", "{355EAE7D-A76E-4549-AA89-4FEE097FACE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiseTestBench", "WiseTestBench\WiseTestBench.csproj", "{4D06786A-173F-4187-A33F-74043AF4907D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiseTestBench", "WiseTestBench\WiseTestBench.csproj", "{4D06786A-173F-4187-A33F-74043AF4907D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics.Tracing;
+using WiseEngine.Models;
+using WiseEngine.PhysicsAndCollisions;
 
 namespace WiseEngine.MVP;
 

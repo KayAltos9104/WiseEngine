@@ -3,7 +3,6 @@ using System.IO;
 using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
 using WiseTestBench;
-using WiseEngine;
 using System.Reflection;
 using WiseTestBench.BaseMovementScene;
 using WiseTestBench.ButtonsWorkExampleScene;

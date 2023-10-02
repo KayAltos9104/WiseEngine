@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace WiseEngine;
+namespace WiseEngine.PhysicsAndCollisions;
 
 public interface ISolid : IShaped
 {
@@ -9,5 +9,5 @@ public interface ISolid : IShaped
     bool IsOnPlatform { get; set; }
     float Mass { get; set; }
     Vector2 PrevPos { get; set; }
-    Vector2 Force { get; set; }    
+    Vector2 Force { get; set; }
 }
