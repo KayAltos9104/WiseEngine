@@ -131,7 +131,7 @@ public sealed class GameProcessor : Game
     /// </summary>
     /// <param name="gameTime"> GameTime element parameter </param>
     /// <remarks>
-    /// Its override of original Monogame Update and is called automatically
+    /// Its override of original Monogame SolveCollision and is called automatically
     /// </remarks>
     protected override void Update(GameTime gameTime)
     {

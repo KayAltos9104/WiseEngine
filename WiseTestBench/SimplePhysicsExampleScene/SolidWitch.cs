@@ -16,6 +16,6 @@ public class SolidWitch : LittleShapeWitch, ISolid
     }
     public bool IsStatic { get; set; } = false;
     public float Mass { get; set; }
-    public float Force { get; set; }
+    public Vector2 Force { get; set; }
     public Vector2 PrevPos { get; set; }
 }

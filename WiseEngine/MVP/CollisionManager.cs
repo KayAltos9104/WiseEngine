@@ -9,7 +9,7 @@ public sealed class CollisionManager
     public CollisionManager ()
     {
         PhysicsManager = new SimplePhysics();
-        Collided += PhysicsManager.Update;
+        Collided += PhysicsManager.SolveCollision;
     }
     public void Update (List<IObject> objects)
     {

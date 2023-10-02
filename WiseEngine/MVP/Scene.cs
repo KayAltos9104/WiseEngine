@@ -51,7 +51,7 @@ public class Scene
         IsInitalized = true;
     }
     /// <summary>
-    /// Update scene state 
+    /// SolveCollision scene state 
     /// </summary>
     public void Update()
     {

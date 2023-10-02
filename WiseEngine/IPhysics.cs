@@ -4,6 +4,7 @@ namespace WiseEngine;
 
 public interface IPhysics
 {
-    void Update (IObject o1, IObject o2);
-    void Update(object sender, ManageCollisionEventArgs e);
+    void Update (List<IObject> objects);
+    void SolveCollision (IObject o1, IObject o2);
+    void SolveCollision(object sender, ManageCollisionEventArgs e);
 }
