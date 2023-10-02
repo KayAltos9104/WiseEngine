@@ -9,7 +9,7 @@ public class Animation
     private float _currentTime;
     private AnimationFrame [] _frames;
     private bool _isCycled;
-    private int _currentFrameIndex;
+    public int _currentFrameIndex;
     private Sprite _sprite;
     public string Name { get; set; }
     public bool IsActive { get; private set; }
@@ -33,8 +33,8 @@ public class Animation
     public void Activate()
     {
         IsActive = true;
-        _currentTime = 0;
-        _currentFrameIndex = 0;
+        //_currentTime = 0;
+        //_currentFrameIndex = 0;
     }
 
     public void Deactivate()

@@ -5,6 +5,7 @@ using WiseEngine.MVP;
 using WiseEngine.PhysicsAndCollisions;
 using WiseTestBench.SimplePhysicsExampleScene;
 using Microsoft.Xna.Framework;
+using WiseEngine.MonogamePart;
 
 namespace WiseTestBench;
 
@@ -36,6 +37,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         witchSheet.Scale = Vector2.One * 2;
         Animations = new Dictionary<string, Animation>();
         AnimationFrame[] idleFrames = new AnimationFrame[13];
+
         int width = 25;
         int height = 49;
         Point pos = new Point(20,8);
@@ -51,10 +53,30 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         SetAnimation("idle");
         CurrentAnimation.Activate();
 
+
+        
+
         Layer = 0;       
         
         Collider = new RectangleCollider(Vector2.Zero, (int)(width*witchSheet.Scale.X), (int)(height * witchSheet.Scale.Y));
 
+
+        width = 34;
+        height = 49;
+        pos = new Point(20, 8);
+        AnimationFrame[] runFrames = new AnimationFrame[16];
+        for (int i = 0; i < runFrames.Length; i++)
+        {
+            AnimationFrame a = new AnimationFrame(width, height, pos);
+            pos.X += 85;
+            runFrames[i] = a;
+        }
+        witchSheet = new Sprite("WitchRun");
+        witchSheet.Scale = Vector2.One * 2;
+        Animation run = new Animation(runFrames, witchSheet, 50);
+        Animations.Add("run", run);
+        //SetAnimation("run");
+        //CurrentAnimation.Activate();
         IsDisposed = false;
         IsStatic = false;
         Mass = 50;
@@ -75,8 +97,19 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
     {
         PrevPos = Pos;
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
-        Speed = Vector2.Zero;
+        if (Speed.X != 0)
+        {
+            SetAnimation("run");
+        }
+        else
+        {
+            SetAnimation("idle");
+            GameConsole.Clear();
+            GameConsole.WriteLine(CurrentAnimation._currentFrameIndex.ToString());
+        }
         CurrentAnimation.Update();
+        Speed = Vector2.Zero;
+        
     }
 
     public Collider GetCollider()
@@ -104,6 +137,12 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
     public void SetAnimation(string animationName)
     {
         if (Animations.ContainsKey(animationName))
+        {
+            //if (CurrentAnimation != null) 
+                //CurrentAnimation.Deactivate();
             CurrentAnimation = Animations[animationName];
+            CurrentAnimation.Activate();
+        }
+            
     }
 }

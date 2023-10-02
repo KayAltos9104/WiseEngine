@@ -34,6 +34,7 @@ var game = new GameProcessor(
                 ("Platform3", "Platform3"),
                 ("Gem1", "Gem1"),
                 ("WitchIdle","WitchIdleAnimation"),
+                ("WitchRun","WitchRunAnimation"),
     },
     new List<(string, string)>()
     {
