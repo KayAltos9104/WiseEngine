@@ -14,7 +14,7 @@ public class PhysicsModel : Model
 
     protected float _shotCooldownTime = 0;
     protected float _enemyBirthCooldownTime = 0;
-    protected LittleShapeWitch _player;
+    protected SolidWitch _player;
     protected CommonTrigger _borders;
     protected bool _isLoosed = false;
     protected bool _doGoblins = true;
@@ -23,7 +23,7 @@ public class PhysicsModel : Model
     public override void Initialize()
     {
         base.Initialize();
-        _player = new LittleShapeWitch(new Vector2(
+        _player = new SolidWitch(new Vector2(
             Globals.Resolution.Width / 2,
             Globals.Resolution.Height / 2)
             );

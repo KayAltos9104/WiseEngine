@@ -29,26 +29,26 @@ public abstract class View
     /// <value>
     /// Event <c>CycleFinished</c> invokes when View ended cycle processing
     /// </value>
-    public EventHandler<ViewCycleFinishedEventArgs>? CycleFinished;
+    public event EventHandler<ViewCycleFinishedEventArgs>? CycleFinished;
     /// <value>
     /// Event <c>SceneFinished</c> invokes when we should finish current scene and switch to another
     /// </value>
-    public EventHandler<SceneFinishedEventArgs>? SceneFinished;
+    public event EventHandler<SceneFinishedEventArgs>? SceneFinished;
     /// <value>
     /// Event <c>GameFinished</c> invokes when we should finish the game
     /// </value>
     /// <remarks>
     /// Processed in presenter because Exit method is in <see cref="GameProcessor"/>
     /// </remarks>
-    public EventHandler? GameFinished;
+    public event EventHandler? GameFinished;
     /// <value>
     /// Event <c>SettingsChanged</c> invokes when we should change settings such as screen resolution
     /// </value>
-    public EventHandler<SettingsEventArgs>? SettingsChanged;
+    public event EventHandler<SettingsEventArgs>? SettingsChanged;
     /// <value>
     /// Event <c>SceneReloaded</c> invokes when we want to initialize scene again
     /// </value>
-    public EventHandler SceneReloaded;
+    public event EventHandler SceneReloaded;
 
     /// <summary>
     /// Gets <c>_inputData</c> 

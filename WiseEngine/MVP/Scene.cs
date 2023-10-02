@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-
-namespace WiseEngine.MVP;
+﻿namespace WiseEngine.MVP;
 /// <summary>
 /// Scene class which contains all scene MVP elements - View, Presenter and Model
 /// </summary>

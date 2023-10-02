@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using WiseEngine;
+using WiseEngine.MonogamePart;
 using IRenderable = WiseEngine.IRenderable;
 
 namespace WiseTestBench.BaseMovementScene;
@@ -15,7 +16,7 @@ public class Witch : IObject, IRenderable
 
     public bool IsDisposed { get; set; } = false;
     public List<Sprite> Sprites { get; set; }
-    public EventHandler Died { get; set; }
+    public event EventHandler Died;
 
     public Witch (Vector2 initPos)
     {        
@@ -28,6 +29,7 @@ public class Witch : IObject, IRenderable
         {
             witchSprite
         };
+       
     }
 
     public override string ToString()

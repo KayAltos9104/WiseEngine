@@ -13,6 +13,9 @@ public class SimplePhysics : IPhysics
     {        
         if (o1 is ISolid s1 && o2 is ISolid s2)
         {
+            if (s1.PrevPos == null || s2.PrevPos == null)
+                throw new ArgumentNullException("Missing previous positions");
+
             var collider1 = s1.GetCollider() as RectangleCollider;
             var collider2 = s2.GetCollider() as RectangleCollider;
 

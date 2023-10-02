@@ -18,7 +18,7 @@ public class OrbProjectile : IObject, IShaped, IRenderable
     public bool IsDisposed { get; set; }
     public List<Sprite> Sprites { get; set; }
     public float Layer { get; set; }
-    public EventHandler Died { get; set; }
+    public event EventHandler Died;
 
     public OrbProjectile(Vector2 initPos, Vector2 speed) 
     {

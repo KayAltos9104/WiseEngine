@@ -12,7 +12,7 @@ public class RedOrb : IObject, IRenderable
     public Vector2 Speed { get; set; }
     public List<Sprite> Sprites { get; set; }
     public float Layer { get; set; } = 0;
-    public EventHandler Died { get; set; }
+    public event EventHandler Died;
 
     public RedOrb(Vector2 initPos)
     {        

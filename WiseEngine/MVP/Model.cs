@@ -35,7 +35,7 @@ public abstract class Model
     /// <remarks>
     /// This event sends <see cref="ModelCycleFinishedEventArgs"/> which contains game logic data for view
     /// </remarks>
-    public EventHandler<ModelCycleFinishedEventArgs>? OnCycleFinished;
+    public event EventHandler<ModelCycleFinishedEventArgs>? OnCycleFinished;
 
     /// <summary>
     /// Gets <c>_inputData</c> 

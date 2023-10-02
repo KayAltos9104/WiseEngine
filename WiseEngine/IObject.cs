@@ -9,11 +9,11 @@ namespace WiseEngine;
 /// This interface should be inherited by classes that implement every game object on model 
 /// </remarks>
 public interface IObject
-{
+{    
     /// <value>
     /// The <c>Died</c> property invokes when object is disposed
     /// </value>
-    EventHandler Died { get; set; }
+    event EventHandler Died;
     /// <value>
     /// The <c>Pos</c> property represents position where object is placed
     /// </value>
