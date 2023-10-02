@@ -1,57 +1,54 @@
 ﻿using WiseEngine;
 using WiseTestBench.ExampleSceneShapeProjectileWork;
-using static System.Formats.Asn1.AsnWriter;
-using WiseTestBench.ExampleSceneTriggerWork;
-using Microsoft.Xna.Framework;
 using WiseEngine.MVP;
-using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using WiseEngine.MonogamePart;
+using System;
 
 namespace WiseTestBench.SimplePhysicsExampleScene;
 
 public class PhysicsModel : Model
 {
-    protected new SolidWitch _player;
-
     protected const float _shotCooldown = 400.0f;
     protected const float _enemyBirthCooldown = 600.0f;
 
     protected float _shotCooldownTime = 0;
     protected float _enemyBirthCooldownTime = 0;
-    
+    protected LittleShapeWitch _player;
     protected CommonTrigger _borders;
     protected bool _isLoosed = false;
     protected bool _doGoblins = true;
     protected int _score = 0;
+
     public override void Initialize()
     {
         base.Initialize();
-        
-
-        _player = new SolidWitch(new Vector2(
+        _player = new LittleShapeWitch(new Vector2(
             Globals.Resolution.Width / 2,
             Globals.Resolution.Height / 2)
             );
         GameObjects.Add(_player);
 
-        var goblin1 = new SolidGoblin(new Vector2(1200, 200), Vector2.Zero);  
-        var goblin2 = new SolidGoblin(new Vector2(1200, 400), Vector2.Zero);
-        var goblin3 = new SolidGoblin(new Vector2(1200, 600), Vector2.Zero);
+        //var goblin1 = new Goblin(new Vector2(1200, 200), Vector2.Zero);
+        //goblin1.Died += ShotProccess;
+        //GameObjects.Add(goblin1);
+        //var goblin2 = new Goblin(new Vector2(1200, 400), Vector2.Zero);
+        //var goblin3 = new Goblin(new Vector2(1200, 600), Vector2.Zero);
 
-        GameObjects.AddRange(new[] { goblin1, goblin2, goblin3 });
-        _doGoblins = false;
+        //GameObjects.AddRange(new[] { goblin1, goblin2, goblin3 });
 
-        
-
-        _outputData = new ProjectileWorkModelViewData();
-        _inputData = new ProjectileWorkViewModelData();
-        var outData = GetOutputData<ProjectileWorkModelViewData>();
-        outData.Player = _player;
         _borders = new CommonTrigger(new Vector2(100, 100), 1400, 700);
         _borders.Name = "Borders";
         _borders.TriggeredOutside += SwitchOutside;
         TriggerManager.AddTrigger(_borders);
-        //GameObjects.Add(_player);
+
+        _outputData = new PhysicsModelViewData();
+        _inputData = new PhysicsViewModelData();
+        var outData = GetOutputData<PhysicsModelViewData>();
+        outData.Player = _player;
+        _player.Died += LooseProcess;
+        _isLoosed = false;
+        _score = 0;
     }
 
     public override void Update(ViewCycleFinishedEventArgs e)
@@ -59,7 +56,7 @@ public class PhysicsModel : Model
         if (_isLoosed)
             return;
 
-        var inputData = GetInputData<ProjectileWorkViewModelData>();
+        var inputData = GetInputData<PhysicsViewModelData>();
         _player.Speed += inputData.DeltaSpeedPlayer;
 
         if (_player.Speed.X > 0)
@@ -82,7 +79,7 @@ public class PhysicsModel : Model
             _shotCooldownTime += Globals.Time.ElapsedGameTime.Milliseconds;
         }
 
-        var outData = GetOutputData<ProjectileWorkModelViewData>();
+        var outData = GetOutputData<PhysicsModelViewData>();
 
         outData.Score = _score;
         var borderArea = (_borders.GetCollider() as RectangleCollider).Area;
@@ -90,7 +87,7 @@ public class PhysicsModel : Model
         {
             var pos = new Vector2(1300, Globals.Random.Next(borderArea.Y + 100, borderArea.Y + borderArea.Height - 100));
             var goblin = new Goblin(pos, new Vector2(-(float)(Globals.Random.NextDouble() * 0.4), 0));
-            //goblin.Died += ShotProccess;
+            goblin.Died += ShotProccess;
             GameObjects.Add(goblin);
             _enemyBirthCooldownTime = 0;
         }
@@ -113,6 +110,7 @@ public class PhysicsModel : Model
              );
 
     }
+
     protected void SwitchOutside(object sender, TriggerEventArgs e)
     {
         if (e.ActivatedObject is OrbProjectile)
@@ -124,5 +122,24 @@ public class PhysicsModel : Model
             e.ActivatedObject.IsDisposed = true;
             _score--;
         }
+    }
+
+    private void LooseProcess(object sender, EventArgs e)
+    {
+        Graphics2D.ReflectAllSprites(_player.Sprites, true, "X");
+        _isLoosed = true;
+        var outData = GetOutputData<PhysicsModelViewData>();
+        outData.IsLoosed = _isLoosed;
+    }
+
+    private void ShotProccess(object sender, EventArgs e)
+    {
+        IncreaseScore(1);
+    }
+
+    private void IncreaseScore(byte value)
+    {
+        //GameConsole.WriteLine($"Shot!");
+        _score += value;
     }
 }

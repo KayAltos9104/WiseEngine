@@ -2,7 +2,7 @@
 using WiseEngine;
 using WiseEngine.MVP;
 
-namespace WiseTestBench.ExampleSceneTriggerWork;
+namespace WiseEngine;
 public class CommonTrigger : ITrigger
 {
     public string Name { get; set; }
