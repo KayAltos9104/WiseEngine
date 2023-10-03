@@ -9,8 +9,7 @@ using WiseTestBench.ButtonsWorkExampleScene;
 using WiseTestBench.ExampleSceneTriggerWork;
 using WiseTestBench.ExampleSceneShapeProjectileWork;
 using WiseTestBench.SimplePhysicsExampleScene;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+
 
 string projectRoot = Directory.GetCurrentDirectory();
 string projectName = Assembly.GetEntryAssembly().GetName().Name;
@@ -35,6 +34,10 @@ var game = new GameProcessor(
                 ("Gem1", "Gem1"),
                 ("WitchIdle","WitchIdleAnimation"),
                 ("WitchRun","WitchRunAnimation"),
+                ("WitchAttack","AttackAnimation"),
+                ("WitchJump","JumpAnimation"),
+                ("WitchFall","FallAnimation"),
+                ("WitchDeath","DeathAnimation"),
     },
     new List<(string, string)>()
     {

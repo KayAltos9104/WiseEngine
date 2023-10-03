@@ -11,10 +11,11 @@ namespace WiseTestBench;
 
 public class AnimatedWitch : IObject, IAnimated, ISolid
 {
-    private const float _shotCooldown = 400.0f;    
+    private const float _shotCooldown = 800.0f;    
     private float _shotCooldownTime = 0;
     private float _fallingCooldownCheck = 100.0f;
     private States _currentState;
+    private bool _shot = true;
     public RectangleCollider Collider { get; set; }
     public event EventHandler Died;
     public Vector2 Pos { get; set; }
@@ -40,6 +41,9 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         Speed = Vector2.Zero;
         var witchSheet = new Sprite("WitchIdle");
         witchSheet.Scale = Vector2.One * 2;
+        Layer = 0;
+
+        // Animations
         Animations = new Dictionary<string, Animation>();
         AnimationFrame[] idleFrames = new AnimationFrame[13];
 
@@ -51,10 +55,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
             AnimationFrame a = new AnimationFrame(width, height, pos);
             pos.X += 85;
             idleFrames[i] = a;
-        }
-
-
-        Layer = 0;
+        }        
 
         Animation idle = new Animation(idleFrames, witchSheet, 100);
         Animations.Add("idle", idle);
@@ -76,6 +77,63 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         witchSheet.Scale = Vector2.One * 2;
         Animation run = new Animation(runFrames, witchSheet, 50);
         Animations.Add("run", run);
+
+
+        width = 76;
+        height = 49;
+        pos = new Point(20, 8);
+
+        AnimationFrame[] attackFrames = new AnimationFrame[10];
+        //for (int i = 0; i < attackFrames.Length; i++)
+        //{
+        //    AnimationFrame a = new AnimationFrame(width, height, pos);
+        //    pos.X += 61;
+        //    attackFrames[i] = a;
+        //}
+        attackFrames[0] = new AnimationFrame(25, height, pos);
+        pos.X += 61 + 25;
+        attackFrames[1] = new AnimationFrame(25, height, pos);
+        pos.X += 60 + 25;
+        attackFrames[2] = new AnimationFrame(25, height, pos);
+        pos.X += 52 + 25;
+        attackFrames[3] = new AnimationFrame(36, height, pos);
+        pos.X += 34 + 36;
+        attackFrames[4] = new AnimationFrame(51, height, pos);
+        pos.X += 39 + 51;
+        attackFrames[5] = new AnimationFrame(45, height, pos);
+        pos.X += 45 + 46;
+        attackFrames[6] = new AnimationFrame(74, height, pos);
+        pos.X += 74 + 27;
+        attackFrames[7] = new AnimationFrame(58, height, pos);
+        pos.X += 58 + 27;
+        attackFrames[8] = new AnimationFrame(42, height, pos);
+        pos.X += 42 + 43;
+        attackFrames[9] = new AnimationFrame(42, height, pos);
+
+
+
+        witchSheet = new Sprite("WitchAttack");
+        witchSheet.Scale = Vector2.One * 2;
+        Animation attack = new Animation(attackFrames, witchSheet, 50, true);
+        
+        Animations.Add("shot", attack);
+
+        width = 30;
+        height = 49;
+        pos = new Point(20, 8);
+        AnimationFrame[] jumpFrames = new AnimationFrame[15];
+        for (int i = 0; i < jumpFrames.Length; i++)
+        {
+            AnimationFrame a = new AnimationFrame(width, height, pos);
+            pos.X += 55 + width;
+            jumpFrames[i] = a;
+        }
+        witchSheet = new Sprite("WitchJump");
+        witchSheet.Scale = Vector2.One * 2;
+        Animation jump = new Animation(jumpFrames, witchSheet, 30, true);
+
+        Animations.Add("jump", jump);
+
 
         if (CurrentAnimation.GetSprite().IsReflectedOY)
         {
@@ -137,13 +195,15 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
                     SetAnimation("run");
                     if (Speed.X > 0)
                     {
-                        Graphics2D.ReflectSprite(CurrentAnimation.GetSprite());
+                        foreach (var a in Animations.Values)
+                            Graphics2D.ReflectSprite(a.GetSprite());
                         IsLeft = false;
                     }
                     else if (Speed.X < 0)
 
                     {
-                        Graphics2D.ReflectSprite(CurrentAnimation.GetSprite(), true);
+                        foreach (var a in Animations.Values)
+                            Graphics2D.ReflectSprite(a.GetSprite(), true);
                         IsLeft = true;
                     }
                     break;
@@ -162,6 +222,11 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
                 {
                     SetAnimation("shot");
                     _shotCooldownTime -= Globals.Time.ElapsedGameTime.Milliseconds;
+                    if (_shotCooldownTime <= 300 && _shot == false)
+                    {
+                        Shooted?.Invoke(this, EventArgs.Empty);
+                        _shot = true;
+                    }
                     if (_shotCooldownTime <= 0)
                     {
                         _shotCooldownTime = 0;
@@ -199,9 +264,10 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         if (_currentState != States.Shot)
         {
             _currentState = States.Shot;
+            _shot = false;
             //GameConsole.WriteLine("shot!");
             _shotCooldownTime = _shotCooldown;
-            Shooted?.Invoke(this, EventArgs.Empty);
+            
         }        
     }
     public Collider GetCollider()
