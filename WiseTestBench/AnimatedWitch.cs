@@ -22,7 +22,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
     public Vector2 PrevPos { get; set; }
     public Vector2 Force { get; set; }
     public bool IsOnPlatform { get; set; }
-
+    public bool IsLeft { get; private set; }
     public Dictionary<string, Animation> Animations { get; }
 
     public Animation CurrentAnimation { get; private set; }
@@ -48,18 +48,13 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
             idleFrames[i] = a;
         }
 
+
+        Layer = 0;
+
         Animation idle = new Animation(idleFrames, witchSheet, 100);
         Animations.Add("idle", idle);
-        SetAnimation("idle");
-        CurrentAnimation.Activate();
-
-
-        
-
-        Layer = 0;       
-        
+        SetAnimation("idle");  
         Collider = new RectangleCollider(Vector2.Zero, (int)(width*witchSheet.Scale.X), (int)(height * witchSheet.Scale.Y));
-
 
         width = 34;
         height = 49;
@@ -71,12 +66,21 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
             pos.X += 85;
             runFrames[i] = a;
         }
+
         witchSheet = new Sprite("WitchRun");
         witchSheet.Scale = Vector2.One * 2;
         Animation run = new Animation(runFrames, witchSheet, 50);
         Animations.Add("run", run);
-        //SetAnimation("run");
-        //CurrentAnimation.Activate();
+
+        if (CurrentAnimation.GetSprite().IsReflectedOY)
+        {
+            IsLeft = true;
+        }
+        else
+        {
+            IsLeft = false;
+        }
+
         IsDisposed = false;
         IsStatic = false;
         Mass = 50;
@@ -97,15 +101,32 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
     {
         PrevPos = Pos;
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
+
+        if (Speed.X > 0)
+            Graphics2D.ReflectSprite(CurrentAnimation.GetSprite());
+        else if (Speed.X < 0)
+            Graphics2D.ReflectSprite(CurrentAnimation.GetSprite(), true);
+
+
+        if (Speed.X > 0)
+        {
+            Graphics2D.ReflectSprite(CurrentAnimation.GetSprite());
+            IsLeft = false;
+        }
+        else if (Speed.X < 0)
+
+        {
+            Graphics2D.ReflectSprite(CurrentAnimation.GetSprite(), true);
+            IsLeft = true;
+        }
+
         if (Speed.X != 0)
         {
             SetAnimation("run");
         }
         else
         {
-            SetAnimation("idle");
-            GameConsole.Clear();
-            GameConsole.WriteLine(CurrentAnimation._currentFrameIndex.ToString());
+            SetAnimation("idle");            
         }
         CurrentAnimation.Update();
         Speed = Vector2.Zero;
@@ -122,7 +143,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
     public void OnDied()
     {
         Died?.Invoke(this, EventArgs.Empty);
-        IsDisposed = true;
+        Graphics2D.ReflectSprite(CurrentAnimation.GetSprite(), true, "X");
     }
     public virtual void OnCollided(object sender, CollisionEventArgs e)
     {
@@ -137,12 +158,9 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
     public void SetAnimation(string animationName)
     {
         if (Animations.ContainsKey(animationName))
-        {
-            //if (CurrentAnimation != null) 
-                //CurrentAnimation.Deactivate();
+        {            
             CurrentAnimation = Animations[animationName];
             CurrentAnimation.Activate();
-        }
-            
+        }            
     }
 }

@@ -24,6 +24,8 @@ public class SolidWitch : IObject, IRenderable, ISolid
     public Vector2 Force { get; set; }
     public bool IsOnPlatform { get; set; }
 
+    public bool IsLeft { get; private set; }
+
     public event EventHandler<CollisionEventArgs> Collided;
 
     public SolidWitch(Vector2 initPos)
@@ -46,6 +48,15 @@ public class SolidWitch : IObject, IRenderable, ISolid
         Mass = 50;
         Force = Vector2.Zero;       
         Speed = Vector2.Zero;
+
+        if (Sprites[0].IsReflectedOY) 
+        {
+            IsLeft = true;
+        }
+        else
+        {
+            IsLeft = false;
+        }
     }
 
     public override string ToString()
@@ -61,6 +72,18 @@ public class SolidWitch : IObject, IRenderable, ISolid
     {
         PrevPos = Pos;
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
+
+        if (Speed.X > 0)
+        {
+            Graphics2D.ReflectSprite(Sprites);
+            IsLeft = false;
+        }
+        else if (Speed.X < 0)
+            
+        {
+            Graphics2D.ReflectSprite(Sprites, true);
+            IsLeft = true;
+        }       
         Speed = Vector2.Zero;
     }
 
@@ -74,13 +97,13 @@ public class SolidWitch : IObject, IRenderable, ISolid
     public void OnDied()
     {
         Died?.Invoke(this, EventArgs.Empty);
-        IsDisposed = true;
+        Graphics2D.ReflectSprite(Sprites, true, "X");        
     }
     public virtual void OnCollided(object sender, CollisionEventArgs e)
     {
         if (e.OtherObject is SolidGoblin)
         {
-            OnDied();
+            OnDied();            
         }
 
         Collided?.Invoke(sender, e);

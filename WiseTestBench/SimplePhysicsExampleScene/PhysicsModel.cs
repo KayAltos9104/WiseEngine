@@ -16,13 +16,14 @@ public class PhysicsModel : Model
 
     private float _shotCooldownTime = 0;
     private float _enemyBirthCooldownTime = 0;
+    //private SolidWitch _player;
     private AnimatedWitch _player;
     private CommonTrigger _borders;
     private bool _isLoosed = false;
     private bool _isWon = false;
     private bool _doGoblins = false;
     private int _score = 0;
-
+    private bool _loseProcessed = false;
     public override void Initialize()
     {
         base.Initialize();
@@ -103,8 +104,15 @@ public class PhysicsModel : Model
 
     public override void Update(ViewCycleFinishedEventArgs e)
     {
-        if (_isLoosed)
+        if (_isLoosed && _loseProcessed == true)
+        {            
             return;
+        }
+        else if (_isLoosed && _loseProcessed == false)
+        {
+            _loseProcessed = true;
+        }
+           
 
         var inputData = GetInputData<PhysicsViewModelData>();
         _player.Speed += inputData.DeltaSpeedPlayer;
@@ -114,27 +122,17 @@ public class PhysicsModel : Model
         }
         inputData.DoJump = false;
 
-        //if (_player.Speed.X > 0)
-        //    Graphics2D.ReflectAllSprites(_player.Sprites);
-        //else if (_player.Speed.X < 0)
-        //    Graphics2D.ReflectAllSprites(_player.Sprites, true);
 
-        if (_player.Speed.X > 0)
-            Graphics2D.ReflectSprite(_player.CurrentAnimation.GetSprite());
-        else if (_player.Speed.X < 0)
-            Graphics2D.ReflectSprite(_player.CurrentAnimation.GetSprite(), true);
+
+
 
         if (inputData.DoPlayerShoot && _shotCooldownTime > _shotCooldown)
-        {
-            //Vector2 orbPos = new Vector2(
-            //    _player.Pos.X + _player.Sprites[0].GetTexture().Width * _player.Sprites[0].Scale.X / 2,
-            //    _player.Pos.Y + _player.Sprites[0].GetTexture().Height * _player.Sprites[0].Scale.Y / 1.8f);
-            //var projectile = new OrbProjectile(orbPos, _player.Sprites[0].IsReflectedOY ? -Vector2.UnitX / 2 : Vector2.UnitX / 2);
+        {           
             Vector2 orbPos = new Vector2(
-                _player.Pos.X + _player.CurrentAnimation.GetCurrentFrame().Width * _player.CurrentAnimation.GetSprite().Scale.X / 2,
-                _player.Pos.Y + _player.CurrentAnimation.GetCurrentFrame().Height * _player.CurrentAnimation.GetSprite().Scale.Y / 1.8f);
-            var projectile = new OrbProjectile(orbPos, _player.CurrentAnimation.GetSprite().IsReflectedOY ? -Vector2.UnitX / 2 : Vector2.UnitX / 2);
-            //var projectile = new OrbProjectile(new Vector2(1200,200), Vector2.Zero);
+                _player.Pos.X + (_player.GetCollider() as RectangleCollider).Area.Width / 2,
+                _player.Pos.Y + (_player.GetCollider() as RectangleCollider).Area.Height / 1.8f);
+            var projectile = new OrbProjectile(orbPos, _player.IsLeft ? -Vector2.UnitX / 2 : Vector2.UnitX / 2);
+            
             GameObjects.Add(projectile);
             _shotCooldownTime = 0;
         }
@@ -163,15 +161,6 @@ public class PhysicsModel : Model
         // Вынести обновление данных в отдельный метод, потому что иначе цикл завершается до того, как данные 
         // обновятся
         base.Update(e);
-        //var t = LoadableObjects.GetTexture(_player.Sprites[0].TextureName);
-        //_player.Pos = new Vector2(
-        //     MathHelper.Clamp(_player.Pos.X,
-        //     _borders.Pos.X,
-        //     _borders.Pos.X + borderArea.Width - t.Width * _player.Sprites[0].Scale.X),
-        //     MathHelper.Clamp(_player.Pos.Y,
-        //     _borders.Pos.Y,
-        //     _borders.Pos.Y + borderArea.Height - t.Height * _player.Sprites[0].Scale.Y)
-        //     );
 
     }
 
@@ -186,15 +175,14 @@ public class PhysicsModel : Model
             e.ActivatedObject.IsDisposed = true;
             _score--;
         }
-        if (e.ActivatedObject is SolidWitch) 
+        if (e.ActivatedObject is SolidWitch || e.ActivatedObject is AnimatedWitch) 
         {
             _player.OnDied();
         }
     }
 
     private void LooseProcess(object sender, EventArgs e)
-    {
-        //Graphics2D.ReflectAllSprites(_player.Sprites, true, "X");
+    {        
         _isLoosed = true;
         var outData = GetOutputData<PhysicsModelViewData>();
         outData.IsLoosed = _isLoosed;
@@ -212,8 +200,7 @@ public class PhysicsModel : Model
     }
 
     private void IncreaseScore(byte value)
-    {
-        //GameConsole.WriteLine($"Shot!");
+    {        
         _score += value;
     }
 }

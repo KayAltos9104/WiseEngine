@@ -62,9 +62,9 @@ public class ProjectileWorkModel : Model
         _player.Speed += inputData.DeltaSpeedPlayer;
 
         if (_player.Speed.X > 0)
-            Graphics2D.ReflectAllSprites(_player.Sprites);
+            Graphics2D.ReflectSprite(_player.Sprites);
         else if ( _player.Speed.X < 0)
-            Graphics2D.ReflectAllSprites(_player.Sprites, true);
+            Graphics2D.ReflectSprite(_player.Sprites, true);
 
         if (inputData.DoPlayerShoot && _shotCooldownTime > _shotCooldown)
         {
@@ -128,7 +128,7 @@ public class ProjectileWorkModel : Model
 
     private void LooseProcess (object sender, EventArgs e)
     {
-        Graphics2D.ReflectAllSprites(_player.Sprites, true, "X");
+        Graphics2D.ReflectSprite(_player.Sprites, true, "X");
         _isLoosed = true;
         var outData = GetOutputData<ProjectileWorkModelViewData>();
         outData.IsLoosed = _isLoosed;

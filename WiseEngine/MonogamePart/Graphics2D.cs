@@ -332,7 +332,7 @@ public static class Graphics2D
         SpriteBatch.Draw(circleTexture, center, color);
     }
 
-    public static void ReflectAllSprites (List<Sprite> sprites, bool isReflected = false, string axis = "Y")
+    public static void ReflectSprite (List<Sprite> sprites, bool isReflected = false, string axis = "Y")
     {
         switch (axis) 
         {

@@ -44,7 +44,7 @@ public class Gem : IObject, IShaped, IRenderable
 
     public void OnCollided(object sender, CollisionEventArgs e)
     {
-        if (e.OtherObject is SolidWitch)
+        if (e.OtherObject is SolidWitch || e.OtherObject is AnimatedWitch)
         {
             OnDied();
             Collided?.Invoke(this, e);
