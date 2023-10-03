@@ -18,6 +18,7 @@ public class SimplePhysics : IPhysics
             Vector2 speed = solid.Force / solid.Mass * Globals.Time.ElapsedGameTime.Milliseconds / 1000.0f;
             speed = new Vector2((float)Math.Round(speed.X, 0), (float)Math.Round(speed.Y, 0));
             obj.Pos += speed;
+            
             solid.IsOnPlatform = false;
         }
     }

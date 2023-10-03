@@ -116,7 +116,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
             {
                 _currentState = States.Jump;
             }
-            else if (IsOnPlatform == false)
+            else if (Force.Y > 2500)
             {
                 _currentState = States.Fall;
             }
