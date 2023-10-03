@@ -100,6 +100,19 @@ public class PhysicsModel : Model
         _isLoosed = false;
         _isWon = false;
         _score = 0;
+
+        if (_player is AnimatedWitch)
+        {
+            _player.Shooted += (sender, e) => 
+            {
+                Vector2 orbPos = new Vector2(
+                    _player.Pos.X + (_player.GetCollider() as RectangleCollider).Area.Width / 2,
+                    _player.Pos.Y + (_player.GetCollider() as RectangleCollider).Area.Height / 1.8f);
+                var projectile = new OrbProjectile(orbPos, _player.IsLeft ? -Vector2.UnitX / 2 : Vector2.UnitX / 2);
+
+                GameObjects.Add(projectile);
+            };
+        }
     }
 
     public override void Update(ViewCycleFinishedEventArgs e)
@@ -124,22 +137,30 @@ public class PhysicsModel : Model
 
 
 
-
-
-        if (inputData.DoPlayerShoot && _shotCooldownTime > _shotCooldown)
-        {           
-            Vector2 orbPos = new Vector2(
-                _player.Pos.X + (_player.GetCollider() as RectangleCollider).Area.Width / 2,
-                _player.Pos.Y + (_player.GetCollider() as RectangleCollider).Area.Height / 1.8f);
-            var projectile = new OrbProjectile(orbPos, _player.IsLeft ? -Vector2.UnitX / 2 : Vector2.UnitX / 2);
-            
-            GameObjects.Add(projectile);
-            _shotCooldownTime = 0;
-        }
-        else
+        if (_player is SolidWitch)
         {
-            _shotCooldownTime += Globals.Time.ElapsedGameTime.Milliseconds;
+            if (inputData.DoPlayerShoot && _shotCooldownTime > _shotCooldown)
+            {
+                Vector2 orbPos = new Vector2(
+                    _player.Pos.X + (_player.GetCollider() as RectangleCollider).Area.Width / 2,
+                    _player.Pos.Y + (_player.GetCollider() as RectangleCollider).Area.Height / 1.8f);
+                var projectile = new OrbProjectile(orbPos, _player.IsLeft ? -Vector2.UnitX / 2 : Vector2.UnitX / 2);
+
+                GameObjects.Add(projectile);
+                _shotCooldownTime = 0;
+            }
+            else
+            {
+                _shotCooldownTime += Globals.Time.ElapsedGameTime.Milliseconds;
+            }
         }
+        else if (_player is AnimatedWitch)
+        {
+            if (inputData.DoPlayerShoot)
+                _player.DoShoot();
+        }
+
+        
 
         var outData = GetOutputData<PhysicsModelViewData>();
 

@@ -11,6 +11,10 @@ namespace WiseTestBench;
 
 public class AnimatedWitch : IObject, IAnimated, ISolid
 {
+    private const float _shotCooldown = 400.0f;    
+    private float _shotCooldownTime = 0;
+    private float _fallingCooldownCheck = 100.0f;
+    private States _currentState;
     public RectangleCollider Collider { get; set; }
     public event EventHandler Died;
     public Vector2 Pos { get; set; }
@@ -28,6 +32,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
     public Animation CurrentAnimation { get; private set; }
 
     public event EventHandler<CollisionEventArgs> Collided;
+    public event EventHandler Shooted;
 
     public AnimatedWitch(Vector2 initPos)
     {
@@ -86,6 +91,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         Mass = 50;
         Force = Vector2.Zero;
         Speed = Vector2.Zero;
+        _currentState = States.Idle;
     }
 
     public override string ToString()
@@ -100,39 +106,104 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
     public virtual void Update()
     {
         PrevPos = Pos;
+        if (_currentState != States.Die)
+        {
+            if (_shotCooldownTime > 0)
+            {
+                _currentState = States.Shot;
+            }
+            else if (Force.Y < 0)
+            {
+                _currentState = States.Jump;
+            }
+            else if (IsOnPlatform == false)
+            {
+                _currentState = States.Fall;
+            }
+            else if (Speed.X != 0)
+            {
+                _currentState = States.Run;
+            }           
+            else
+            {
+                _currentState = States.Idle;
+            }
+        }       
+
+        switch (_currentState)
+        {             
+            case States.Run:
+                {
+                    SetAnimation("run");
+                    if (Speed.X > 0)
+                    {
+                        Graphics2D.ReflectSprite(CurrentAnimation.GetSprite());
+                        IsLeft = false;
+                    }
+                    else if (Speed.X < 0)
+
+                    {
+                        Graphics2D.ReflectSprite(CurrentAnimation.GetSprite(), true);
+                        IsLeft = true;
+                    }
+                    break;
+                }
+            case States.Jump:
+                {
+                    SetAnimation("jump");
+                    break;
+                }
+            case States.Fall:
+                {
+                    SetAnimation("fall");
+                    break;
+                }
+            case States.Shot:
+                {
+                    SetAnimation("shot");
+                    _shotCooldownTime -= Globals.Time.ElapsedGameTime.Milliseconds;
+                    if (_shotCooldownTime <= 0)
+                    {
+                        _shotCooldownTime = 0;
+                        _currentState = States.Idle;
+                    }
+
+                    break;
+                }
+            case States.Die:
+                {
+                    SetAnimation("death");
+                    break;
+                }
+            case States.Idle:
+            default:
+                {
+                    SetAnimation("idle");
+                    break;
+                }
+                
+        }
+
         Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
 
-        if (Speed.X > 0)
-            Graphics2D.ReflectSprite(CurrentAnimation.GetSprite());
-        else if (Speed.X < 0)
-            Graphics2D.ReflectSprite(CurrentAnimation.GetSprite(), true);
-
-
-        if (Speed.X > 0)
-        {
-            Graphics2D.ReflectSprite(CurrentAnimation.GetSprite());
-            IsLeft = false;
-        }
-        else if (Speed.X < 0)
-
-        {
-            Graphics2D.ReflectSprite(CurrentAnimation.GetSprite(), true);
-            IsLeft = true;
-        }
-
-        if (Speed.X != 0)
-        {
-            SetAnimation("run");
-        }
-        else
-        {
-            SetAnimation("idle");            
-        }
         CurrentAnimation.Update();
+        //if (_currentState == States.Shot) GameConsole.WriteLine(_currentState.ToString());
+        GameConsole.Clear();
+        GameConsole.WriteLine(_shotCooldownTime.ToString());
+        GameConsole.WriteLine(_currentState.ToString());
         Speed = Vector2.Zero;
         
     }
-
+    public void DoShoot ()
+    {
+        if (_currentState != States.Shot)
+        {
+            _currentState = States.Shot;
+            //GameConsole.WriteLine("shot!");
+            _shotCooldownTime = _shotCooldown;
+            Shooted?.Invoke(this, EventArgs.Empty);
+        }        
+    }
     public Collider GetCollider()
     {
         return new RectangleCollider(Pos + Collider.Position,
@@ -144,6 +215,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
     {
         Died?.Invoke(this, EventArgs.Empty);
         Graphics2D.ReflectSprite(CurrentAnimation.GetSprite(), true, "X");
+        _currentState = States.Die;
     }
     public virtual void OnCollided(object sender, CollisionEventArgs e)
     {
@@ -157,10 +229,20 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
 
     public void SetAnimation(string animationName)
     {
+        //TODO: Сделать, чтобы он не выставлял уже текущую анимацию
         if (Animations.ContainsKey(animationName))
         {            
-            CurrentAnimation = Animations[animationName];
-            CurrentAnimation.Activate();
+            CurrentAnimation = Animations[animationName];            
         }            
+    }
+
+    public enum States : byte
+    {
+        Idle,
+        Run,
+        Jump,
+        Fall,
+        Shot,
+        Die
     }
 }
