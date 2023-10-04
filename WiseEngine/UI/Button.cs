@@ -19,7 +19,7 @@ public class Button : MessageBox
     }
     /// <summary>
     /// Raises the <see cref="Clicked"/> event
-    /// </summary>
+    /// </summary> 
     public override void OnClicked()
     {
         Clicked?.Invoke(this, new ClickEventArgs());
