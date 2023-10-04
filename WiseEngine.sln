@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiseEngine", "WiseEngine\Wi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiseTestBench", "WiseTestBench\WiseTestBench.csproj", "{4D06786A-173F-4187-A33F-74043AF4907D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleWitch", "LittleWitch\LittleWitch.csproj", "{1D491DD6-46B7-4326-AEEF-0B105550D887}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4D06786A-173F-4187-A33F-74043AF4907D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D06786A-173F-4187-A33F-74043AF4907D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D06786A-173F-4187-A33F-74043AF4907D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D491DD6-46B7-4326-AEEF-0B105550D887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D491DD6-46B7-4326-AEEF-0B105550D887}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D491DD6-46B7-4326-AEEF-0B105550D887}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D491DD6-46B7-4326-AEEF-0B105550D887}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
