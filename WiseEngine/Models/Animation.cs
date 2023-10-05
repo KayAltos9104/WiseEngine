@@ -3,7 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 using WiseEngine.MVP;
 
 namespace WiseEngine.Models;
-
+/// <summary>
+/// Class which manages a single animation
+/// </summary>
+/// <remarks>
+/// Should be field of <see cref="IAnimated"/> object
+/// </remarks>
 public class Animation
 {
     private float _currentTime;
@@ -11,10 +16,24 @@ public class Animation
     private bool _isCycled;
     private int _currentFrameIndex;
     private Sprite _sprite;
+    /// <summary>
+    /// Animation name for searching
+    /// </summary>
+    /// <remarks>
+    /// If you don't set it, generates name with guid
+    /// </remarks>
     public string Name { get; set; }
+    /// <summary>
+    /// Is animation active or not in current moment
+    /// </summary>
     public bool IsActive { get; private set; }
+    /// <summary>
+    /// Time interval for frames changing
+    /// </summary>
     public float SwitchingTime { get; set; }
-
+    /// <summary>
+    /// Animation position in relative coordinates
+    /// </summary>
     public Vector2 Pos { get; set; }
 
     public Animation(AnimationFrame[] frames, Sprite sprite, float switchTime, bool isCycled = true)
@@ -30,7 +49,9 @@ public class Animation
         _currentTime = 0;
         Activate();
     }
-
+    /// <summary>
+    /// Activae
+    /// </summary>
     public void Activate()
     {
         IsActive = true;        
@@ -56,7 +77,6 @@ public class Animation
             }
         }       
     }
-
     public Rectangle GetCurrentFrame()
     {
         var frame = _frames[_currentFrameIndex];
@@ -67,7 +87,6 @@ public class Animation
     {
         return _sprite;
     }
-
     private void SwitchNextFrame()
     {
         _currentFrameIndex++;
