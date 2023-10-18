@@ -18,11 +18,12 @@ Globals.ResourcesPath = Path.Combine(new string[] { projectRoot, "Resources" });
 var game = new GameProcessor(
     new List<(string, string)>()
     {
-        ("Scroll1", "Sprites/Scroll1")
+        ("Scroll1", "Sprites/Scroll1"),
+        ("ForestBgrnd", "Sprites/Forest")
     },
     new List<(string, string)>()
     {
-                //("MainFont", "Fonts/SystemFont")
+                ("MainFont", "Fonts/WitchFont")
     }
     );
 var mainMenuView = new MainMenuView();

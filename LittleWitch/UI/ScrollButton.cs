@@ -11,7 +11,7 @@ internal class ScrollButton : Button
     public ScrollButton(Vector2 pos, SpriteFont font, string text, Texture2D texture) : base(pos, font, text)
     {
         _texture = texture;
-        MarginText = new Vector2(0, 0);
+        MarginText = new Vector2(0, 10);
     }
 
     public override void Render(SpriteBatch spriteBatch)

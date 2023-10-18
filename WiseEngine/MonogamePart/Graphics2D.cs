@@ -42,6 +42,24 @@ public static class Graphics2D
                     layerDepth: 0);
     }
 
+    public static void RenderTexture(IRenderable obj, Color filter)
+    {
+        foreach (var s in obj.Sprites)
+        {
+            SpriteBatch.Draw(
+                    texture: s.GetTexture(),
+                    position: s.Pos,
+                    sourceRectangle: null,
+                    color: filter,
+                    rotation: 0,
+                    origin: Vector2.Zero,
+                    scale: s.Scale,
+                    effects: SpriteEffects.None,
+                    layerDepth: 0);
+        }
+        
+    }
+
     /// <summary>
     /// Renders <see cref="IObject">game object</see>
     /// </summary>
