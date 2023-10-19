@@ -24,7 +24,8 @@ internal class ScrollButton : Button
 
         if (IsChosen)
         {
-            TextColor = Color.Red;
+            //TextColor = Color.Red;
+            TextColor = Color.Yellow;
             Graphics2D.RenderTexture(Pos, _texture, new Color(200, 200, 200), scale);
             RenderText(spriteBatch);
         }
