@@ -17,7 +17,8 @@ public static class UIFactory
             pos,
             LoadableObjects.GetFont("MainFont"),
             text,
-            LoadableObjects.GetTexture("Scroll1")
+            //LoadableObjects.GetTexture("Scroll1")
+            "Scroll1"
             );
         button.IsCentered = true;
         button.ChangeSize(250, 100);

@@ -113,7 +113,7 @@ public abstract class InterfaceComponent : IComponent
     /// </summary>
     /// <param name="width">New width</param>
     /// <param name="height">New height</param>
-    public void ChangeSize(int width, int height)
+    public virtual void ChangeSize(int width, int height)
     {
         Bounds = new Rectangle((int)Pos.X, (int)Pos.Y, width, height);
     }

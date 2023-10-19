@@ -87,20 +87,6 @@ public static class Graphics2D
         layerDepth: layer);
     }
 
-    public static void RenderTexture(Vector2 pos, Texture2D texture, Color filter, Vector2 scale)
-    {
-        SpriteBatch.Draw(
-                    texture: texture,
-                    position: pos,
-                    sourceRectangle: null,
-                    color: filter,
-                    rotation: 0,
-                    origin: Vector2.Zero,
-                    scale: scale,
-                    effects: SpriteEffects.None,
-                    layerDepth: 0);
-    }
-
     /// <summary>
     /// Renders <see cref="IObject">game object</see>
     /// </summary>

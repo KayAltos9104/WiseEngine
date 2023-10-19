@@ -1,16 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using WiseEngine;
+using WiseEngine.Models;
 using WiseEngine.MonogamePart;
 
 namespace LittleWitch.UI;
 
 internal class ScrollButton : Button
 {
-    private Texture2D _texture;
-    public ScrollButton(Vector2 pos, SpriteFont font, string text, Texture2D texture) : base(pos, font, text)
-    {
-        _texture = texture;
+   
+    public Sprite Sprite { get; set; }
+    public ScrollButton(Vector2 pos, SpriteFont font, string text, string textureName) : base(pos, font, text)
+    {        
+        Sprite = new Sprite(textureName, Sprite.StretchMode.Stretch);
+        Sprite.SetSize(Bounds.Width, Bounds.Height);
         MarginText = new Vector2(0, 10);
     }
 
@@ -19,21 +22,25 @@ internal class ScrollButton : Button
         _textSize = Font.MeasureString(Text) != Vector2.Zero ?
                 Font.MeasureString(Text) :
                 Vector2.One;
-
-        Vector2 scale = new Vector2(Bounds.Width / _texture.Width, Bounds.Height / _texture.Height);
-
+        
         if (IsChosen)
-        {
-            //TextColor = Color.Red;
+        {            
             TextColor = Color.Yellow;
-            Graphics2D.RenderTexture(Pos, _texture, new Color(200, 200, 200), scale);
+            Sprite.Color = new Color(200, 200, 200);            
             RenderText(spriteBatch);
         }
         else
         {
             TextColor = Color.Black;
-            Graphics2D.RenderTexture(Pos, _texture, Color.White, scale);
-            RenderText(spriteBatch);
+            Sprite.Color = Color.White;   
         }
+        Graphics2D.RenderSprite(Pos, Sprite, 0);
+        RenderText(spriteBatch);
+    }
+
+    public override void ChangeSize(int width, int height)
+    {
+        base.ChangeSize(width, height);
+        Sprite.SetSize(Bounds.Width, Bounds.Height);
     }
 }
