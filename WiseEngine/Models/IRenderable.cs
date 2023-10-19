@@ -1,4 +1,6 @@
-﻿namespace WiseEngine.Models;
+﻿using Microsoft.Xna.Framework;
+
+namespace WiseEngine.Models;
 
 public interface IRenderable
 {
@@ -10,4 +12,5 @@ public interface IRenderable
     /// The <c>Scenes</c> property represents a dictionary with all scenes used in game
     /// </value>
     float Layer { get; set; }
+    Vector2 Pos { get; set; }
 }

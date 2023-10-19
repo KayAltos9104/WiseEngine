@@ -20,7 +20,8 @@ internal class MainMenuView : MenuViewPrefab
         int screenWidth = Globals.Resolution.Width;
         int screenHeight = Globals.Resolution.Height;
 
-        _background = new Background();
+        _background = new Background(screenWidth, screenHeight);
+        
         //_background.Sprites[0].Scale = new Vector2(
         //    1.0f*screenWidth / _background.Sprites[0].GetTexture().Width,
         //    1.0f * screenHeight / _background.Sprites[0].GetTexture().Height);
@@ -57,7 +58,7 @@ internal class MainMenuView : MenuViewPrefab
     public override void Draw()
     {
         Graphics2D.SpriteBatch.Begin();
-        //Graphics2D.RenderSprite(Vector2.Zero, _background, 0);
+        Graphics2D.Render(_background, null);
         Graphics2D.SpriteBatch.End();
         base.Draw();
         

@@ -10,11 +10,11 @@ internal class Background : IRenderable
     public float Layer { get; set; }
     public Vector2 Pos { get; set; }
     
-    public Background ()
+    public Background (float width, float height)
     {
         Pos = Vector2.Zero;
-        var background = new Sprite("ForestBgrnd", Sprite.StretchMode.None);
-        //background.Scale = Vector2.One * 1;
+        var background = new Sprite("ForestBgrnd", Sprite.StretchMode.Stretch);
+        background.SetSize(width, height);        
         Layer = 0;
         Sprites = new()
         {

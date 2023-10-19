@@ -40,7 +40,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         Pos = initPos;
         Speed = Vector2.Zero;
         var witchSheet = new Sprite("WitchIdle");
-        witchSheet.Scale = Vector2.One * 2;
+        //witchSheet.Scale = Vector2.One * 2;
         Layer = 0;
 
         // Animations

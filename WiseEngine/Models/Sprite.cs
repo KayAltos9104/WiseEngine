@@ -13,9 +13,9 @@ public class Sprite
     /// The <c>Scale</c> property represents scale of sprite for drawing
     /// </value>
     public Vector2 Scale { get; private set; }
-   
 
-    public (float Width, float Height) Size;
+
+    public (float Width, float Height) Size {get; private set;}
     public (float Width, float Height) TextureSize
     {
         get
@@ -36,7 +36,10 @@ public class Sprite
 
     public StretchMode TextureStretchMode { get; set; }
 
-    private Vector2 _scale;
+    public Sprite(string textureName) : this (textureName, StretchMode.None)
+    {
+
+    }
     public Sprite(string textureName, StretchMode stretchMode)
     {
         TextureName = textureName;
@@ -48,28 +51,29 @@ public class Sprite
         Alpha = 255;
         Rotation = 0;
         TextureStretchMode = stretchMode;
-        Size = (GetTexture().Bounds.Width, GetTexture().Height);       
+        Size = (GetTexture().Bounds.Width, GetTexture().Height);     
+        CalculateTextureScale();
     }
+
+    public void SetSize (float width, float height)
+    {
+        Size = (width, height);
+        CalculateTextureScale ();
+    }
+
     public void CalculateTextureScale ()
     {
         switch (TextureStretchMode)
         {
             case StretchMode.Stretch:
                 {
-                    _scale = new Vector2(Size.Width / TextureSize.Width, Size.Height / TextureSize.Height);
+                    Scale = new Vector2(Size.Width / TextureSize.Width, Size.Height / TextureSize.Height);
                     break;
                 }
-            case StretchMode.Multiple:
-                {
-                    //int rowNumber = (int)(Size.Height / TextureSize.Height);
-                    //int columnNumber = (int)(Size.Width / TextureSize.Width);
-                    //rowNumber = rowNumber == 0 ? 1 : rowNumber;
-                    //columnNumber = columnNumber == 0 ? 1 : columnNumber;
-                    break;
-                }
+            case StretchMode.Multiple:                
             case StretchMode.None:
                 {
-                    _scale = Vector2.One;
+                    Scale = Vector2.One;
                     break;
                 }               
 
