@@ -40,6 +40,7 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         Pos = initPos;
         Speed = Vector2.Zero;
         var witchSheet = new Sprite("WitchIdle");
+        witchSheet.SetSize(witchSheet.TextureSize.Width * 2, witchSheet.TextureSize.Height * 2);
         //witchSheet.Scale = Vector2.One * 2;
         Layer = 0;
 
@@ -74,7 +75,8 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
         }
 
         witchSheet = new Sprite("WitchRun");
-        witchSheet.Scale = Vector2.One * 2;
+        witchSheet.SetSize(witchSheet.TextureSize.Width * 2, witchSheet.TextureSize.Height * 2);
+        //witchSheet.Scale = Vector2.One * 2;
         Animation run = new Animation(runFrames, witchSheet, 50);
         Animations.Add("run", run);
 
@@ -113,7 +115,8 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
 
 
         witchSheet = new Sprite("WitchAttack");
-        witchSheet.Scale = Vector2.One * 2;
+        witchSheet.SetSize(witchSheet.TextureSize.Width * 2, witchSheet.TextureSize.Height * 2);
+        //witchSheet.Scale = Vector2.One * 2;
         Animation attack = new Animation(attackFrames, witchSheet, 50, true);
         
         Animations.Add("shot", attack);
@@ -129,7 +132,8 @@ public class AnimatedWitch : IObject, IAnimated, ISolid
             jumpFrames[i] = a;
         }
         witchSheet = new Sprite("WitchJump");
-        witchSheet.Scale = Vector2.One * 2;
+        witchSheet.SetSize(witchSheet.TextureSize.Width * 2, witchSheet.TextureSize.Height * 2);
+        //witchSheet.Scale = Vector2.One * 2;
         Animation jump = new Animation(jumpFrames, witchSheet, 30, true);
 
         Animations.Add("jump", jump);

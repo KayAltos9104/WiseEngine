@@ -36,7 +36,7 @@ public class Sprite
 
     public StretchMode TextureStretchMode { get; set; }
 
-    public Sprite(string textureName) : this (textureName, StretchMode.None)
+    public Sprite(string textureName) : this (textureName, StretchMode.Stretch)
     {
 
     }

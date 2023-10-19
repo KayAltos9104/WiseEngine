@@ -20,7 +20,8 @@ public class RedOrb : IObject, IRenderable
         Pos = initPos;
         Speed = Vector2.Zero;
         var redOrbSprite = new Sprite("RedOrb");
-        redOrbSprite.Scale = new Vector2(0.1f, 0.1f);
+        redOrbSprite.SetSize(redOrbSprite.TextureSize.Width * 0.1f, redOrbSprite.TextureSize.Height * 0.1f);
+        //redOrbSprite.Scale = new Vector2(0.1f, 0.1f);
         Sprites = new()
         {
             redOrbSprite

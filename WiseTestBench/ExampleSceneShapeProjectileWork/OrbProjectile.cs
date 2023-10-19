@@ -27,7 +27,8 @@ public class OrbProjectile : IObject, IShaped, IRenderable
         Pos = initPos;
         _speed = speed;
         var redOrbSprite = new Sprite("RedOrb");
-        redOrbSprite.Scale = new Vector2(0.2f, 0.1f);
+        redOrbSprite.SetSize(redOrbSprite.TextureSize.Width * 0.2f, redOrbSprite.TextureSize.Height * 0.1f);
+        //redOrbSprite.Scale = new Vector2(0.2f, 0.1f);
         Sprites = new()
         {
             redOrbSprite

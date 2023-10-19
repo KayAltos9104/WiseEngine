@@ -30,7 +30,7 @@ public class Platform : IObject, ISolid, IRenderable
         Pos = initPos;
         Speed = Vector2.Zero;
         var platformSprite = new Sprite("Platform3");
-        platformSprite.Scale = Vector2.One * 1;
+        //platformSprite.Scale = Vector2.One * 1;
         Layer = 0;
         Sprites = new()
         {

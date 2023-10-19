@@ -31,7 +31,7 @@ public class SolidGoblin : IObject, ISolid, IRenderable
         Pos = initPos;
         var sprite = new Sprite("Goblin");
         
-        sprite.Scale = new Vector2(1.5f, 1.5f);
+        sprite.SetSize(sprite.TextureSize.Width * 1.5f, sprite.TextureSize.Height * 1.5f);
         Sprites = new()
         {
             sprite

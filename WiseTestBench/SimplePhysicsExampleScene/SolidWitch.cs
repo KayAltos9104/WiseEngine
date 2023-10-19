@@ -33,14 +33,15 @@ public class SolidWitch : IObject, IRenderable, ISolid
         Pos = initPos;
         Speed = Vector2.Zero;
         var witchSprite = new Sprite("ExampleWitch");
-        witchSprite.Scale = Vector2.One * 2;
+        witchSprite.SetSize(witchSprite.TextureSize.Width * 2, witchSprite.TextureSize.Height * 2);
+        //witchSprite.Scale = Vector2.One * 2;
         Layer = 0;
         Sprites = new()
         {
             witchSprite
         };
-        int width = (int)(LoadableObjects.GetTexture(Sprites[0].TextureName).Width * Sprites[0].Scale.X);
-        int height = (int)(LoadableObjects.GetTexture(Sprites[0].TextureName).Height * Sprites[0].Scale.Y);
+        int width = (int)(witchSprite.Size.Width);
+        int height = (int)(witchSprite.Size.Height);
         Collider = new RectangleCollider(Vector2.Zero, width, height);
 
         IsDisposed = false;

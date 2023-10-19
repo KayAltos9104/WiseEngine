@@ -25,7 +25,7 @@ public class Gem : IObject, IShaped, IRenderable
 
         var sprite = new Sprite("Gem1");
 
-        sprite.Scale = new Vector2(0.5f, 0.5f);
+        sprite.SetSize(sprite.TextureSize.Width * 0.5f, sprite.TextureSize.Height * 0.5f);
         Sprites = new()
         {
             sprite

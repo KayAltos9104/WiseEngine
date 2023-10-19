@@ -24,7 +24,8 @@ public class Witch : IObject, IRenderable
         Pos = initPos;
         Speed = Vector2.Zero;
         var witchSprite = new Sprite("ExampleWitch");
-        witchSprite.Scale = Vector2.One * 3;
+        witchSprite.SetSize(witchSprite.TextureSize.Width * 3, witchSprite.TextureSize.Height * 3);
+        //witchSprite.Scale = Vector2.One * 3;
         Layer = 0;
         Sprites = new()
         {

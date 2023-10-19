@@ -24,7 +24,7 @@ public class Goblin : IObject, IShaped, IRenderable
         Pos = initPos;
         var sprite = new Sprite("Goblin");
         //sprite.IsReflectedOY = true;
-        sprite.Scale = new Vector2(1.5f, 1.5f);
+        sprite.SetSize(sprite.TextureSize.Width * 1.5f, sprite.TextureSize.Height * 1.5f);
         Sprites = new()
         {
             sprite
