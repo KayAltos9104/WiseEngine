@@ -28,6 +28,26 @@ public static class Graphics2D
     public static Vector2 VisualShift = new Vector2(0, 0);   
     
     
+    public static void RenderSprite (Vector2 texturePos, Sprite sprite, float layer)
+    {
+        var texture = LoadableObjects.GetTexture(sprite.TextureName);
+        if (texture == null)
+            throw new ArgumentNullException($"Texture with name {sprite.TextureName} was not found");
+
+        SpriteBatch.Draw(
+        texture: texture,
+        position: texturePos,
+        sourceRectangle: null,
+        color: sprite.Color,
+        rotation: sprite.Rotation,
+        origin: Vector2.Zero,
+        scale: sprite.Scale,
+        effects: sprite.IsReflectedOY ? SpriteEffects.FlipHorizontally
+        : sprite.IsReflectedOX ? SpriteEffects.FlipVertically
+        : SpriteEffects.None,
+        layerDepth: layer);
+    }
+
     public static void RenderTexture (Vector2 pos, Texture2D texture, Color filter, Vector2 scale)
     {
         SpriteBatch.Draw(
@@ -75,22 +95,46 @@ public static class Graphics2D
                 Vector2 texturePos = obj.Pos + sprite.Pos;
                 if (camera.IsInVisionArea(texturePos))
                 {
-                    var texture = LoadableObjects.GetTexture(sprite.TextureName);
-                    if (texture == null)
-                        throw new ArgumentNullException($"Texture with name {sprite.TextureName} was not found");
+                    switch (sprite.TextureStretchMode)
+                    {
+                        case (Sprite.StretchMode.Multiple):
+                            {
+                                int rowNumber = (int)(sprite.Size.Height / sprite.TextureSize.Height);
+                                int columnNumber = (int)(sprite.Size.Width / sprite.TextureSize.Width);
+                                rowNumber = rowNumber == 0 ? 1 : rowNumber;
+                                columnNumber = columnNumber == 0 ? 1 : columnNumber;
+                                
+                                for (int y = 0; y < rowNumber; y++)
+                                    for (int x = 0; x < columnNumber; x++)
+                                    {
+                                        Vector2 shift = new Vector2(x * sprite.TextureSize.Width, y * sprite.TextureSize.Height);
+                                        RenderSprite(texturePos + shift, sprite, raw.Layer);
+                                    }                                
+                                break;
+                            }
+                        case Sprite.StretchMode.Stretch:
+                            break;
+                        case Sprite.StretchMode.None:
+                            RenderSprite(texturePos, sprite, raw.Layer);
+                            break;
+                    }
+                        
+                    //var texture = LoadableObjects.GetTexture(sprite.TextureName);
+                    //if (texture == null)
+                    //    throw new ArgumentNullException($"Texture with name {sprite.TextureName} was not found");
 
-                    SpriteBatch.Draw(
-                    texture: texture,
-                    position: texturePos,
-                    sourceRectangle: null,
-                    color: sprite.Color,
-                    rotation: sprite.Rotation,
-                    origin: Vector2.Zero,
-                    scale: sprite.Scale,
-                    effects: sprite.IsReflectedOY ? SpriteEffects.FlipHorizontally
-                    : sprite.IsReflectedOX ? SpriteEffects.FlipVertically
-                    : SpriteEffects.None,
-                    layerDepth: raw.Layer);
+                    //SpriteBatch.Draw(
+                    //texture: texture,
+                    //position: texturePos,
+                    //sourceRectangle: null,
+                    //color: sprite.Color,
+                    //rotation: sprite.Rotation,
+                    //origin: Vector2.Zero,
+                    //scale: sprite.Scale,
+                    //effects: sprite.IsReflectedOY ? SpriteEffects.FlipHorizontally
+                    //: sprite.IsReflectedOX ? SpriteEffects.FlipVertically
+                    //: SpriteEffects.None,
+                    //layerDepth: raw.Layer);
 
                     if (Globals.SpriteBordersAreVisible)
                     {

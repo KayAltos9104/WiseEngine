@@ -21,9 +21,9 @@ internal class MainMenuView : MenuViewPrefab
         int screenHeight = Globals.Resolution.Height;
 
         _background = new Background();
-        _background.Sprites[0].Scale = new Vector2(
-            1.0f*screenWidth / _background.Sprites[0].GetTexture().Width,
-            1.0f * screenHeight / _background.Sprites[0].GetTexture().Height);
+        //_background.Sprites[0].Scale = new Vector2(
+        //    1.0f*screenWidth / _background.Sprites[0].GetTexture().Width,
+        //    1.0f * screenHeight / _background.Sprites[0].GetTexture().Height);
 
         _interfaceManager.AddElement(
             UIFactory.CreateScrollButton(
@@ -57,7 +57,7 @@ internal class MainMenuView : MenuViewPrefab
     public override void Draw()
     {
         Graphics2D.SpriteBatch.Begin();
-        Graphics2D.RenderTexture(_background, Color.White);
+        //Graphics2D.RenderSprite(Vector2.Zero, _background, 0);
         Graphics2D.SpriteBatch.End();
         base.Draw();
         

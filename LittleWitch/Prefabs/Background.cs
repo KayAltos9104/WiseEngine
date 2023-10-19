@@ -13,8 +13,8 @@ internal class Background : IRenderable
     public Background ()
     {
         Pos = Vector2.Zero;
-        var background = new Sprite("ForestBgrnd");
-        background.Scale = Vector2.One * 1;
+        var background = new Sprite("ForestBgrnd", Sprite.StretchMode.None);
+        //background.Scale = Vector2.One * 1;
         Layer = 0;
         Sprites = new()
         {
