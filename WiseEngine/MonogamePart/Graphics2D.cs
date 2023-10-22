@@ -144,8 +144,45 @@ public static class Graphics2D
                 }
             }
         }
-        
-        
+        //if (obj is IAnimatedSingleFrames animSF)
+        //{
+        //    if (animSF.CurrentAnimation != null && animSF.CurrentAnimation.IsActive)
+        //    {
+        //        Vector2 texturePos = obj.Pos + animSF.CurrentAnimation.Pos;
+        //        //var sprite = animSF.CurrentAnimation.GetSprite();
+        //        //Rectangle area = animSF.CurrentAnimation.GetCurrentFrame();
+
+        //        var currentAnimation = animSF.CurrentAnimation;
+
+        //        if (camera.IsInVisionArea(texturePos))
+        //        {
+        //            var sprite = animSF.CurrentAnimation.GetCurrentFrame();                    
+
+        //            SpriteBatch.Draw(
+        //            texture: texture,
+        //            position: texturePos,
+        //            sourceRectangle: null,
+        //            color: sprite.Color,
+        //            rotation: sprite.Rotation,
+        //            origin: Vector2.Zero,
+        //            scale: sprite.Scale,
+        //            effects: sprite.IsReflectedOY ? SpriteEffects.FlipHorizontally
+        //            : sprite.IsReflectedOX ? SpriteEffects.FlipVertically
+        //            : SpriteEffects.None,
+        //            layerDepth: animSF.Layer);
+        //        }
+
+        //        if (Globals.SpriteBordersAreVisible)
+        //        {
+        //            DrawRectangle((int)texturePos.X, (int)texturePos.Y,
+        //                (int)(area.Width * sprite.Scale.X),
+        //                (int)(area.Height * sprite.Scale.Y),
+        //                Color.Red, 3);
+        //        }                                
+        //    }
+        //}
+
+
     }
     /// <summary>
     /// Renders text
@@ -183,34 +220,6 @@ public static class Graphics2D
         OutputText(pos, text, LoadableObjects.GetFont("SystemFont"), Color.Yellow);
     }
 
-    //public static void RenderAnimation(IAnimated a)
-    //{
-    //    if (a.Animation.ActiveAnimation != null &&
-    //        a.Animation.ActiveAnimation.IsActive)
-    //    {
-    //        var centerShift = a.Animation.ActiveAnimation.IsCentered ?
-    //            new Vector2(a.Animation.ActiveAnimation.CurrentFrame.Width / 2,
-    //            a.Animation.ActiveAnimation.CurrentFrame.Height / 2) :
-    //            Vector2.Zero;
-    //        Vector2 v = a.Animation.Pos - VisualShift;
-    //        if (IsInVisionArea(v))
-    //        {
-    //            SpriteBatch.Draw(
-    //           LoadableObjects.GetTexture(a.Animation.ActiveAnimation.GetPictureName()),
-    //            v,
-    //            new Rectangle(
-    //                a.Animation.ActiveAnimation.CurrentFrame.Point,
-    //                new Point(
-    //                a.Animation.ActiveAnimation.CurrentFrame.Width,
-    //                a.Animation.ActiveAnimation.CurrentFrame.Height)),
-    //            Color.White,
-    //            0,
-    //            centerShift,
-    //            1,
-    //            SpriteEffects.None, a.Animation.Layer);
-    //        }
-    //    }
-    //}
     /// <summary>
     /// Renders straight line
     /// </summary>
