@@ -144,43 +144,14 @@ public static class Graphics2D
                 }
             }
         }
-        //if (obj is IAnimatedSingleFrames animSF)
-        //{
-        //    if (animSF.CurrentAnimation != null && animSF.CurrentAnimation.IsActive)
-        //    {
-        //        Vector2 texturePos = obj.Pos + animSF.CurrentAnimation.Pos;
-        //        //var sprite = animSF.CurrentAnimation.GetSprite();
-        //        //Rectangle area = animSF.CurrentAnimation.GetCurrentFrame();
-
-        //        var currentAnimation = animSF.CurrentAnimation;
-
-        //        if (camera.IsInVisionArea(texturePos))
-        //        {
-        //            var sprite = animSF.CurrentAnimation.GetCurrentFrame();                    
-
-        //            SpriteBatch.Draw(
-        //            texture: texture,
-        //            position: texturePos,
-        //            sourceRectangle: null,
-        //            color: sprite.Color,
-        //            rotation: sprite.Rotation,
-        //            origin: Vector2.Zero,
-        //            scale: sprite.Scale,
-        //            effects: sprite.IsReflectedOY ? SpriteEffects.FlipHorizontally
-        //            : sprite.IsReflectedOX ? SpriteEffects.FlipVertically
-        //            : SpriteEffects.None,
-        //            layerDepth: animSF.Layer);
-        //        }
-
-        //        if (Globals.SpriteBordersAreVisible)
-        //        {
-        //            DrawRectangle((int)texturePos.X, (int)texturePos.Y,
-        //                (int)(area.Width * sprite.Scale.X),
-        //                (int)(area.Height * sprite.Scale.Y),
-        //                Color.Red, 3);
-        //        }                                
-        //    }
-        //}
+        if (obj is IAnimatedSingleFrames animSF)
+        {
+            if (animSF.CurrentAnimation != null && animSF.CurrentAnimation.IsActive)
+            {
+                Vector2 texturePos = obj.Pos + animSF.CurrentAnimation.Pos;
+                RenderSprite(texturePos, animSF.CurrentAnimation.GetCurrentFrame(), animSF.Layer);              
+            }
+        }
 
 
     }

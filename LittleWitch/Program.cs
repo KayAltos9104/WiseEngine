@@ -19,7 +19,20 @@ var game = new GameProcessor(
     new List<(string, string)>()
     {
         ("Scroll1", "Sprites/Scroll1"),
-        ("ForestBgrnd", "Sprites/Forest")
+        ("ForestBgrnd", "Sprites/Forest"),
+        ("Witch_Idle1", "Animations/Witch/Idle/IdleAnimation1"),
+        ("Witch_Idle2", "Animations/Witch/Idle/IdleAnimation2"),
+        ("Witch_Idle3", "Animations/Witch/Idle/IdleAnimation3"),
+        ("Witch_Idle4", "Animations/Witch/Idle/IdleAnimation4"),
+        ("Witch_Idle5", "Animations/Witch/Idle/IdleAnimation5"),
+        ("Witch_Idle6", "Animations/Witch/Idle/IdleAnimation6"),
+        ("Witch_Idle7", "Animations/Witch/Idle/IdleAnimation7"),
+        ("Witch_Idle8", "Animations/Witch/Idle/IdleAnimation8"),
+        ("Witch_Idle9", "Animations/Witch/Idle/IdleAnimation9"),
+        ("Witch_Idle10", "Animations/Witch/Idle/IdleAnimation10"),
+        ("Witch_Idle11", "Animations/Witch/Idle/IdleAnimation11"),
+        ("Witch_Idle12", "Animations/Witch/Idle/IdleAnimation12"),
+        ("Witch_Idle13", "Animations/Witch/Idle/IdleAnimation13"),        
     },
     new List<(string, string)>()
     {
