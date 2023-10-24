@@ -1,5 +1,18 @@
-﻿namespace LittleWitch.Scenes;
+﻿using WiseEngine.MVP;
 
-public class LevelViewPrefab
+
+namespace LittleWitch.Scenes;
+
+public class LevelViewPrefab : View
 {
+    public override void Initialize()
+    {
+        base.Initialize();        
+    }
+
+    public override void Update()
+    {
+        base.Update();       
+    }
+
 }

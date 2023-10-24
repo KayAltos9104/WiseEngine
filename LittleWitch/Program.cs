@@ -1,4 +1,5 @@
 ﻿using LittleWitch.Scenes;
+using LittleWitch.Scenes.Level0;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -42,6 +43,13 @@ var game = new GameProcessor(
 var mainMenuView = new MainMenuView();
 var scnMainMenu = new Scene(mainMenuView, null, new Presenter(game, mainMenuView, null));
 
+var testLevelView = new CommonLevelView();
+var testLevelModel = new ComonLevelModel();
+var scnTestLevel = new Scene (testLevelView, testLevelModel, new Presenter (game, testLevelView, testLevelModel));
+
 game.Scenes.Add("MainMenu", scnMainMenu);
+game.Scenes.Add("Level0", scnTestLevel);
 game.SetCurrentScene("MainMenu");
+game.SetCurrentScene("Level0");
+
 game.Run();
