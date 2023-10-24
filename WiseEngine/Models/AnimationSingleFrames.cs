@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using WiseEngine.MonogamePart;
 using WiseEngine.MVP;
 
 namespace WiseEngine.Models;
@@ -62,6 +63,7 @@ public class AnimationSingleFrames
             {
                 SwitchNextFrame();
                 _currentTime = 0;
+                //GameConsole.WriteLine($"{GetCurrentFrame().TextureName}");
             }
             else
             {

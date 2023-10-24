@@ -15,16 +15,10 @@ internal class MainMenuView : MenuViewPrefab
     {
         base.Initialize();
 
-        
-
         int screenWidth = Globals.Resolution.Width;
         int screenHeight = Globals.Resolution.Height;
 
-        _background = new Background(screenWidth, screenHeight);
-        
-        //_background.Sprites[0].Scale = new Vector2(
-        //    1.0f*screenWidth / _background.Sprites[0].GetTexture().Width,
-        //    1.0f * screenHeight / _background.Sprites[0].GetTexture().Height);
+        _background = new Background(screenWidth, screenHeight); 
 
         _interfaceManager.AddElement(
             UIFactory.CreateScrollButton(
@@ -47,7 +41,7 @@ internal class MainMenuView : MenuViewPrefab
 
     private void BtnStart_Click (object sender, ClickEventArgs e)
     {
-        GameConsole.WriteLine("Заглушка!");
+        OnSceneFinished(new SceneFinishedEventArgs() { NewSceneName = "Level0" });
     }
 
     private void BtnExit_Click(object sender, ClickEventArgs e)
@@ -60,7 +54,6 @@ internal class MainMenuView : MenuViewPrefab
         Graphics2D.SpriteBatch.Begin();
         Graphics2D.Render(_background, null);
         Graphics2D.SpriteBatch.End();
-        base.Draw();
-        
+        base.Draw();        
     }
 }

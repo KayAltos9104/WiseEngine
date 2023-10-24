@@ -148,8 +148,15 @@ public static class Graphics2D
         {
             if (animSF.CurrentAnimation != null && animSF.CurrentAnimation.IsActive)
             {
-                Vector2 texturePos = obj.Pos + animSF.CurrentAnimation.Pos;
-                RenderSprite(texturePos, animSF.CurrentAnimation.GetCurrentFrame(), animSF.Layer);              
+                Vector2 texturePos = obj.Pos + animSF.CurrentAnimation.Pos + animSF.CurrentAnimation.GetCurrentFrame().Pos;
+                RenderSprite(texturePos, animSF.CurrentAnimation.GetCurrentFrame(), animSF.Layer);
+                if (Globals.SpriteBordersAreVisible)
+                {
+                    DrawRectangle((int)texturePos.X, (int)texturePos.Y,
+                        (int)(animSF.CurrentAnimation.GetCurrentFrame().Size.Width),
+                        (int)(animSF.CurrentAnimation.GetCurrentFrame().Size.Height),
+                        Color.Red, 3);
+                }
             }
         }
 

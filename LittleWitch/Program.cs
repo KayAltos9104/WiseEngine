@@ -50,6 +50,6 @@ var scnTestLevel = new Scene (testLevelView, testLevelModel, new Presenter (game
 game.Scenes.Add("MainMenu", scnMainMenu);
 game.Scenes.Add("Level0", scnTestLevel);
 game.SetCurrentScene("MainMenu");
-game.SetCurrentScene("Level0");
+//game.SetCurrentScene("Level0");
 
 game.Run();

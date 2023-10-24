@@ -6,6 +6,7 @@ namespace WiseEngine.Models;
 
 public class Sprite
 {
+    //public bool IsCenteredPos { get; private set; }
     public string TextureName { get; set; }
     public Vector2 Pos { get; set; }
 
@@ -35,7 +36,7 @@ public class Sprite
     public float Rotation { get; set; }
 
     public StretchMode TextureStretchMode { get; set; }
-
+    
     public Sprite(string textureName) : this (textureName, StretchMode.Stretch)
     {
 
@@ -43,7 +44,7 @@ public class Sprite
     public Sprite(string textureName, StretchMode stretchMode)
     {
         TextureName = textureName;
-        Pos = Vector2.Zero;
+        
         //Scale = Vector2.One;
         IsReflectedOY = false;
         IsReflectedOX = false;
@@ -53,14 +54,30 @@ public class Sprite
         TextureStretchMode = stretchMode;
         Size = (GetTexture().Bounds.Width, GetTexture().Height);     
         CalculateTextureScale();
+        Pos = Vector2.Zero;
+        //IsCenteredPos = true;
+        //CalculatePos();
     }
 
     public void SetSize (float width, float height)
     {
         Size = (width, height);
         CalculateTextureScale ();
+        //CalculatePos();
+    }
+    public void SwitchPositionRelation ()
+    {
+        //IsCenteredPos = !IsCenteredPos;
+        throw new NotImplementedException ();
     }
 
+    public void CalculatePos()
+    {
+        //Pos = IsCenteredPos
+        //    ? Pos = new Vector2(Pos.X - Size.Width / 2, Pos.Y - Size.Height / 2)
+        //    : Pos = new Vector2(Pos.X + Size.Width / 2, Pos.X + Size.Height / 2);
+        throw new NotImplementedException();
+    }
     public void CalculateTextureScale ()
     {
         switch (TextureStretchMode)
@@ -78,6 +95,7 @@ public class Sprite
                 }               
 
         }
+       
     }
     public Texture2D GetTexture()
     {
