@@ -37,6 +37,19 @@ public class Sorceress : IObject, IAnimatedSingleFrames
         AnimationSingleFrames idle = new AnimationSingleFrames(frames, 100);
         Animations.Add("idle", idle);
         SetAnimation("idle");
+
+        frames = new Sprite[14];
+        for (int i = 1; i <= 14; i++)
+        {            
+            var frame = new Sprite($"Witch_Run{i}", Sprite.StretchMode.Stretch);
+            frame.SetSize(frame.TextureSize.Width * 2, frame.TextureSize.Height * 2);
+
+            frames[i - 1] = frame;
+        }
+
+        AnimationSingleFrames run = new AnimationSingleFrames(frames, 20);
+        Animations.Add("run", run);
+        SetAnimation("run");
     }
     public void OnDied()
     {

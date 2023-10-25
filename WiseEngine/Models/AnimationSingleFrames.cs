@@ -63,7 +63,7 @@ public class AnimationSingleFrames
             {
                 SwitchNextFrame();
                 _currentTime = 0;
-                //GameConsole.WriteLine($"{GetCurrentFrame().TextureName}");
+                GameConsole.WriteLine($"{GetCurrentFrame().TextureName}");
             }
             else
             {

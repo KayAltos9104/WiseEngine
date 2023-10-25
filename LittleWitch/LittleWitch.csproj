@@ -27,7 +27,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\bin\DesktopGL\" />
+    <Folder Include="Content\bin\DesktopGL\Content\WitchRunAnimation\" />
     <Folder Include="Content\bin\DesktopGL\WitchIdleAnimation\" />
+    <Folder Include="Content\bin\DesktopGL\WitchRunAnimation\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
