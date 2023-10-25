@@ -3,11 +3,15 @@ using System;
 using System.Collections.Generic;
 using WiseEngine.Models;
 using WiseEngine.MonogamePart;
+using WiseEngine.MVP;
+using WiseEngine.PhysicsAndCollisions;
 
 namespace LittleWitch.Prefabs;
 
-public class Sorceress : IObject, IAnimatedSingleFrames
+public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
 {
+    public bool IsLeft {  get; private set; }
+    public Vector2 Speed { get; set; }
     public Vector2 Pos { get; set; }
     public bool IsDisposed { get; set; }
     public float Layer { set; get; }
@@ -15,14 +19,27 @@ public class Sorceress : IObject, IAnimatedSingleFrames
     public Dictionary<string, AnimationSingleFrames> Animations { set; get; }
 
     public AnimationSingleFrames CurrentAnimation { set; get; }
+    public bool IsStatic { set; get; }
+    public bool IsOnPlatform { set; get; }
+    public float Mass { set; get; }
+    public Vector2 PrevPos { set; get; }
+    public Vector2 Force { set; get; }
+    public RectangleCollider Collider { get; set; }
 
     public event EventHandler Died;
+    public event EventHandler<CollisionEventArgs> Collided;
 
     public Sorceress() 
     {
         Pos = Vector2.Zero;
         IsDisposed = false;
         Layer = 0;
+        Force = Vector2.Zero;
+        Speed = Vector2.Zero;
+        PrevPos = Pos;
+        IsStatic = true;
+        Mass = 50;        
+        
 
         Animations = new Dictionary<string, AnimationSingleFrames>();
         var frames = new Sprite[13];       
@@ -33,6 +50,8 @@ public class Sorceress : IObject, IAnimatedSingleFrames
             
             frames[i - 1] = frame;
         }
+
+        
 
         AnimationSingleFrames idle = new AnimationSingleFrames(frames, 100);
         Animations.Add("idle", idle);
@@ -47,9 +66,13 @@ public class Sorceress : IObject, IAnimatedSingleFrames
             frames[i - 1] = frame;
         }
 
-        AnimationSingleFrames run = new AnimationSingleFrames(frames, 20);
+        AnimationSingleFrames run = new AnimationSingleFrames(frames, 70);
         Animations.Add("run", run);
         SetAnimation("run");
+
+        Collider = new RectangleCollider(Vector2.Zero, 
+            (int)CurrentAnimation.GetCurrentFrame().Size.Width,
+            (int)CurrentAnimation.GetCurrentFrame().Size.Height);
     }
     public void OnDied()
     {
@@ -63,7 +86,43 @@ public class Sorceress : IObject, IAnimatedSingleFrames
 
     public void Update()
     {
+        PrevPos = Pos;
+        Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;  
+
+        if (Speed.X != 0)
+        {
+            SetAnimation("run");
+        }
+        else
+        {
+            SetAnimation("idle");
+        }
+
         CurrentAnimation.Update();
-        
+        if (Speed.X > 0)
+        {
+            IsLeft = false; 
+        }
+        else if (Speed.X < 0)
+        {
+            IsLeft = true;
+        }
+
+        CurrentAnimation.GetCurrentFrame().IsReflectedOY = IsLeft;
+
+        Speed = Vector2.Zero;
+    }
+
+    public Collider GetCollider()
+    {
+        return new RectangleCollider(Pos + Collider.Position,
+            Collider.Area.Width,
+            Collider.Area.Height)
+        { Color = Collider.Color };
+    }
+
+    public void OnCollided(object sender, CollisionEventArgs e)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -14,9 +14,17 @@ public class LevelModelPrefab : Model
         _player.Pos = new Vector2(Globals.Resolution.Width / 2, Globals.Resolution.Height / 2);
         //_player.Pos = new Vector2(27, 48);
         GameObjects.Add( _player );
+
+        _inputData = new LevelViewModelData();
+        _outputData  = new LevelModelViewData();
     }
     public override void Update(ViewCycleFinishedEventArgs e)
     {
+        var inputData = GetInputData<LevelViewModelData>();
+        _player.Speed += inputData.PlayerSpeed;
+
+        var outData = GetOutputData<LevelModelViewData>();
+        outData.Player = _player;
         base.Update(e);
     }
 }
