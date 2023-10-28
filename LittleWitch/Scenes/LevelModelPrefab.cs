@@ -21,7 +21,8 @@ public class LevelModelPrefab : Model
     public override void Update(ViewCycleFinishedEventArgs e)
     {
         var inputData = GetInputData<LevelViewModelData>();
-        _player.Speed += inputData.PlayerSpeed;
+        _player.Run(inputData.PlayerDirection);
+      
 
         var outData = GetOutputData<LevelModelViewData>();
         outData.Player = _player;

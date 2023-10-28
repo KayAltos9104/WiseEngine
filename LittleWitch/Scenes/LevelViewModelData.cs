@@ -6,5 +6,5 @@ namespace LittleWitch.Scenes;
 
 public class LevelViewModelData : ViewModelData
 {
-    public Vector2 PlayerSpeed { get; set; }
+    public Vector2 PlayerDirection { get; set; }
 }

@@ -10,6 +10,7 @@ namespace LittleWitch.Prefabs;
 
 public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
 {
+    private float _xAcceleration;
     public bool IsLeft {  get; private set; }
     public Vector2 Speed { get; set; }
     public Vector2 Pos { get; set; }
@@ -39,7 +40,7 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
         PrevPos = Pos;
         IsStatic = true;
         Mass = 50;        
-        
+        _xAcceleration = 0.45f;
 
         Animations = new Dictionary<string, AnimationSingleFrames>();
         var frames = new Sprite[13];       
@@ -66,7 +67,7 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
             frames[i - 1] = frame;
         }
 
-        AnimationSingleFrames run = new AnimationSingleFrames(frames, 70);
+        AnimationSingleFrames run = new AnimationSingleFrames(frames, 20);
         Animations.Add("run", run);
         SetAnimation("run");
 
@@ -83,7 +84,10 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
     {
         CurrentAnimation = Animations[animationName];
     }
-
+    public void Run (Vector2 direction)
+    {
+        Speed += direction * _xAcceleration;
+    }
     public void Update()
     {
         PrevPos = Pos;

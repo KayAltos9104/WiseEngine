@@ -37,7 +37,7 @@ public class LevelViewPrefab : View
             _interfaceManager.ClickCurrentElement();
         }
 
-        outData.PlayerSpeed = sV;
+        outData.PlayerDirection = sV;
         base.Update();       
     }
 
