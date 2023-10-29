@@ -9,7 +9,8 @@ public class AnimationSingleFrames
     private float _currentTime;
     private Sprite [] _frames;
     private bool _isCycled;
-    private int _currentFrameIndex;    
+    private int _currentFrameIndex;   
+    public int RepeatFrame { get; set; }
     /// <summary>
     /// Animation name for searching
     /// </summary>
@@ -34,6 +35,7 @@ public class AnimationSingleFrames
     {
         Name = Guid.NewGuid().ToString();
         Pos = Vector2.Zero;
+        RepeatFrame = 0;
         _frames = frames;        
         SwitchingTime = switchTime;
         _isCycled = isCycled;
@@ -86,7 +88,7 @@ public class AnimationSingleFrames
         {
             if (_isCycled)
             {
-                _currentFrameIndex = 0;
+                _currentFrameIndex = RepeatFrame;
             }
             else
             {

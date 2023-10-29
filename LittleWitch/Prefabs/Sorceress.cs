@@ -102,6 +102,19 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
         AnimationSingleFrames jump = new AnimationSingleFrames(frames, 20, isCycled: false);
         
         Animations.Add("jump", jump);
+
+        frames = new Sprite[7];
+        for (int i = 1; i <= 7; i++)
+        {
+            var frame = new Sprite($"Witch_Fall{i}", Sprite.StretchMode.Stretch);
+            frame.SetSize(frame.TextureSize.Width * 2, frame.TextureSize.Height * 2);
+
+            frames[i - 1] = frame;
+        }
+
+        AnimationSingleFrames fall = new AnimationSingleFrames(frames, 100, isCycled: true);
+        fall.RepeatFrame = 1;
+        Animations.Add("fall", fall);
     }
     public void OnDied()
     {
@@ -131,7 +144,7 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
         if (_isLive == false) GameState = State.Losing;
         else if (_doShoot) GameState = State.Attack;
         else if (_jumpDelay > 0 || Force.Y < 0) GameState = State.Jump;
-        else if (Force.Y > 0) GameState = State.Fall;
+        else if (Force.Y > 2000) GameState = State.Fall;
         else if (Speed.X != 0) GameState = State.Run;
         else GameState = State.Idle;
 
@@ -180,7 +193,11 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
                 }
             case State.Fall:
                 {
-                    //throw new NotImplementedException("Пока не сделал");
+                    if (PreviousGameState != GameState)
+                    {
+                        SetAnimation("fall");
+                        CurrentAnimation.Activate();
+                    }                    
                     break;
                 }
             case State.Run:
