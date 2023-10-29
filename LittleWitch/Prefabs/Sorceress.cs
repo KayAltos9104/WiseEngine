@@ -168,7 +168,7 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
 
     public void OnCollided(object sender, CollisionEventArgs e)
     {
-        throw new NotImplementedException();
+        Collided?.Invoke(sender, e);
     }
 
     public enum State : byte

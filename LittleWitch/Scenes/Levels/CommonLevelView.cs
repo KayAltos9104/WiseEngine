@@ -1,5 +1,5 @@
 ﻿
-namespace LittleWitch.Scenes.Level0;
+namespace LittleWitch.Scenes.Levels;
 
 public class CommonLevelView : LevelViewPrefab
 {
