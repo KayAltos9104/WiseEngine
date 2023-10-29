@@ -41,7 +41,7 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
         Force = Vector2.Zero;
         Speed = Vector2.Zero;
         PrevPos = Pos;
-        IsStatic = true;
+        //IsStatic = true;
         Mass = 50;        
         _xAcceleration = 0.45f;
         _isLive = true;
@@ -128,7 +128,7 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
                 }
             case State.Fall:
                 {
-                    throw new NotImplementedException("Пока не сделал");
+                    //throw new NotImplementedException("Пока не сделал");
                     break;
                 }
             case State.Run:

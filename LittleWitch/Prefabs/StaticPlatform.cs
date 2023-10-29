@@ -35,9 +35,10 @@ public class StaticPlatform : IObject, IRenderable, ISolid
         Mass = 50;
 
         var platformSprite = new Sprite(spriteName);
+        platformSprite.TextureStretchMode = Sprite.StretchMode.Multiple;
         platformSprite.SetSize(platformSprite.TextureSize.Width * 10, platformSprite.TextureSize.Height * 1);
         //platformSprite.Scale = Vector2.One * 3;
-        platformSprite.TextureStretchMode = Sprite.StretchMode.Multiple;
+        
         
         Layer = 0;
         Sprites = new()
@@ -45,9 +46,12 @@ public class StaticPlatform : IObject, IRenderable, ISolid
             platformSprite
         };
 
-        Collider = new RectangleCollider(Vector2.Zero,
+        Collider = new RectangleCollider(Vector2.Zero + Vector2.UnitY*5,
             (int)Sprites[0].Size.Width,
-            (int)Sprites[0].Size.Height);
+            (int)Sprites[0].Size.Height-5);
+        Mass = 500;        
+        PrevPos = Vector2.Zero;
+        Force = Vector2.Zero;
     }
     public Collider GetCollider()
     {
@@ -69,6 +73,6 @@ public class StaticPlatform : IObject, IRenderable, ISolid
 
     public void Update()
     {
-        
+        PrevPos = Pos;
     }
 }
