@@ -36,8 +36,10 @@ public class SimplePhysics : IPhysics
             var collider1 = s1.GetCollider() as RectangleCollider;
             var collider2 = s2.GetCollider() as RectangleCollider;
 
-            Vector2 bufferPos1 = new Vector2(s1.PrevPos.X, o1.Pos.Y);
-            Vector2 bufferPos2 = new Vector2(s2.PrevPos.X, o2.Pos.Y);
+            var shift1 = o1.Pos - collider1.Position;
+            var shift2 = o2.Pos - collider2.Position;
+            Vector2 bufferPos1 = new Vector2(s1.PrevPos.X, o1.Pos.Y) - shift1;
+            Vector2 bufferPos2 = new Vector2(s2.PrevPos.X, o2.Pos.Y) - shift2;
 
             Rectangle buffer1 = new Rectangle(
                 (int)bufferPos1.X, (int)bufferPos1.Y, collider1.Area.Width, collider1.Area.Height);
@@ -45,8 +47,8 @@ public class SimplePhysics : IPhysics
                 (int)bufferPos2.X, (int)bufferPos2.Y, collider2.Area.Width, collider2.Area.Height);
             bool isCollidedX = !buffer1.Intersects(buffer2);
 
-            bufferPos1 = new Vector2(o1.Pos.X, s1.PrevPos.Y);
-            bufferPos2 = new Vector2(o2.Pos.X, s2.PrevPos.Y);
+            bufferPos1 = new Vector2(o1.Pos.X, s1.PrevPos.Y) - shift1;
+            bufferPos2 = new Vector2(o2.Pos.X, s2.PrevPos.Y) - shift2;
             buffer1 = new Rectangle(
                 (int)bufferPos1.X, (int)bufferPos1.Y, collider1.Area.Width, collider1.Area.Height);
             buffer2 = new Rectangle(
