@@ -17,7 +17,7 @@ public class LevelViewPrefab : View
 
     public override void Update()
     {
-        var player = GetInputData<LevelModelViewData>().Player;
+        var inputData = GetInputData<LevelModelViewData>();
         
         Vector2 sV = Vector2.Zero;
         var outData = GetOutputData<LevelViewModelData>();
@@ -36,7 +36,7 @@ public class LevelViewPrefab : View
         {
             _interfaceManager.ClickCurrentElement();
         }
-
+        Camera.Follow(inputData.Player != null ? inputData.Player.Pos : Vector2.Zero);
         outData.PlayerDirection = sV;
         base.Update();       
     }
