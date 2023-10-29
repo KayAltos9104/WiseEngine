@@ -56,7 +56,7 @@ public class StaticPlatform : IObject, IRenderable, ISolid
     }
     public Collider GetCollider()
     {
-        return new RectangleCollider(Pos + Collider.Area.Location.ToVector2(),
+        return new RectangleCollider(Pos + Collider.Position,
             Collider.Area.Width,
             Collider.Area.Height)
         { Color = Collider.Color };
