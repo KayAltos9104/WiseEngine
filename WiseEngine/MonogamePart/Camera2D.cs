@@ -56,9 +56,8 @@ public class Camera2D
     }
 
     public void Follow (Vector2 position)
-    {
-        Pos = new Vector3(VisionArea.Width/2 - position.X, VisionArea.Height / 2 - position.Y, Pos.Z);
-        //Translate(position.X, position.Y, 0);
+    {        
+        Pos = new Vector3(Globals.Resolution.Width / 2 - position.X, Globals.Resolution.Height / 2 - position.Y, Pos.Z);        
         Update();
         UpdateVisionArea(-(int)Pos.X, -(int)Pos.Y);
     }
