@@ -14,6 +14,9 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
     private bool _isLive;
     private bool _doShoot;
     private float _jumpForce;
+    private float _jumpDelay;
+    private bool _isJumped;
+    public State PreviousGameState { get; private set; }
     public State GameState { get; private set; }
     public bool IsLeft {  get; private set; }
     public Vector2 Speed { get; set; }
@@ -47,6 +50,8 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
         _xAcceleration = 0.45f;
         _isLive = true;
         _jumpForce = 40000;
+        _jumpDelay = 0;
+        _isJumped = false;
         GameState = State.Idle;
 
         AnimationInitialize();
@@ -82,8 +87,21 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
             frames[i - 1] = frame;
         }
 
-        AnimationSingleFrames run = new AnimationSingleFrames(frames, 20);
+        AnimationSingleFrames run = new AnimationSingleFrames(frames, 10);
         Animations.Add("run", run);
+
+        frames = new Sprite[8];
+        for (int i = 1; i <= 8; i++)
+        {
+            var frame = new Sprite($"Witch_Jump{i}", Sprite.StretchMode.Stretch);
+            frame.SetSize(frame.TextureSize.Width * 2, frame.TextureSize.Height * 2);
+
+            frames[i - 1] = frame;
+        }
+
+        AnimationSingleFrames jump = new AnimationSingleFrames(frames, 20, isCycled: false);
+        
+        Animations.Add("jump", jump);
     }
     public void OnDied()
     {
@@ -100,24 +118,26 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
     }
     public void Jump ()
     {
-        if (IsOnPlatform)
+        if (IsOnPlatform && _jumpDelay == 0)
         {
-            Force += new Vector2(0, -_jumpForce);
+            //Force += new Vector2(0, -_jumpForce);
+            _jumpDelay = Animations["jump"].SwitchingTime * 3;
         }
     }
     public void Update()
     {
+        PreviousGameState = GameState;
 
         if (_isLive == false) GameState = State.Losing;
         else if (_doShoot) GameState = State.Attack;
-        else if (Speed.Y > 0) GameState = State.Jump;
-        else if (Speed.Y < 0) GameState = State.Fall;
+        else if (_jumpDelay > 0 || Force.Y < 0) GameState = State.Jump;
+        else if (Force.Y > 0) GameState = State.Fall;
         else if (Speed.X != 0) GameState = State.Run;
         else GameState = State.Idle;
 
         PrevPos = Pos;
-        Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;  
-
+        
+        
         switch (GameState)
         {
             case State.Losing:
@@ -132,7 +152,30 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
                 }
             case State.Jump:
                 {
-                    //throw new NotImplementedException("Пока не сделал");
+                    if (PreviousGameState != GameState)
+                    {
+                        SetAnimation("jump");
+                        CurrentAnimation.Activate();
+                        _isJumped = false;
+                    }
+                    else
+                    {
+                        if (_isJumped == false)
+                        {
+                            _jumpDelay -= Globals.Time.ElapsedGameTime.Milliseconds;
+                            if (_jumpDelay < 0)
+                            {
+                                Force += new Vector2(0, -_jumpForce);
+                                _isJumped = true;
+                                _jumpDelay = 0;
+                            }
+                            else
+                            {
+                                Speed = new Vector2 (0, Speed.Y);
+                            }
+                        }                       
+                        
+                    }    
                     break;
                 }
             case State.Fall:
@@ -142,25 +185,32 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
                 }
             case State.Run:
                 {
-                    if (Speed.X > 0)
+                    if (PreviousGameState != GameState)
                     {
-                        IsLeft = false;
+                        SetAnimation("run");                       
                     }
-                    else if (Speed.X < 0)
-                    {
-                        IsLeft = true;
-                    }
-                    SetAnimation("run");
+                    
                     break;
                 }
             case State.Idle:
                 {
-                    SetAnimation("idle");
+                    if (PreviousGameState != GameState)
+                    {
+                        SetAnimation("idle");
+                    }
                     break;
                 }
         }
-
-        
+         
+        if (Speed.X > 0)
+        {
+            IsLeft = false;
+        }
+        else if (Speed.X < 0)
+        {
+            IsLeft = true;
+        }
+        Pos += Speed * Globals.Time.ElapsedGameTime.Milliseconds;
         CurrentAnimation.Update();  
         CurrentAnimation.GetCurrentFrame().IsReflectedOY = IsLeft;
 

@@ -50,7 +50,15 @@ var game = new GameProcessor(
         ("Witch_Run13", "Animations/Witch/Run/Runanimation13"),
         ("Witch_Run14", "Animations/Witch/Run/Runanimation14"),
         ("Witch_Run15", "Animations/Witch/Run/Runanimation15"),
-        ("Witch_Run16", "Animations/Witch/Run/Runanimation16"),
+        ("Witch_Run16", "Animations/Witch/Run/Runanimation16"),        
+        ("Witch_Jump1", "Animations/Witch/Jump/Jumpanimation1"),
+        ("Witch_Jump2", "Animations/Witch/Jump/Jumpanimation2"),
+        ("Witch_Jump3", "Animations/Witch/Jump/Jumpanimation3"),
+        ("Witch_Jump4", "Animations/Witch/Jump/Jumpanimation4"),
+        ("Witch_Jump5", "Animations/Witch/Jump/Jumpanimation5"),
+        ("Witch_Jump6", "Animations/Witch/Jump/Jumpanimation6"),
+        ("Witch_Jump7", "Animations/Witch/Jump/Jumpanimation7"),
+        ("Witch_Jump8", "Animations/Witch/Jump/Jumpanimation8"),
     },
     new List<(string, string)>()
     {

@@ -48,6 +48,8 @@ public class AnimationSingleFrames
     public void Activate()
     {
         IsActive = true;
+        _currentFrameIndex = 0;
+        _currentTime = 0;
     }
 
     public void Deactivate()
@@ -88,7 +90,8 @@ public class AnimationSingleFrames
             }
             else
             {
-                IsActive = false;
+                //IsActive = false;
+                _currentFrameIndex--;
             }
         }
     }
