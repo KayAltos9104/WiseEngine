@@ -13,6 +13,7 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
     private float _xAcceleration;
     private bool _isLive;
     private bool _doShoot;
+    private float _jumpForce;
     public State GameState { get; private set; }
     public bool IsLeft {  get; private set; }
     public Vector2 Speed { get; set; }
@@ -37,7 +38,7 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
     {
         Pos = Vector2.Zero;
         IsDisposed = false;
-        Layer = 0;
+        Layer = 0.0f;
         Force = Vector2.Zero;
         Speed = Vector2.Zero;
         PrevPos = Pos;
@@ -45,6 +46,7 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
         Mass = 50;        
         _xAcceleration = 0.45f;
         _isLive = true;
+        _jumpForce = 40000;
         GameState = State.Idle;
 
         AnimationInitialize();
@@ -96,6 +98,13 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
     {
         Speed += direction * _xAcceleration;
     }
+    public void Jump ()
+    {
+        if (IsOnPlatform)
+        {
+            Force += new Vector2(0, -_jumpForce);
+        }
+    }
     public void Update()
     {
 
@@ -123,7 +132,7 @@ public class Sorceress : IObject, IAnimatedSingleFrames, ISolid
                 }
             case State.Jump:
                 {
-                    throw new NotImplementedException("Пока не сделал");
+                    //throw new NotImplementedException("Пока не сделал");
                     break;
                 }
             case State.Fall:

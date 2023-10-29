@@ -21,7 +21,9 @@ public class LevelModelPrefab : Model
     {
         var inputData = GetInputData<LevelViewModelData>();
         _player.Run(inputData.PlayerDirection);
-      
+
+        if (inputData.DoJump) 
+            _player.Jump();
 
         var outData = GetOutputData<LevelModelViewData>();
         outData.Player = _player;

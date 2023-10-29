@@ -21,14 +21,18 @@ public class LevelViewPrefab : View
         
         Vector2 sV = Vector2.Zero;
         var outData = GetOutputData<LevelViewModelData>();
-        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.W))
-            sV -= Vector2.UnitY;
+       
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.A))
             sV -= Vector2.UnitX;
-        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.S))
-            sV += Vector2.UnitY;
         if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.D))
             sV += Vector2.UnitX;
+        if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.Space))
+            outData.DoJump = true;
+        else
+            outData.DoJump = false;
+        //if (InputsManager.PressedCurrentFrame.IsKeyDown(Keys.S))
+        //    sV += Vector2.UnitY;
+
 
         _interfaceManager.TransformCursor(InputsManager.MouseStateCurrentFrame.Position);
 

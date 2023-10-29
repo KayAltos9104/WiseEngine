@@ -7,4 +7,5 @@ namespace LittleWitch.Scenes;
 public class LevelViewModelData : ViewModelData
 {
     public Vector2 PlayerDirection { get; set; }
+    public bool DoJump {  get; set; }
 }

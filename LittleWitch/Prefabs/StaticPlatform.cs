@@ -28,7 +28,7 @@ public class StaticPlatform : IObject, IRenderable, ISolid
     {
         Pos = Vector2.Zero;
         IsDisposed = false;
-        Layer = 0;
+        Layer = 0.1f;
         Force = Vector2.Zero;        
         PrevPos = Pos;
         IsStatic = true;
@@ -46,7 +46,7 @@ public class StaticPlatform : IObject, IRenderable, ISolid
             platformSprite
         };
 
-        Collider = new RectangleCollider(Vector2.Zero + Vector2.UnitY*5,
+        Collider = new RectangleCollider(Vector2.Zero + Vector2.UnitY*10,
             (int)Sprites[0].Size.Width,
             (int)Sprites[0].Size.Height);
         
