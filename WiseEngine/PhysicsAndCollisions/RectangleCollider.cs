@@ -11,6 +11,7 @@ public class RectangleCollider : Collider
     public RectangleCollider(Vector2 pos, int width, int height)
     {
         Area = new Rectangle(pos.ToPoint(), new Point(width, height));
+        Position = pos;
     }
     public override void Move(Vector2 newPos)
     {
