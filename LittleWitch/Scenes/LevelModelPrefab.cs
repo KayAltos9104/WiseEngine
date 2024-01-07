@@ -7,6 +7,7 @@ namespace LittleWitch.Scenes;
 public class LevelModelPrefab : Model
 {
     private Sorceress _player;
+    
     public override void Initialize()
     {
         base.Initialize();

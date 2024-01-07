@@ -1,13 +1,13 @@
 ﻿using WiseTestBench.ExampleSceneShapeProjectileWork;
 using WiseEngine.MVP;
 using Microsoft.Xna.Framework;
-using WiseEngine.MonogamePart;
 using System;
 using WiseEngine.PhysicsAndCollisions;
 using WiseEngine.Models;
 
 namespace WiseTestBench.SimplePhysicsExampleScene;
 
+// TODO: Глючит, если статические объекты двигать
 public class PhysicsModel : Model
 {
     private const float _shotCooldown = 400.0f;

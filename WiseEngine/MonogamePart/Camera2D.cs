@@ -81,8 +81,8 @@ public class Camera2D
     /// <param name="y">Y coordinate for left top rectangle corner</param>
     public void UpdateVisionArea(int x, int y)
     {
-        VisionArea = new Rectangle(x-300, y-300,
-            Globals.Resolution.Width + 300, Globals.Resolution.Height + 300);
+        VisionArea = new Rectangle(x-1000, y-1000,
+            Globals.Resolution.Width + 1000, Globals.Resolution.Height + 1000);
     }
     /// <summary>
     /// Changes <see cref="VisionArea"/>

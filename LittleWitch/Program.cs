@@ -22,6 +22,7 @@ var game = new GameProcessor(
         ("Scroll1", "Sprites/Scroll1"),
         ("ForestBgrnd", "Sprites/Forest"),
         ("Platform1", "Sprites/Platform1"),
+        ("Star", "Sprites/Star"),
         ("Witch_Idle1", "Animations/Witch/Idle/IdleAnimation1"),
         ("Witch_Idle2", "Animations/Witch/Idle/IdleAnimation2"),
         ("Witch_Idle3", "Animations/Witch/Idle/IdleAnimation3"),

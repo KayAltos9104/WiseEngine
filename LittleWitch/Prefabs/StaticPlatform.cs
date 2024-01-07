@@ -24,7 +24,7 @@ public class StaticPlatform : IObject, IRenderable, ISolid
     public event EventHandler Died;
     public event EventHandler<CollisionEventArgs> Collided;
 
-    public StaticPlatform (string spriteName)
+    public StaticPlatform (string spriteName, int sectionsNumber)
     {
         Pos = Vector2.Zero;
         IsDisposed = false;
@@ -36,7 +36,7 @@ public class StaticPlatform : IObject, IRenderable, ISolid
 
         var platformSprite = new Sprite(spriteName);
         platformSprite.TextureStretchMode = Sprite.StretchMode.Multiple;
-        platformSprite.SetSize(platformSprite.TextureSize.Width * 10, platformSprite.TextureSize.Height * 1);
+        platformSprite.SetSize(platformSprite.TextureSize.Width * sectionsNumber, platformSprite.TextureSize.Height * 1);
         //platformSprite.Scale = Vector2.One * 3;
         
         
@@ -75,5 +75,6 @@ public class StaticPlatform : IObject, IRenderable, ISolid
     public void Update()
     {
         PrevPos = Pos;
+        //Pos -= Vector2.UnitY;
     }
 }
